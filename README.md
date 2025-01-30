@@ -1,7 +1,7 @@
 # CP3407-Group-Project
 
 ## Group Members:
-- Bailey Johannsmann  
-- Nathan D'Achille  
-- David Hunter  
-- Quinn Stocker  
+- Bailey Johannsmann @Bailey-Johannsmann
+- Nathan D'Achille @Nathan-Dachille
+- David Hunter @Dav0-12
+- Quinn Stocker @Quinn-Stocker
