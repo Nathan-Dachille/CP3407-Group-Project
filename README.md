@@ -16,17 +16,6 @@ The following is the list of items, which are required to be completed.
 - [David Hunter](https://www.github.com/Dav0-12)
 - [Quinn Stocker](https://www.github.com/Quinn-Stocker)
 
-# Initial Backlog Ideas
-1. As a property manager, I want to schedule deep cleans after tenants move out so that the units are ready for new renters.
-2. As a solo cleaner, I want to create a profile with my skills and availability so that clients can find and book me easily.
-3. As a small cleaning business, I want to register multiple cleaners under my business so that I can manage bookings effectively.
-4. As an elderly individual, I want to find a trusted and verified cleaner so that I feel safe having them in my home.
-5. As an enterprise-level cleaning company, I want a dashboard to track multiple jobs and team assignments for large-scale operations
-6. As a cleaning service provider, I want a dispute resolution system that includes a blacklist feature so that I can handle conflicts with customers professionally and avoid repeated bad experiences.
-7. As an end user, I want to cancel or reschedule a booking with a clear policy so that I know the consequences of changes.
-8. As a service provider, I want an earnings summary and payout history so that I can track my income over time.
-9. As a busy homeowner, I want a reminder feature for upcoming cleanings so that I don’t forget my appointments.
-10. As a customer, I want to specify areas of focus (e.g., kitchen, bathroom, windows) so that the cleaner knows my priorities.
 
 
 # Project planning BEFORE iteration-1, (see chapters 1-3)
