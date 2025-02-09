@@ -51,39 +51,48 @@ User Stories:
 * SP can create an account, priority 10, 1 days
 * User can create an account, priority 10, 1 days
 * User can edit information, priority 10, 1 days
-* Communication channel between user and SP, priority 10, 2 days
+* Communication channel between user and SP, priority 30, 2 days
 
-Total: YY days
+Total: 24 days
 
 
-## Iteration 1 [duration 3-4 weeks], add your start and end dates 
+## Iteration 1 [duration 3-4 weeks], Start: 10/02/2025, End: 10/03/2025 
 
 * Goal is to have 2 iterations during a trimester of teaching.
 * Update the following during each week prac session
 * During pracs, you may experiment with using other github ways of tracking changes, e.g. via pull requests.
 
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
+1. [Scheduling](./user_stories/user_story_01_title.md), priority 10, 2 days
+2. SP can service location, price per hour, availability, priority 10, 2 days
+3. SP can edit personal information, priority 10, 1 days
+4. SP can create an account, priority 10, 1 days
+5. User can create an account, priority 10, 1 days
+6. User can edit information, priority 10, 1 days
 
-Total: YY days
+Total: 8 working days
 
 
-### Iteration 2 [duration 3-4 weeks], add your start and end dates
+### Iteration 2 [duration 3-4 weeks], Start: 11/02/2025, End: 7/04/2025
 Goal is to have 2 iterations during a trimester of teaching.
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
 
-Total: YY days
+1. [Dashboard Management](./user_stories/user_story_01_title.md), priority 20, 2 days
+2. [Calendar](./user_stories/user_story_01_title.md), priority 20, 1 days
+3. [Earnings/Finance](./user_stories/user_story_01_title.md), priority 20, 1 days
+4. [Profiles](./user_stories/user_story_01_title.md), priority 20, 1 days
+5. [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 3 days
+
+Total: 8 working days
 
 ### Not enough time/developers: 
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
+1. [Safety Verification](./user_stories/user_story_01_title.md), priority 20, 1 days
+2. [Customer Conflicts](./user_stories/user_story_01_title.md), priority 20, 1 days
+3. [Reschedule](./user_stories/user_story_01_title.md), priority 30, 2 days
+4. [Focused Clean Request](./user_stories/user_story_01_title.md), priority 20, 2 days
+5. Communication channel between user and SP, priority 30, 2 days
 
-Total: YY days
+Total: 8 days
 
 # Actual iterations
 1. [Iteration-1](./iteration_1.md)
 2. [Iteration-2](./iteration_2.md)
 
-
-cker)
