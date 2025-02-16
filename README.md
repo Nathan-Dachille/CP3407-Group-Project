@@ -35,7 +35,31 @@ Checklist/TODOs:
 * User stories are correct: see p39
 * Must have more user stories than fits into iterations 1 and 2. To practice the priority.
 
-User Stories:
+User Stories (Ideal Days):
+
+* [Scheduling](./user_stories/user_story_01_title.md), priority 10, 1 days 
+* [Profiles](./user_stories/user_story_01_title.md), priority 20, 0.5 days
+* [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 1.5 days
+* [Safety Verification](./user_stories/user_story_01_title.md), priority 20, 0.5 days
+* [Dashboard Management](./user_stories/user_story_01_title.md), priority 20, 1 days
+* [Customer Conflicts](./user_stories/user_story_01_title.md), priority 20, 0.5 days
+* [Reschedule](./user_stories/user_story_01_title.md), priority 30, 1 days
+* [Earnings/Finance](./user_stories/user_story_01_title.md), priority 20, 0.5 days
+* [Calendar](./user_stories/user_story_01_title.md), priority 20, 0.5 days
+* [Focused Clean Request](./user_stories/user_story_01_title.md), priority 20, 1 days
+* SP can service location, price per hour, availability, priority 10, 1 days
+* SP can edit personal information, priority 10, 0.5 days
+* SP can create an account, priority 10, 0.5 days
+* User can create an account, priority 10, 0.5 days
+* User can edit information, priority 10, 0.5 days
+* Communication channel between user and SP, priority 30, 1 days
+
+Total Ideal Days: 12 Days
+
+Using velocity of 0.5, since the group must also focus on other classes.
+Actual Days = Ideal Days / 0.5
+
+User Stories (Actual Days):
 * [Scheduling](./user_stories/user_story_01_title.md), priority 10, 2 days 
 * [Profiles](./user_stories/user_story_01_title.md), priority 20, 1 days
 * [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 3 days
@@ -53,7 +77,10 @@ User Stories:
 * User can edit information, priority 10, 1 days
 * Communication channel between user and SP, priority 30, 2 days
 
-Total: 24 days
+Total Actual Days: 24 days
+
+Each iteration is 4 calendar weeks. We have 4 group members, each willing to work 0.5 work days a week
+on top of other subjects. This gives a total of 8 working days of potential work time per iteration.
 
 
 ## Iteration 1 [duration 3-4 weeks], Start: 10/02/2025, End: 10/03/2025 
