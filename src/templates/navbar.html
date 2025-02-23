@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<title>Cleaning Website</title>
+{% load static %} 
+<html>
+  <head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/css/default.css' %}">
+  </head>
+
+  <body>
+    <header class="primary-header flex"> 
+    <a href="#default" class="logo round">
+        LOGO
+      </a> 
+      <nav>
+        <ul class="primary-navigation flex round">
+          <li><a class="verdana-ss-20px" href="#default">Link 1</a></li>
+          <li><a class="verdana-ss-20px" href="#default">Link 2</a></li>
+          <li><a class="verdana-ss-20px" href="#default">Link 3</a></li>
+          <li>
+            {% if user.is_authenticated %}
+            <a class="verdana-ss-20px" href="#profile">
+              Hello, {{user.username}}. 
+            </a>
+            {% else %}
+            <a class="verdana-ss-20px" href="#signin">
+              Sign In 
+            </a>
+            {% endif %}
+          </li>
+        </ul>
+      </nav> 
+    </header> 
+    <main class="content"> 
+      
+      {% block content %}
+
+      {% endblock content %} 
+
+    </main>
+
+    <!--  <script src="{% static '/js/navbar.js' %}"></script> </body> -->
+  </body>
+</html>
