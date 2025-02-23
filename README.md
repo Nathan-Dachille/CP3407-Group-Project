@@ -123,3 +123,29 @@ Total: 8 days
 1. [Iteration-1](./iteration_1.md)
 2. [Iteration-2](./iteration_2.md)
 
+# Iteration 1 Tasks:
+## 1. SP can create an account
+* Create sign up page view, 0.5 days
+* Create sign in page view, 0.5 days
+* Create home page view, 1 day
+* Create individual user models in Django for cleaners and cleaning businesses, 0.5 days
+* Create user groups, 0.5 days
+
+Total: 3 days
+
+## 2. SP can edit personal information
+* Create a profile page view, 0.5 days
+
+Total: 0.5 days
+
+## 3. [Scheduling](./user_stories/user_story_01_title.md)
+* Create a booking page view (Customers can book cleans), 1 day
+    - Customer can select day for clean on calendar, they may then be presented with a list of cleaners
+    - It will lookup their area from their profile and compare to serviced area for cleaner
+* Create a manager dashboard page view (Employer - Cleaners and their jobs/working hours), 2 days
+* Create a cleaner dashboard page view (Cleaner - View upcoming jobs), 1 day
+* Create a job model, 0.5 days
+
+Total: 4 days
+
+Iteration 1 Tasks Total: 8 days
