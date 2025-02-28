@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <title>Cleaning Website</title>
 {% load static %} 
 <html>
   <head> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static '/css/default.css' %}">
+      <script src="{% static '/js/navbar.js' %}" defer></script>
   </head>
 
   <body>
@@ -12,8 +13,11 @@
     <a href="#default" class="logo round">
         LOGO
       </a> 
+
+        <button data-open="false" class="menu-toggle"></button>
+
       <nav>
-        <ul class="primary-navigation flex round">
+        <ul data-visible="false" class="primary-navigation flex round">
           <li><a class="verdana-ss-20px" href="#default">Link 1</a></li>
           <li><a class="verdana-ss-20px" href="#default">Link 2</a></li>
           <li><a class="verdana-ss-20px" href="#default">Link 3</a></li>
