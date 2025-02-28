@@ -1,5 +1,7 @@
 const nav = document.querySelector(".primary-navigation");
 const toggle = document.querySelector(".menu-toggle");
+const header = document.querySelector(".primary-header");
+var last_scroll_pos = window.pageYOffset;
 
 function toggle_navbar() {
 	const visible = nav.getAttribute("data-visible");
@@ -14,7 +16,20 @@ function toggle_navbar() {
 	}
 }
 
+function hide_topbar() {
+	var new_scroll_pos = window.pageYOffset;
 
+	if (last_scroll_pos < new_scroll_pos) {
+		header.setAttribute("data-hide", "true");
+		nav.setAttribute("data-visible", "false");
+		toggle.setAttribute("data-open", "false");
+	} else {
+		header.setAttribute("data-hide", "false");
+	}
+	last_scroll_pos = new_scroll_pos;
+}
+
+document.addEventListener('scroll', hide_topbar);
 toggle.addEventListener('click', toggle_navbar);
 
 

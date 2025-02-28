@@ -17,8 +17,10 @@
 html,
 body {
   display: grid;
+  padding-top: 3rem;
   margin: 0;
   background: rgb(24, 24, 26);
+  overflow-x: hidden;
 }
 
 .logo {
@@ -48,10 +50,20 @@ body {
 }
 
 .primary-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: lightcoral;
   border-radius: 0 0 15px 15px;
   align-items: center;
   justify-content: space-between;
+
+  transform: translateY(0%);
+  transition: transform 150ms linear;
+}
+
+.primary-header[data-hide="true"] {
+  transform: translateY(-100%);
 }
 
 .primary-navigation {
@@ -95,7 +107,7 @@ body {
     inset: 0 0 0 40%;
 
     flex-direction: column;
-    padding: min(30vh, 10rem) 1em;
+    padding: 50vh 1em;
     border-radius: 15px 0 0 15px;
 
     transform: translateX(100%);
