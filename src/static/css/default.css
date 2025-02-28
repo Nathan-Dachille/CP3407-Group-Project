@@ -11,11 +11,14 @@
   font-family: 'Verdana', 'sans-serif';
   font-size: 20px;
   font-weight: 900;
-  color: black;
+  color: white;
 }
 
+html,
 body {
+  display: grid;
   margin: 0;
+  background: rgb(24, 24, 26);
 }
 
 .logo {
@@ -26,16 +29,27 @@ body {
   font-family: 'Impact', 'sans-serif';
   font-size: 20px;
   font-weight: 900;
-  color: black;
+  color: white;
   text-decoration: none;
   padding: 1rem;
 }
 
 .content {
+  padding: 2rem;
+}
+
+.content>div {
+  background: rgb(43, 42, 51);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 15px;
   padding: 1rem;
+  margin-top: 0.5rem;
 }
 
 .primary-header {
+  background: lightcoral;
+  border-radius: 0 0 15px 15px;
   align-items: center;
   justify-content: space-between;
 }
@@ -51,17 +65,13 @@ body {
 }
 
 .primary-navigation li {
-  border-right: 2px solid darkgrey;
+  border-right: 2px solid white;
   padding: 0.5rem;
 }
 
 .primary-navigation li:last-of-type {
   border-right: none;
   padding: 0.5rem;
-}
-
-.primary-navigation li:hover {
-  background-color: lightskyblue;
 }
 
 .primary-navigation a {
@@ -74,6 +84,10 @@ body {
 
 
 @media (max-width: 40em) {
+  .logo {
+    margin: 2rem;
+  }
+
   .primary-navigation {
     --gap: 2em;
     margin: 0;
@@ -90,7 +104,7 @@ body {
 
   .primary-navigation li {
     border-right: none;
-    border-bottom: 2px solid darkgray;
+    border-bottom: 2px solid white;
   }
 
   .primary-navigation li:last-of-type {
@@ -106,6 +120,7 @@ body {
     position: absolute;
     z-index: 1000;
     background: url("/static/images/hamburger.svg");
+    filter: invert(1);
     background-repeat: no-repeat;
     background-position: center;
     width: 3.5rem;
@@ -117,6 +132,7 @@ body {
 
   .menu-toggle[data-open="true"] {
     background: url("/static/images/closed.svg");
+    filter: invert(1);
     background-repeat: no-repeat;
     background-position: center;
   }
