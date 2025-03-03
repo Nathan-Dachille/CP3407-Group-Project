@@ -1,0 +1,32 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+    <script>
+        function password_toggle() {
+            const x = document.getElementById("pass_input");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+
+    <div>
+        <h1>Sign In</h1>
+        <p> Please enter your email and password to sign in to your account. </p>
+    </div>
+
+    <div>
+        <label for="email_input">Email:</label><br>
+        <input type="email" id="email_input" name="email_input"> <br>
+
+        <label for="pass_input">Password:</label><br>
+        <input type="password" id="pass_input" name="pass_input"><br>
+        <label for="toggle_switch">Show Password</label>
+        <input type="checkbox" id="toggle_switch" onclick="password_toggle()"> <br>
+
+        <input type="button" id="verify_user" name="verify_user" value="Sign In">
+    </div>
+{% endblock content %}
