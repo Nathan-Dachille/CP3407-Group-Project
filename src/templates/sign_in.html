@@ -2,28 +2,16 @@
 
 {% block content %}
 
-    <script>
-        function password_toggle() {
-            const x = document.getElementById("pass_input");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
-
     <div>
         <h1>Sign In</h1>
-        <p> Please enter your username and password to sign in to your account. </p>
+        <p> Please enter your username and password to sign in. </p>
     </div>
 
     <div>
-        <form action="sign_in/" method="post">
+        <form class="form-with-validation" action="/sign_in/" method="post">
             {% csrf_token %}
             {{ form }}
-            <input type="checkbox" id="toggle_switch" onclick="password_toggle()"> <br>
-            <input type="submit" value="Sign In">
+            <button class="form-submit" type="submit">Sign In</button>
         </form>
     </div>
 {% endblock content %}
