@@ -1,0 +1,17 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+    <div>
+        <h1>Register</h1>
+        <p> Please enter your details to register for an account. </p>
+    </div>
+
+    <div>
+        <form class="form-with-validation" action="/register/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="form-submit" type="submit">Sign In</button>
+        </form>
+    </div>
+{% endblock content %}
