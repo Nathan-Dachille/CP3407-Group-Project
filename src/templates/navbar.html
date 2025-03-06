@@ -1,48 +1,56 @@
 <DOCTYPE html>
-<title>Cleaning Website</title>
-{% load static %} 
-<html>
-  <head> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static '/css/default.css' %}">
-      <script src="{% static '/js/navbar.js' %}" defer></script>
-  </head>
+    <title>Cleaning Website</title>
+    {% load static %}
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/css/default.css' %}">
+        <script src="{% static '/js/navbar.js' %}" defer></script>
+    </head>
 
-  <body>
-    <header data-hide="false" class="primary-header flex"> 
-    <a href="#default" class="logo round">
-        LOGO
-      </a> 
+    <body>
+    <header data-hide="false" class="primary-header flex">
+        <a href="#default" class="logo round">
+            LOGO
+        </a>
 
         <button data-open="false" class="menu-toggle"></button>
 
-      <nav>
-        <ul data-visible="false" class="primary-navigation flex round">
-          <li><a class="verdana-ss-20px" href="#default">Link 1</a></li>
-          <li><a class="verdana-ss-20px" href="#default">Link 2</a></li>
-          <li><a class="verdana-ss-20px" href="#default">Link 3</a></li>
-          <li>
-            {% if user.is_authenticated %}
-            <a class="verdana-ss-20px" href="#profile">
-              Hello, {{user.username}}. 
-            </a>
-            {% else %}
-            <a class="verdana-ss-20px" href="#signin">
-              Sign In 
-            </a>
-            {% endif %}
-          </li>
-        </ul>
-      </nav> 
-    </header> 
-    <main class="content"> 
-      
-      {% block content %}
+        <nav>
+            <ul data-visible="false" class="primary-navigation flex round">
+                <li><a class="verdana-ss-20px" href="#default">Link 1</a></li>
+                <li><a class="verdana-ss-20px" href="#default">Link 2</a></li>
+                <li><a class="verdana-ss-20px" href="#default">Link 3</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a class="verdana-ss-20px" href="#profile">
+                            Hello, {{ user.username }}.
+                        </a>
+                    </li>
+                    <li>
+                        <form class="sign-out" action="/sign_out/" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="sign-out-button verdana-ss-20px">Sign Out</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="verdana-ss-20px" href="/sign_in/">
+                            Sign In
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main class="content">
 
-      {% endblock content %} 
+        {% block content %}
+
+        {% endblock content %}
 
     </main>
 
     <!--  <script src="{% static '/js/navbar.js' %}"></script> </body> -->
-  </body>
-</html>
+    </body>
+    </html>

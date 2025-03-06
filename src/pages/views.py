@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+
 
 # Create your views here.
 
@@ -30,22 +31,7 @@ def sign_in_view(request):
     return render(request, "sign_in.html", {"form": form})
 
 
-"""
-def sign_in(request, *args, **kwargs):
-    # if this is a POST request we need to process the form data
+def sign_out_view(request):
     if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = SignIn(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect("/thanks/")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SignIn()
-
-    return render(request, "sign_in.html", {"form": form})
-"""
+        logout(request)
+        return redirect("/")
