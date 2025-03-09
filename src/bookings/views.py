@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import BookingForm
 
+
 def book_appointment(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
@@ -10,5 +11,4 @@ def book_appointment(request):
     else:
         form = BookingForm()
 
-    return render(request, "bookings/booking_form.html", {"form": form})
-
+    return render(request, "booking_form.html", {"form": form})

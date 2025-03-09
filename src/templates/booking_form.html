@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "navbar.html" %}
 {% load static %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
 
-<div class="booking-page">
-    <h2>Book an Appointment</h2>
+<div class="booking-div">
+    <h2 class="booking-title">Book an Appointment</h2>
     <form class="booking-form" method="POST" action="{% url 'book_appointment' %}">
         {% csrf_token %}
 

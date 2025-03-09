@@ -1,20 +1,22 @@
 /* Center the booking form in the middle of the page */
-.booking-page {
-    display: flex;
+.booking-div {
     justify-content: center;
+    align-self: center;
     align-items: center;
+    margin: auto;
     height: 100vh;
+    width: 60vw;
     background: rgba(24, 24, 26, 0.9);
-    padding: 2rem;
+}
+
+/* Style the title */
+.booking-title {
+    text-align: center;
 }
 
 /* Style the booking form container */
 .booking-form {
-    background: rgb(43, 42, 51);
-    padding: 2.5rem;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 450px;
+    padding: 1rem 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -24,7 +26,6 @@
 
 /* Style the input fields */
 .booking-form input {
-    width: 100%;
     padding: 12px;
     margin-top: 5px;
     border: 1px solid #ccc;
@@ -32,6 +33,7 @@
     background: #2c2c38;
     color: white;
     font-size: 1rem;
+    color-scheme: dark;
 }
 
 /* Style the labels */
@@ -66,7 +68,7 @@
 }
 
 /* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 40em) {
     .booking-form {
         width: 90%;
         padding: 2rem;
