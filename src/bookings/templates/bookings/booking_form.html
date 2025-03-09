@@ -5,7 +5,10 @@
 <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
 
 <div class="booking-page">
-    <form class="booking-form">
+    <h2>Book an Appointment</h2>
+    <form class="booking-form" method="POST" action="{% url 'book_appointment' %}">
+        {% csrf_token %}
+
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -16,7 +19,7 @@
         <input type="date" id="date" name="date" required>
 
         <label for="notes">Message:</label>
-        <textarea id="notes" name="notes" rows="10" placeholder="Enter your enquiry here..."></textarea>
+        <textarea id="notes" name="notes" rows="5" placeholder="Enter your enquiry here..."></textarea>
 
         <button type="submit">Book Now</button>
     </form>

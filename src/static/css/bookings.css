@@ -3,14 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background: rgba(24, 24, 26, 0.9); /* Dark background */
+    height: 100vh;
+    background: rgba(24, 24, 26, 0.9);
     padding: 2rem;
 }
 
 /* Style the booking form container */
 .booking-form {
-    background: rgb(43, 42, 51); /* Dark grey background */
+    background: rgb(43, 42, 51);
     padding: 2.5rem;
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
@@ -55,8 +55,10 @@
 
 /* Message Textarea */
 .booking-form textarea {
-    background: rgb(43, 42, 51); /* Dark grey background */
+    background: rgb(43, 42, 51);
     height: 100px;
+    color: white;
+
 }
 
 .booking-form button:hover {
