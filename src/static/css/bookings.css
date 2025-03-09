@@ -1,0 +1,72 @@
+/* Center the booking form in the middle of the page */
+.booking-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background: rgba(24, 24, 26, 0.9); /* Dark background */
+    padding: 2rem;
+}
+
+/* Style the booking form container */
+.booking-form {
+    background: rgb(43, 42, 51); /* Dark grey background */
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style the input fields */
+.booking-form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #2c2c38;
+    color: white;
+    font-size: 1rem;
+}
+
+/* Style the labels */
+.booking-form label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Style the submit button */
+.booking-form button {
+    background: lightcoral;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Message Textarea */
+.booking-form textarea {
+    background: rgb(43, 42, 51); /* Dark grey background */
+    height: 100px;
+}
+
+.booking-form button:hover {
+    background: rgb(200, 50, 50);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .booking-form {
+        width: 90%;
+        padding: 2rem;
+    }
+}
