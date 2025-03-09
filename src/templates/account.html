@@ -9,7 +9,7 @@
             <div>
                 <h1>{{ request.user }} - Cleaner</h1>
                 <!-- Change Password Button -->
-                <button onclick="openModel()"
+                <button onclick="openPModel()"
                         style="background: #007bff; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px;">
                     Change Password
                 </button>
@@ -18,7 +18,7 @@
             <!-- Password Change Popup Model -->
             <div id="passwordModel" class="model">
                 <div class="model-content">
-                    <span class="close" onclick="closeModel()">&times;</span>
+                    <span class="close" onclick="closePModel()">&times;</span>
                     <h2>Change Password</h2>
                     <form action="{% url 'password_change' %}" method="post">
                         {% csrf_token %}
@@ -37,10 +37,39 @@
             </div>
 
             <div>
-                <p>Rating: </p>
-                <p>Email: </p>
-
-                <p>Rate: </p>
+                <p class="stars">
+                    {% for i in "12345"|make_list %}
+                        {% if forloop.counter <= user.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p>Email: {{ request.email }}</p>
+                <button onclick="openEModel()"
+                    style="background: #007bff; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px;">
+                    Change Email
+                </button>
+            </div>
+            <!-- Email Change Popup Model -->
+            <div id="emailModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeEModel()">&times;</span>
+                    <h2>Change Email</h2>
+                    <form action="{% url 'email_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>New Email:</label>
+                        <input type="email" name="new email" placeholder="Enter new email" required>
+                        <label>Password:</label>
+                        <input type="password" name="password" placeholder="Enter password" required>
+                        <button type="submit">Change Email</button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <p>Phone: {{ request.phone }}</p>
+                <p>Suburb: {{ request.suburb }}</p>
             </div>
         </div>
 
@@ -53,12 +82,19 @@
 
 
     <script>
-        function openModel() {
+        function openPModel() {
             document.getElementById("passwordModel").style.display = "flex";
         }
 
-        function closeModel() {
+        function closePModel() {
             document.getElementById("passwordModel").style.display = "none";
+        }
+        function openEModel() {
+            document.getElementById("emailModel").style.display = "flex";
+        }
+
+        function closeEModel() {
+            document.getElementById("emailModel").style.display = "none";
         }
     </script>
 
