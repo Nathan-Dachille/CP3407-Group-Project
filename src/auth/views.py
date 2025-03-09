@@ -21,7 +21,10 @@ def sign_in_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("/")
+            if 'next' in request.POST:
+                return redirect(request.POST['next'])
+            else:
+                return redirect("/")
     else:
         form = AuthenticationForm()
     return render(request, "sign_in.html", {"form": form})
