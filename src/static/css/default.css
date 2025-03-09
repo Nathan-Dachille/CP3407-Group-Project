@@ -38,14 +38,13 @@ body {
 
 .content {
     padding: 2rem;
+    align-items: center;
+    margin: auto;
 }
 
 .content > div {
-    background: rgb(43, 42, 51);
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 15px;
-    padding: 1rem;
     margin-top: 0.5rem;
 }
 .primary-header {

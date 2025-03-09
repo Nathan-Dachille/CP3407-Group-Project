@@ -1,0 +1,65 @@
+{% extends "navbar.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/css/account.css' %}">
+    <script src="{% static '/js/account.js' %}" defer></script>
+    <div class="layout">
+        <div class="info">
+            <div>
+                <h1>{{ request.user }} - Cleaner</h1>
+                <!-- Change Password Button -->
+                <button onclick="openModel()"
+                        style="background: #007bff; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px;">
+                    Change Password
+                </button>
+            </div>
+
+            <!-- Password Change Popup Model -->
+            <div id="passwordModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeModel()">&times;</span>
+                    <h2>Change Password</h2>
+                    <form action="{% url 'password_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>Old Password:</label>
+                        <input type="password" name="old_password" placeholder="Enter old password" required>
+
+                        <label>New Password:</label>
+                        <input type="password" name="new_password1" placeholder="Enter new password" required>
+
+                        <label>Confirm Password:</label>
+                        <input type="password" name="new_password2" placeholder="confirm new password" required>
+
+                        <button type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <p>Rating: </p>
+                <p>Email: </p>
+
+                <p>Rate: </p>
+            </div>
+        </div>
+
+
+        <div class="timetable">
+            <h1>Timetable</h1>
+        </div>
+    </div>
+
+
+
+    <script>
+        function openModel() {
+            document.getElementById("passwordModel").style.display = "flex";
+        }
+
+        function closeModel() {
+            document.getElementById("passwordModel").style.display = "none";
+        }
+    </script>
+
+{% endblock content %}
