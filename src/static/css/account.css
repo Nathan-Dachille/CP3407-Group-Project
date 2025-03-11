@@ -1,67 +1,97 @@
-/* Model Background */
-.stars {
-    font-size: 40px;
-    color: white;
-}
+/* Webpage General Divs */
 
 .layout {
     display: inline-flex;
     flex-wrap: wrap;
     margin: auto;
     align-self: center;
-    gap: 3rem;
+    gap: 1rem;
     width: 80vw;
     align-content: space-between;
     background-color: transparent;
     justify-content: space-evenly;
 }
 
-.info {
-    background: rgb(43, 42, 51);
-    border-radius: 15px;
-    padding: 1rem;
+.content_section {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
     width: 45%;
     min-width: 400px;
-    flex-grow: 1;
-    text-align: center;
 }
 
-.timetable {
+.content_box {
+    width: 100%;
+    padding: 1rem;
     background: rgb(43, 42, 51);
     border-radius: 15px;
-    padding: 1rem;
-    width: 45%;
-    min-width: 400px;
-    flex-grow: 1;
     text-align: center;
+    margin: 1rem auto auto auto;
 }
+
+.info {
+    flex-grow: 1;
+}
+
+/* Webpage General Texts */
+
+.stars {
+    font-size: 40px;
+    color: white;
+}
+
+/* Webpage General Inputs */
+
+.change_button {
+    background: #D87373;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.symbol_button {
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.symbol_button:hover {
+    background: #D87373;
+}
+
+/* Model Divs */
 
 .model {
     display: none;
     width: 90%;
     min-width: 300px;
-    min-height: 400px;
     background-color: transparent;
-    /* Center model */
     justify-content: center;
     align-items: center;
     align-self: center;
     margin: 1rem auto auto auto;
 }
 
-/* Model Content */
 .model-content {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     width: 90%;
     height: 90%;
-
     text-align: center;
     position: relative;
 }
 
-/* Close Button */
+/* Model Inputs */
 .close {
     position: absolute;
     top: 10px;
@@ -75,19 +105,20 @@
     color: red;
 }
 
-/* Input and Button Styling */
 .model-content input {
-width: 80%;
-padding: 10px;
-margin: 5px 0;
-display: block;
+    width: 80%;        /* Limit the width of inputs */
+    padding: 10px;     /* Add padding for better spacing */
+    margin: 5px auto auto auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;    /* Ensure they are block elements */
 }
 
 .model-content button {
     width: 85%;
     padding: 10px;
     margin-top: 10px;
-    background: #007bff;
+    background: lightcoral;
     color: white;
     border: none;
     border-radius: 5px;
@@ -95,10 +126,9 @@ display: block;
 }
 
 .model-content button:hover {
-    background: #0056b3;
+    background: lightcoral;
 }
 
-/* Ensures close button styling is also scoped */
 .model-content .close {
     position: absolute;
     top: 10px;
@@ -112,8 +142,10 @@ display: block;
     color: red;
 }
 
+/* Model Texts */
+
 .model-content label {
-display: block; /* Ensures labels are on their own line */
+display: block;
 margin-top: 10px;
 font-weight: bold;
 font-size: 16px;
@@ -121,22 +153,9 @@ color: black;
 }
 
 .model-content h2 {
-display: block; /* Ensures labels are on their own line */
+display: block;
 margin-top: 10px;
 font-weight: bold;
 font-size: 20px;
 color: black;
-}
-
-/* Input Fields */
-.model-content input {
-    width: 80%;        /* Limit the width of inputs */
-    padding: 10px;     /* Add padding for better spacing */
-    margin-top: 10px;  /* Space between inputs */
-    margin-bottom: 15px;  /* Space between inputs and button */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;    /* Ensure they are block elements */
-    margin-left: auto; /* Center input horizontally */
-    margin-right: auto; /* Center input horizontally */
 }
