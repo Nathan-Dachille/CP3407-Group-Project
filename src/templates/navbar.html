@@ -24,7 +24,7 @@
             <li><a class="verdana-ss-20px" href="{% url 'book_appointment' %}">Bookings</a></li>  <!-- Bookings Link -->
             {% if user.is_authenticated %}
                 <li>
-                    <a class="verdana-ss-20px" href="#profile">
+                    <a class="verdana-ss-20px" href="{% url 'account' %}">
                         Hello, {{ user.username }}.
                     </a>
                 </li>
