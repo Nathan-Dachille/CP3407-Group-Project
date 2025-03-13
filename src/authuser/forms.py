@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from authuser.models import User
 
@@ -10,7 +9,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2')
+        fields = ('username', 'email', 'role', 'password1', 'password2')
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
@@ -19,3 +18,11 @@ class RegistrationForm(UserCreationForm):
         except Exception as e:
             return email
         raise forms.ValidationError(f"Email  {email} is already in use.")
+
+
+class SignInForm(AuthenticationForm):
+    email = forms.EmailField(max_length=255)
+
+    class Meta:
+        model = User
+        fields = ('email', 'password')

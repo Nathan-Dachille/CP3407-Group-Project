@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 from pages.views import home
 from authuser.views import sign_in_view, register_view, sign_out_view
+from bookings.views import book_appointment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('bookings/', include('bookings.urls')),
+    path('bookings/', book_appointment, name="book_appointment"),
     path('sign_in/', sign_in_view, name="sign_in"),
     path('register/', register_view, name="register"),
     path('sign_out/', sign_out_view, name="sign_out")
