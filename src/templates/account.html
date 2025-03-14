@@ -82,6 +82,24 @@
                     <span id="phone_display">{{ request.phone }}</span>
                     <input id="phone_input" type="email" value="{{ request.phone }}"
                            placeholder="04XX XXX XXX" style="display: none;">
+
+                    {% if request.type == 'cleaner' %}
+                        <button class="symbol_button" onclick="toggleEdit()">
+                            ⇄
+                        </button>
+                        Working Area:
+                        <span id="area_display">{{ request.area }}</span>
+                        <input id="area_input" type="email" value="{{ request.area }}"
+                               placeholder="State, City, Suburb" style="display: none;">
+
+                        <button class="symbol_button" onclick="toggleEdit()">
+                            ⇄
+                        </button>
+                        Working Rate:
+                        <span id="rate_display">{{ request.rate }}</span>
+                        <input id="rate_input" type="email" value="{{ request.rate }}"
+                               placeholder="Base Rate (%modifiers)" style="display: none;">
+                    {% endif %}
                 </p>
             </div>
         </div>
