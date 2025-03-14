@@ -1,0 +1,121 @@
+{% extends "navbar.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Link Files -->
+    <link rel="stylesheet" href="{% static '/css/account.css' %}">
+    <script src="{% static '/js/account.js' %}"></script>
+
+    <!-- Content -->
+    <div class="layout">
+        <div class="content_section">
+            <!-- Account and Password Section -->
+            <div class="content_box">
+                <!--Username and User Type-->
+                <h1>{{ request.user }} - {{ request.type }}</h1>
+
+                <!-- Rating -->
+                <p class="stars">
+                    {% for i in "12345"|make_list %}
+                        {% if forloop.counter <= user.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </p>
+
+                <!-- Email Section -->
+                <p>Email: {{ request.email }}</p>
+                <!-- Change Email Button -->
+                <button class="change_button" onclick="openModel('emailModel')">
+                    Change Email
+                </button>
+
+                <!-- Change Password Button -->
+                <button class="change_button" onclick="openModel('passwordModel')">
+                    Change Password
+                </button>
+            </div>
+            <!-- Email Change Popup Model -->
+            <div id="emailModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeModel('emailModel')">&times;</span>
+                    <h2>Change Email</h2>
+                    <form action="{% url 'email_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>New Email:</label>
+                        <input type="email" name="new email" placeholder="Enter new email" required>
+                        <label>Password:</label>
+                        <input type="password" name="password" placeholder="Enter password" required>
+                        <button type="submit">Change Email</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Password Change Popup Model -->
+            <div id="passwordModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeModel('passwordModel')">&times;</span>
+                    <h2>Change Password</h2>
+                    <form action="{% url 'password_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>Old Password:</label>
+                        <input type="password" name="old_password" placeholder="Enter old password" required>
+
+                        <label>New Password:</label>
+                        <input type="password" name="new_password1" placeholder="Enter new password" required>
+
+                        <label>Confirm Password:</label>
+                        <input type="password" name="new_password2" placeholder="confirm new password" required>
+
+                        <button type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+            <div class="content_box info">
+                <p>
+                    <button class="symbol_button" onclick="toggleEdit()">
+                        ⇄
+                    </button>
+                    Phone:
+                    <span id="phone_display">{{ request.phone }}</span>
+                    <input id="phone_input" type="email" value="{{ request.phone }}"
+                           placeholder="04XX XXX XXX" style="display: none;">
+                </p>
+            </div>
+        </div>
+
+
+        <div class="content_section">
+            <div class="content_box">
+                <h1>Timetable</h1>
+            </div>
+            <div class="content_box info">
+                <h3>
+                    <button class="symbol_button">
+                        ←
+                    </button>
+                    2025 Week 1: 1st of January - 7th of January
+                    <button class="symbol_button">
+                        →
+                    </button>
+                </h3>
+                <table>
+                    <tr>
+                        <th>+</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
