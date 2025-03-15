@@ -1,14 +1,17 @@
 {% extends "navbar.html" %}
+{% load static %}
 
 {% block content %}
-  <div>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+  
+  <div class="round home-div">
 	<h1>Hello World!</h1>
 	{{request.user}}
 	<p>This is a template</p>
 	<p>Homepage Content Goes Here!</p>
   </div>
   
-  <div>
+  <div class="round home-div">
 	<p> Additional Sections Can be Added as Divs! </p>
   </div>
 {% endblock content %}
