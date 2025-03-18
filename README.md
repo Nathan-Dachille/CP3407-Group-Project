@@ -149,3 +149,16 @@ Total: 0.5 days
 Total: 4 days
 
 Iteration 1 Tasks Total: 8 days
+
+# New Velocity:
+E1 = 8 days
+A1 = 13 days
+V1 = E1/A1
+   = 8/13
+   = 0.6154
+
+E2 = 4 days (Ideal days)
+V2 = 4/8 * 0.6154
+   = 0.3077
+
+Therefore, the new velocity is 0.3077
