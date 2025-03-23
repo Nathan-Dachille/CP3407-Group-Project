@@ -1,25 +1,40 @@
 .auth-div {
-    background: #2c2c38;
-    border-radius: 15px;
-    padding: 1rem;
+    padding: 1rem 2.5rem 2.5rem;
+    max-width: 1280px;
+    width: 80vw;
+    margin: auto;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.auth-title {
+    text-align: center;
 }
 
 .form-with-validation {
-    font-size: 1rem;
+    align-items: center;
     display: flex;
     flex-flow: column;
     gap: 1rem;
+    color: white;
 }
 
 .form-with-validation div {
     display: flex;
     flex-flow: column;
+    width: 100%;
     gap: 0.5rem;
 }
 
 .form-with-validation input {
-    padding: 0.25rem;
-    max-width: 300px;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    background: hla(0, 100%, 0%, 0.1);
+    color: white;
+    font-size: 1rem;
+    color-scheme: dark;
 }
 
 /*
@@ -32,12 +47,21 @@
 
 .form-with-validation label {
     font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
 }
 
 .form-submit {
-    padding: 0.5rem;
-    border-radius: 10px;
-    width: 125px;
+    width: 100%;
+    background: lightcoral;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease-in-out;
 }
 
 .helptext {
@@ -75,4 +99,45 @@ This might be removed in the future.
     padding: 0;
     border: none;
     cursor: pointer;
+}
+
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
+}
+}
+
+cursor: pointer;
 }
