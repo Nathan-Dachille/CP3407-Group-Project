@@ -1,5 +1,5 @@
 .home-div {
-    background: #2c2c38;
+    box-sizing: border-box;
     padding: 1rem;
     width: 80vw;
     max-width: 1280px;

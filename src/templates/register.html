@@ -5,12 +5,10 @@
 
     <link rel="stylesheet" href="{% static '/css/auth.css' %}">
 
-    <div class="auth-div">
-        <h1>Register</h1>
+    <div class="auth-div background-grey round">
+        <h1 class="auth-title">Register</h1>
         <p> Please enter your details to register for an account. </p>
-    </div>
 
-    <div class="auth-div">
         <form class="form-with-validation" action="/register/" method="post">
             {% csrf_token %}
             {{ form }}
