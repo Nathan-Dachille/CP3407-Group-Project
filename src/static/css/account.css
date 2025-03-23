@@ -1,0 +1,161 @@
+/* Webpage General Divs */
+
+.layout {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: auto;
+    align-self: center;
+    gap: 1rem;
+    width: 80vw;
+    align-content: space-between;
+    background-color: transparent;
+    justify-content: space-evenly;
+}
+
+.content_section {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    min-width: 400px;
+}
+
+.content_box {
+    width: 100%;
+    padding: 1rem;
+    background: rgb(43, 42, 51);
+    border-radius: 15px;
+    text-align: center;
+    margin: 1rem auto auto auto;
+}
+
+.info {
+    flex-grow: 1;
+}
+
+/* Webpage General Texts */
+
+.stars {
+    font-size: 40px;
+    color: white;
+}
+
+/* Webpage General Inputs */
+
+.change_button {
+    background: #D87373;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.symbol_button {
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.symbol_button:hover {
+    background: #D87373;
+}
+
+/* Model Divs */
+
+.model {
+    display: none;
+    width: 90%;
+    min-width: 300px;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin: 1rem auto auto auto;
+}
+
+.model-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    height: 90%;
+    text-align: center;
+    position: relative;
+}
+
+/* Model Inputs */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.close:hover {
+    color: red;
+}
+
+.model-content input {
+    width: 80%;        /* Limit the width of inputs */
+    padding: 10px;     /* Add padding for better spacing */
+    margin: 5px auto auto auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;    /* Ensure they are block elements */
+}
+
+.model-content button {
+    width: 85%;
+    padding: 10px;
+    margin-top: 10px;
+    background: lightcoral;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.model-content button:hover {
+    background: lightcoral;
+}
+
+.model-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.model-content .close:hover {
+    color: red;
+}
+
+/* Model Texts */
+
+.model-content label {
+display: block;
+margin-top: 10px;
+font-weight: bold;
+font-size: 16px;
+color: black;
+}
+
+.model-content h2 {
+display: block;
+margin-top: 10px;
+font-weight: bold;
+font-size: 20px;
+color: black;
+}

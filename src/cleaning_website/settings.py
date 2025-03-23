@@ -24,7 +24,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages',
     'bookings',
+    'authuser',
+    'account',
 ]
+
+AUTH_USER_MODEL = 'authuser.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
