@@ -64,6 +64,10 @@
     transition: background 0.3s ease-in-out;
 }
 
+.form-submit:hover {
+    background: rgb(200, 50, 50) !important;
+}
+
 .helptext {
     font-size: 1rem;
     border-left: 5px solid lightcoral;
