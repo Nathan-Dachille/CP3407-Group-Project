@@ -105,15 +105,12 @@
 }
 
 .model-content input {
-    width: 80%;
-    /* Limit the width of inputs */
-    padding: 10px;
-    /* Add padding for better spacing */
+    width: 80%;			/* Limit the width of inputs */
+    padding: 10px;		/* Add padding for better spacing */
     margin: 5px auto auto auto;
     border: 1px solid #ccc;
     border-radius: 5px;
-    display: block;
-    /* Ensure they are block elements */
+    display: block;		/* Ensure they are block elements */
 }
 
 .model-content button {
