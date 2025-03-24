@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
 
-<div class="booking-div">
+<div class="booking-div background-grey round">
     <h2 class="booking-title">Book an Appointment</h2>
     <form class="booking-form" method="POST" action="{% url 'book_appointment' %}">
         {% csrf_token %}
@@ -17,6 +17,12 @@
 
         <label for="date">Booking Date:</label>
         <input type="date" id="date" name="date" required>
+
+        <label for="start_time">Start Time:</label>
+        <input type="time" id="start_time" name="start_time" required>
+
+        <label for="end_time">End Time (optional):</label>
+        <input type="time" id="end_time" name="end_time">
 
         <label for="notes">Message:</label>
         <textarea id="notes" name="notes" rows="5" placeholder="Enter your enquiry here..."></textarea>
