@@ -6,4 +6,5 @@ from django.shortcuts import render
 
 def home(request, *args, **kwargs):
     confirmed = True if "confirmed" in request.GET else False
-    return render(request, "home.html", {"confirmed": confirmed})
+    signout = True if "signout" in request.GET else False
+    return render(request, "home.html", {"confirmed": confirmed, "signout": signout})
