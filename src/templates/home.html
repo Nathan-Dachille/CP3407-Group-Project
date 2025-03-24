@@ -4,6 +4,13 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
   
+{% if confirmed == True %}
+<script src="{% static 'js/confirmation.js' %}" defer></script>
+<div class="round background-grey confirmation-div" data-hidden="False">
+  <p>✅ Your booking was successfully created!</p>
+</div>
+{% endif %}
+
   <div class="round background-grey home-div">
 	<h1>Hello World!</h1>
 	{{request.user}}
