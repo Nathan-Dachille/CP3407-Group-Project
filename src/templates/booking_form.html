@@ -6,9 +6,10 @@
 
 <div class="booking-div background-grey round">
     <h2 class="booking-title">Book an Appointment</h2>
-    <form class="booking-form" method="POST" action="{% url 'book_appointment' %}">
+    <form class="booking-form" action="/bookings/" method="post">
         {% csrf_token %}
-
+        {{ form }}
+<!--
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -26,8 +27,9 @@
 
         <label for="notes">Message:</label>
         <textarea id="notes" name="notes" rows="5" placeholder="Enter your enquiry here..."></textarea>
-
+-->
         <button type="submit">Book Now</button>
+
     </form>
 </div>
 {% endblock %}
