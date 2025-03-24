@@ -11,7 +11,7 @@ def book_appointment(request):
             booking = form.save(commit=False)
             booking.user = request.user
             booking.save()
-            return redirect("/?confirmed=True")
+            return redirect("/?confirmed")
     else:
         form = BookingForm()
 

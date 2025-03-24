@@ -5,5 +5,5 @@ from django.shortcuts import render
 
 
 def home(request, *args, **kwargs):
-    confirmed = request.GET["confirmed"] == "True"
+    confirmed = True if "confirmed" in request.GET else False
     return render(request, "home.html", {"confirmed": confirmed})
