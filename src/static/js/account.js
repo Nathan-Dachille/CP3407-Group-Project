@@ -6,6 +6,21 @@ function closeModel(modelId) {
     document.getElementById(modelId).style.display = "none";
 }
 
+function toggleAvailable(togType, target) {
+    if (togType === 'week')
+    {
+        if (true === true)// target is toggled unavailable
+        {
+            document.getElementById(target).style.color = "white";
+        } else
+        {
+            document.getElementById(target).style.color = "red";
+        }
+
+    }
+
+}
+
 function toggleEdit() {
     let displaySpan = document.getElementById("phone_display");
     let inputField = document.getElementById("phone_input");
