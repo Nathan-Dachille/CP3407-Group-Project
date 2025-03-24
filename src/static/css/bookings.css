@@ -1,13 +1,11 @@
 /* Center the booking form in the middle of the page */
 .booking-div {
-    justify-content: center;
-    align-self: center;
-    align-items: center;
     margin: auto;
     padding: 1rem 1rem 1rem 1rem;
     box-sizing: border-box;
     max-width: 1280px;
     width: 80vw;
+    align-items: center;
 }
 
 /* Style the title */
@@ -17,12 +15,19 @@
 
 /* Style the booking form container */
 .booking-form {
-    padding: 1rem 2.5rem 2.5rem;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-form div {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    gap: 0.5rem;
 }
 
 /* Style the input fields */
@@ -45,6 +50,7 @@
 
 /* Style the submit button */
 .booking-form button {
+    width: 100%;
     background: lightcoral;
     border: none;
     padding: 14px;
