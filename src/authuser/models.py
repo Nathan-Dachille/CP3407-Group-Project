@@ -67,3 +67,15 @@ class User(AbstractUser):
                                                         message="Phone number must be entered in the format: "
                                                                 "'+999999999'. Up to 15 digits allowed.")])
     rating = models.IntegerField(null=True)
+
+
+class CleanerAvailability(models.Model):
+    cleaner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="availabilities")
+    date = models.DateField()
+    available_hours = models.JSONField(default=list)
+
+    class Meta:
+        unique_together = ('cleaner', 'date')
+
+    def day_of_week(self):
+        return self.date.strftime('%A')  # Returns 'Monday', 'Tuesday', etc.
