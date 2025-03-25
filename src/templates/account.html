@@ -117,7 +117,6 @@
                 {% load tz %}
                 {% localtime on %}
                     <p>Current Date: {{ current_date }}</p>
-                    <p>Current Week Number: {{ week_number }}</p>
                     <p>Week Dates:</p>
                     <ul>
                         {% for date in week_dates %}
@@ -125,11 +124,21 @@
                         {% endfor %}
                     </ul>
                     <h3>
-                        <button class="symbol_button">
+                        <button class="symbol_button" id="prev-week">
                             ←
                         </button>
-                        2025 Week 1: 1st of January - 7th of January
-                        <button class="symbol_button">
+
+                        {% if week_dates.0.year != week_dates.6.year %}
+                            {{ week_dates.0.year }} - {{ week_dates.6.year }}
+                        {% else %}
+                            {{ week_dates.0.year }}
+                        {% endif %}
+
+                        Week {{ week_number }}:
+                        {{ week_dates.0|date:"jS" }} of {{ week_dates.0|date:"F" }} -
+                        {{ week_dates.6|date:"jS" }} of {{ week_dates.6|date:"F" }}
+
+                        <button class="symbol_button" id="next-week">
                             →
                         </button>
                     </h3>
