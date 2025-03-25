@@ -18,12 +18,12 @@
     display: flex;
     flex-direction: column;
     width: 45%;
-    min-width: 630px;
+    min-width: 550px;
 }
 
 .content_box {
     padding: 1rem;
-    min-width: 590px;
+    width: 100%;
     text-align: center;
     margin: 1rem auto auto auto;
 }

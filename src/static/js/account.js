@@ -1,3 +1,24 @@
+document.addEventListener("DOMContentLoaded", function() {
+        // Trigger the AJAX request when the page loads
+        updateWeekInfo();
+});
+
+function updateWeekInfo() {
+    // Get today's date (you can change this to any date logic you prefer)
+    const userDate = new Date().toISOString().split('T')[0];  // Formats date as YYYY-MM-DD
+
+    // Send the new date via AJAX to the server
+    fetch(`/profile/?user_date=${userDate}`, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+
+    .catch(error => console.error("Error fetching week data:", error));
+}
+
 function openModel(modelId) {
     document.getElementById(modelId).style.display = "flex";
 }
@@ -7,7 +28,7 @@ function closeModel(modelId) {
 }
 
 function toggleAvailable(togType, target) {
-    if (togType === 'week')
+    if (togType === 'hour')
     {
         if (true === true)// target is toggled unavailable
         {
@@ -16,6 +37,9 @@ function toggleAvailable(togType, target) {
         {
             document.getElementById(target).style.color = "red";
         }
+
+    } else if (togType === 'week')
+    {
 
     }
 
