@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            // Subheader Section:
             document.getElementById("week-number").textContent = ` ${data.week_number} `;
             // Apply the ordinal formatting
             const formattedStartDate = formatDateWithOrdinal(data.week_dates[0]);
@@ -34,6 +35,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("year-display").textContent =
                 (startYear !== endYear) ? ` ${startYear} - ${endYear} ` : ` ${startYear} `;
+
+            // Table Section:
+            const timetableContainer = document.getElementById("timetable")
+            let timetableHTML = '<table class="timetable">';
+
+            // Add table headers
+            timetableHTML += `<tr><th><button class="toggle_set" ` +
+                `onClick="toggleAvailable(1,${data.week_dates})">+` +
+                `</button></th>`;
+
+            for (let i =0; i < data.week_dates.length; i++) {
+                // Create a Date object from the date string
+                const date = new Date(data.week_dates[i]);
+
+                // Get the day name from the Date object
+                const dayName = date.toLocaleString('en-US', { weekday: 'long' });
+                timetableHTML += `<td><button class="toggle_set"` +
+                ` onClick="toggleAvailable(1, '${data.week_dates[i]}')">${dayName}` +
+                `</button></td>`;
+            }
+            timetableHTML += `</tr>`;
+
+
+            // Insert the HTML into the timetable container
+            timetableContainer.innerHTML = timetableHTML;
         })
         .catch(error => console.error("Error fetching week data:", error));
     }
@@ -82,7 +108,7 @@ function closeModel(modelId) {
 }
 
 function toggleAvailable(togType, target) {
-    if (togType === 'hour')
+    if (togType === 1)
     {
         if (true === true)// target is toggled unavailable
         {
@@ -92,7 +118,7 @@ function toggleAvailable(togType, target) {
             document.getElementById(target).style.color = "red";
         }
 
-    } else if (togType === 'week')
+    } else if (togType === 2)
     {
 
     }
