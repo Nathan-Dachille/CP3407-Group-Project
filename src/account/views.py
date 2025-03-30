@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 def get_date_info(date):
     week_start = date - timedelta(days=date.weekday())  # Monday
     # Generate a list of all dates in the week (Monday to Sunday)
-    week_dates = [(week_start + timedelta(days=i)) for i in range(7)]
+    week_dates = [(week_start + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(7)]
 
     week_num = date.isocalendar().week
 
@@ -25,16 +25,12 @@ def account(request, *args, **kwargs):
 
     day_list, week_num = get_date_info(user_date)
 
-    if user_date_str:
-        return redirect('account')  # Redirect to clean URL without the query string
-
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({
             "current_date": user_date,
             "week_number": week_num,
             "week_dates": day_list,
         })
-
     return render(request, "account.html", {
         "current_date": user_date,
         "week_dates": day_list,

@@ -116,32 +116,25 @@
             <div class="content_box info background-grey round">
                 {% load tz %}
                 {% localtime on %}
-                    <p>Current Date: {{ current_date }}</p>
-                    <p>Week Dates:</p>
                     <ul>
                         {% for date in week_dates %}
                             <li>{{ date }}</li>
                         {% endfor %}
                     </ul>
-                    <h3>
+                    <div class="t_header">
                         <button class="symbol_button" id="prev-week">
                             ←
                         </button>
 
-                        {% if week_dates.0.year != week_dates.6.year %}
-                            {{ week_dates.0.year }} - {{ week_dates.6.year }}
-                        {% else %}
-                            {{ week_dates.0.year }}
-                        {% endif %}
-
-                        Week {{ week_number }}:
-                        {{ week_dates.0|date:"jS" }} of {{ week_dates.0|date:"F" }} -
-                        {{ week_dates.6|date:"jS" }} of {{ week_dates.6|date:"F" }}
+                        <div class="header-content">
+                            <span id="year-display"></span> Week <span id="week-number"></span>:
+                            <span id="week-range"></span>
+                        </div>
 
                         <button class="symbol_button" id="next-week">
                             →
                         </button>
-                    </h3>
+                    </div>
                     <table>
                         <tr>
                             <th>

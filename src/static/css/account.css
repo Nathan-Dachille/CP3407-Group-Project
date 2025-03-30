@@ -158,3 +158,29 @@
     font-size: 20px;
     color: black;
 }
+
+/* Timetable Divs */
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em; /* Adds spacing between the elements */
+}
+
+/* Timetable Inputs */
+
+/* Timetable Texts */
+
+.t_header {
+    font-size: 1.17em; /* Default h3 size */
+    font-weight: bold; /* Default h3 bold */
+    line-height: 1.2;
+    display: inline-flex;
+    justify-content: space-between; /* Ensures buttons are at the edges */
+    align-items: center; /* Vertically center the content */
+    width: 100%; /* Makes sure it takes up the full width of the container */
+    white-space: nowrap; /* Prevents wrapping of the content */
+}
+
+/* Timetable Tables */
