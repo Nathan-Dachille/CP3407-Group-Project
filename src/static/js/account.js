@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Add table headers
             timetableHTML += `<tr><th><button class="toggle_set" ` +
-                `onClick="toggleAvailable(1,${data.week_dates})">+` +
+                `onClick="toggleAvailable({togType:1,target_days:${data.week_dates}})">+` +
                 `</button></th>`;
 
             for (let i =0; i < data.week_dates.length; i++) {
@@ -51,12 +51,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Get the day name from the Date object
                 const dayName = date.toLocaleString('en-US', { weekday: 'long' });
-                timetableHTML += `<td><button class="toggle_set"` +
-                ` onClick="toggleAvailable(1, '${data.week_dates[i]}')">${dayName}` +
-                `</button></td>`;
+                timetableHTML += `<th><button class="toggle_set"` +
+                ` onClick="toggleAvailable({togType:1, target_days:${data.week_dates[i]}})">${dayName}` +
+                `</button></th>`;
             }
             timetableHTML += `</tr>`;
 
+            // Add table content
+
+            for (let i = 0, weekDates = data.week_dates; i < 24; i++) {
+                let t_string = convertToTimeString(i)
+
+                timetableHTML += `<tr><th><button class="toggle_set" ` +
+                `onClick="toggleAvailable({togType:1,target_hours:${i}})">${t_string}` +
+                `</button></th>`;
+
+                for (let j = 0; j < weekDates.length; j++) {
+                    timetableHTML += `<th><button class="toggle_set"` +
+                    ` onClick="toggleAvailable({togType:2, target_days:${weekDates[i]},
+                    target_hours:${i}})"></button></th>`;
+                }
+
+                timetableHTML += `</tr>`;
+            }
 
             // Insert the HTML into the timetable container
             timetableContainer.innerHTML = timetableHTML;
@@ -79,6 +96,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Trigger the AJAX request when the page loads
     updateWeekInfo();
 });
+
+function convertToTimeString(hour) {
+    // Handle hour 0 as 12am, and 12 as 12pm
+    if (hour === 0) {
+        return "12am";
+    } else if (hour === 12) {
+        return "12pm";
+    }
+
+    // Convert hour to 12-hour format
+    const hour12 = hour > 12 ? hour - 12 : hour;
+
+    // Determine AM or PM
+    const period = hour >= 12 ? "pm" : "am";
+
+    // Return the formatted time string
+    return `${hour12}${period}`;
+}
 
 function formatDateWithOrdinal(dateString) {
     const date = new Date(dateString);
@@ -107,16 +142,9 @@ function closeModel(modelId) {
     document.getElementById(modelId).style.display = "none";
 }
 
-function toggleAvailable(togType, target) {
+function toggleAvailable({togType=0, target_days=[], target_hours=[]}) {
     if (togType === 1)
     {
-        if (true === true)// target is toggled unavailable
-        {
-            document.getElementById(target).style.color = "white";
-        } else
-        {
-            document.getElementById(target).style.color = "red";
-        }
 
     } else if (togType === 2)
     {
