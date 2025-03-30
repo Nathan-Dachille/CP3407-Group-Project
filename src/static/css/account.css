@@ -7,6 +7,7 @@
     align-self: center;
     gap: 1rem;
     width: 80vw;
+    max-width: 1280px;
     align-content: space-between;
     background-color: transparent;
     justify-content: space-evenly;
@@ -17,14 +18,12 @@
     display: flex;
     flex-direction: column;
     width: 45%;
-    min-width: 400px;
+    min-width: 550px;
 }
 
 .content_box {
-    width: 100%;
     padding: 1rem;
-    background: rgb(43, 42, 51);
-    border-radius: 15px;
+    width: 100%;
     text-align: center;
     margin: 1rem auto auto auto;
 }
@@ -106,12 +105,12 @@
 }
 
 .model-content input {
-    width: 80%;        /* Limit the width of inputs */
-    padding: 10px;     /* Add padding for better spacing */
+    width: 80%;			/* Limit the width of inputs */
+    padding: 10px;		/* Add padding for better spacing */
     margin: 5px auto auto auto;
     border: 1px solid #ccc;
     border-radius: 5px;
-    display: block;    /* Ensure they are block elements */
+    display: block;		/* Ensure they are block elements */
 }
 
 .model-content button {
@@ -145,17 +144,43 @@
 /* Model Texts */
 
 .model-content label {
-display: block;
-margin-top: 10px;
-font-weight: bold;
-font-size: 16px;
-color: black;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
 }
 
 .model-content h2 {
-display: block;
-margin-top: 10px;
-font-weight: bold;
-font-size: 20px;
-color: black;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
 }
+
+/* Timetable Divs */
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em; /* Adds spacing between the elements */
+}
+
+/* Timetable Inputs */
+
+/* Timetable Texts */
+
+.t_header {
+    font-size: 1.17em; /* Default h3 size */
+    font-weight: bold; /* Default h3 bold */
+    line-height: 1.2;
+    display: inline-flex;
+    justify-content: space-between; /* Ensures buttons are at the edges */
+    align-items: center; /* Vertically center the content */
+    width: 100%; /* Makes sure it takes up the full width of the container */
+    white-space: nowrap; /* Prevents wrapping of the content */
+}
+
+/* Timetable Tables */

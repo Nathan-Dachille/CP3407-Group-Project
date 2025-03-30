@@ -6,6 +6,7 @@ from authuser.forms import RegistrationForm
 
 # Create your views here.
 
+
 def register_view(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -22,8 +23,8 @@ def sign_in_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            if 'next' in request.POST:
-                return redirect(request.POST['next'])
+            if "next" in request.POST:
+                return redirect(request.POST["next"])
             else:
                 return redirect("/")
     else:
@@ -34,4 +35,4 @@ def sign_in_view(request):
 def sign_out_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect("/")
+        return redirect("/?signout")
