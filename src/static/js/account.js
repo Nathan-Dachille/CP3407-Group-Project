@@ -16,10 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            if (!data || !data.week_dates || !data.week_number) {
+            if (!data || !data.current_date || !data.week_dates
+                || !data.week_number || !data.ava_data) {
                 console.error("Invalid data received:", data);
                 return;
             }
+            console.log("Current Date:", data.current_date);
+            console.log("Week Number:", data.week_number);
+            console.log("Week Dates:", data.week_dates);
+            console.log("Availability Data:", data.ava_data);
 
             // Subheader Section:
             document.getElementById("week-number").textContent = ` ${data.week_number} `;
@@ -50,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const date = new Date(data.week_dates[i]);
 
                 // Get the day name from the Date object
-                const dayName = date.toLocaleString('en-US', { weekday: 'long' });
+                const dayName = date.toLocaleString('en-US', { weekday: 'short' });
                 timetableHTML += `<th><button class="toggle_set"` +
                 ` onClick="toggleAvailable({togType:1, target_days:${data.week_dates[i]}})">${dayName}` +
                 `</button></th>`;
@@ -59,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Add table content
 
-            for (let i = 0, weekDates = data.week_dates; i < 24; i++) {
+            for (let i = 0, weekDates = data.week_dates, avail = data.ava_data; i < 24; i++) {
                 let t_string = convertToTimeString(i)
 
                 timetableHTML += `<tr><th><button class="toggle_set" ` +
@@ -67,9 +72,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 `</button></th>`;
 
                 for (let j = 0; j < weekDates.length; j++) {
-                    timetableHTML += `<th><button class="toggle_set"` +
-                    ` onClick="toggleAvailable({togType:2, target_days:${weekDates[i]},
-                    target_hours:${i}})"></button></th>`;
+                    let currentDate = weekDates[j]; // Get the current date from the week
+                    // Find availability for this date and time
+                    let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
+                    let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
+
+                    let buttonClass = isAvailable ? "ava" : "n_ava";
+
+                    timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
+                    ` onClick="toggleAvailable({togType:2, target_days:${weekDates[j]},
+                    target_hours:${i}})">‎</button></th>`;
                 }
 
                 timetableHTML += `</tr>`;
@@ -78,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Insert the HTML into the timetable container
             timetableContainer.innerHTML = timetableHTML;
         })
-        .catch(error => console.error("Error fetching week data:", error));
+        .catch(error => console.error("Error fetching data:", error));
     }
 
     document.getElementById("prev-week").addEventListener("click", () => {
@@ -118,7 +130,7 @@ function convertToTimeString(hour) {
 function formatDateWithOrdinal(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "long" });
+    const month = date.toLocaleString("en-US", { month: "short" });
 
     // Function to get ordinal suffix (st, nd, rd, th)
     function getOrdinal(n) {

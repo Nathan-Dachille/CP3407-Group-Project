@@ -116,11 +116,6 @@
             <div class="content_box info background-grey round">
                 {% load tz %}
                 {% localtime on %}
-                    <ul>
-                        {% for date in week_dates %}
-                            <li>{{ date }}</li>
-                        {% endfor %}
-                    </ul>
                     <div class="t_header">
                         <button class="symbol_button" id="prev-week">
                             ←

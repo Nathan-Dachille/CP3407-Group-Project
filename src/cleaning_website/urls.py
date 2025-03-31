@@ -22,8 +22,10 @@ from bookings.views import book_appointment
 from account.views import account
 from django.contrib.auth.views import PasswordChangeView
 
+
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = "registration/password_change_form.html"
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +36,5 @@ urlpatterns = [
     path('sign_out/', sign_out_view, name="sign_out"),
     path('profile/', account, name='account'),
     path('change-password/', CustomPasswordChangeView.as_view(), name='password_change'),
-    path('change-email/', CustomPasswordChangeView.as_view(), name='email_change')
+    path('change-email/', CustomPasswordChangeView.as_view(), name='email_change'),
 ]
