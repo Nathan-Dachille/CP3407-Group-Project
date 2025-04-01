@@ -1,6 +1,11 @@
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth.models import AbstractUser, AbstractBaseUser, PermissionsMixin, UserManager
+from django.contrib.auth.models import (
+    AbstractUser,
+    AbstractBaseUser,
+    PermissionsMixin,
+    UserManager,
+)
 from django.utils import timezone
 
 
@@ -56,26 +61,40 @@ from django.utils import timezone
 #     def get_short_name(self):
 #         return self.name or self.email.split('@')[0]
 
+
 class User(AbstractUser):
     class Role(models.TextChoices):
-        CUSTOMER = "CUSTOMER", 'Customer'
-        CLEANER = "CLEANER", 'Cleaner'
+        CUSTOMER = "CUSTOMER", "Customer"
+        CLEANER = "CLEANER", "Cleaner"
 
-    role = models.CharField(max_length=50, choices=Role.choices, help_text="Required. Select an account type.")
-    phone = models.CharField(max_length=20,
-                             validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$',
-                                                        message="Phone number must be entered in the format: "
-                                                                "'+999999999'. Up to 15 digits allowed.")])
+    role = models.CharField(
+        max_length=50,
+        choices=Role.choices,
+        help_text="Required. Select an account type.",
+    )
+    phone = models.CharField(
+        max_length=20,
+        validators=[
+            RegexValidator(
+                regex=r"^\+?1?\d{9,15}$",
+                message="Phone number must be entered in the format: "
+                "'+999999999'. Up to 15 digits allowed.",
+            )
+        ],
+    )
     rating = models.IntegerField(null=True)
+    objects = UserManager()
 
 
 class CleanerAvailability(models.Model):
-    cleaner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="availabilities")
+    cleaner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="availabilities"
+    )
     date = models.DateField()
     available_hours = models.JSONField(default=list)
 
     class Meta:
-        unique_together = ('cleaner', 'date')
+        unique_together = ("cleaner", "date")
 
     def day_of_week(self):
-        return self.date.strftime('%A')  # Returns 'Monday', 'Tuesday', etc.
+        return self.date.strftime("%A")  # Returns 'Monday', 'Tuesday', etc.
