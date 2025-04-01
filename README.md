@@ -1,4 +1,4 @@
-# CP3407 Group Assignment (Group __ )
+# CP3407 Group Assignment
 
 This a project assignment template for CP3407. 
 The following is the list of items, which are required to be completed.
@@ -35,53 +35,31 @@ Checklist/TODOs:
 * User stories are correct: see p39
 * Must have more user stories than fits into iterations 1 and 2. To practice the priority.
 
-User Stories (Ideal Days):
+User Stories:
+* [Account Creation](./user_stories/user_story_01_title.md), priority 10, 2 days 
+* [Book cleaner](./user_stories/user_story_01_title.md), priority 10, 2 days 
+* [Accept a booking](./user_stories/user_story_01_title.md), priority 10, 1 day 
+* [User profile management](./user_stories/user_story_01_title.md), priority 10, 3 days 
+* [Track job completion](./user_stories/user_story_01_title.md), priority 30, 1 days 
+* [Handling customer disputes](./user_stories/user_story_01_title.md) priority 30, 2 days
+* [Rescheduling bookings](./user_stories/user_story_01_title.md) priority 20, 2 days 
+* [Earnings and payment management](./user_stories/user_story_01_title.md) priority 30, 3 days 
+* [Bookings calendar](./user_stories/user_story_01_title.md), priority 10, 4 days 
+* [User and cleaner communication](./user_stories/user_story_01_title.md), priority 20, 2 days 
+* [Rate a cleaner](./user_stories/user_story_01_title.md), priority 10, 1 day 
+* [Create a cleaning checklist](./user_stories/user_story_01_title.md), priority 20, 1 day 
 
-* [Scheduling](./user_stories/user_story_01_title.md), priority 10, 1 days 
-* [Profiles](./user_stories/user_story_01_title.md), priority 20, 0.5 days
-* [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 1.5 days
-* [Safety Verification](./user_stories/user_story_01_title.md), priority 20, 0.5 days
-* [Dashboard Management](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Customer Conflicts](./user_stories/user_story_01_title.md), priority 20, 0.5 days
-* [Reschedule](./user_stories/user_story_01_title.md), priority 30, 1 days
-* [Earnings/Finance](./user_stories/user_story_01_title.md), priority 20, 0.5 days
-* [Calendar](./user_stories/user_story_01_title.md), priority 20, 0.5 days
-* [Focused Clean Request](./user_stories/user_story_01_title.md), priority 20, 1 days
-* SP can service location, price per hour, availability, priority 10, 1 days
-* SP can edit personal information, priority 10, 0.5 days
-* SP can create an account, priority 10, 0.5 days
-* User can create an account, priority 10, 0.5 days
-* User can edit information, priority 10, 0.5 days
-* Communication channel between user and SP, priority 30, 1 days
+**Total Estimated Days = 24 days**
 
-Total Ideal Days: 12 Days
+Calculate the amount of work, in people days, that our team can handle per iteration:
 
-Using velocity of 0.5, since the group must also focus on other classes.
-Actual Days = Ideal Days / 0.5
+- Each iteration is 4 calendar weeks. Assuming that we have other subjects, this gives only about 4 working days. 
+- We have 4 group members
+- The first pass velocity will be assumed to be 0.5, since we expect other unexpected work for other subjects that will have to be completed
 
-User Stories (Actual Days):
-* [Scheduling](./user_stories/user_story_01_title.md), priority 10, 2 days 
-* [Profiles](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 3 days
-* [Safety Verification](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Dashboard Management](./user_stories/user_story_01_title.md), priority 20, 2 days
-* [Customer Conflicts](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Reschedule](./user_stories/user_story_01_title.md), priority 30, 2 days
-* [Earnings/Finance](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Calendar](./user_stories/user_story_01_title.md), priority 20, 1 days
-* [Focused Clean Request](./user_stories/user_story_01_title.md), priority 20, 2 days
-* SP can service location, price per hour, availability, priority 10, 2 days
-* SP can edit personal information, priority 10, 1 days
-* SP can create an account, priority 10, 1 days
-* User can create an account, priority 10, 1 days
-* User can edit information, priority 10, 1 days
-* Communication channel between user and SP, priority 30, 2 days
+Number of people x Number of working days x velocity = 4 x 4 x 0.5 = **8 actual people days per iteration**
 
-Total Actual Days: 24 days
-
-Each iteration is 4 calendar weeks. We have 4 group members, each willing to work 0.5 work days a week
-on top of other subjects. This gives a total of 8 working days of potential work time per iteration.
-
+Total milestone estimate = 8 x 2 = **16 actual people days for the milestone**
 
 ## Iteration 1 [duration 3-4 weeks], Start: 10/02/2025, End: 10/03/2025 
 
@@ -89,35 +67,24 @@ on top of other subjects. This gives a total of 8 working days of potential work
 * Update the following during each week prac session
 * During pracs, you may experiment with using other github ways of tracking changes, e.g. via pull requests.
 
-1. [Scheduling](./user_stories/user_story_01_title.md), priority 10, 2 days
-2. SP can service location, price per hour, availability, priority 10, 2 days
-3. SP can edit personal information, priority 10, 1 days
-4. SP can create an account, priority 10, 1 days
-5. User can create an account, priority 10, 1 days
-6. User can edit information, priority 10, 1 days
+* [Account Creation](./user_stories/user_story_01_title.md), priority 10, 2 days
+* [Book cleaner](./user_stories/user_story_01_title.md), priority 10, 2 days
+* [Accept a booking](./user_stories/user_story_01_title.md), priority 10, 1 day 
+* [User profile management](./user_stories/user_story_01_title.md), priority 10, 3 days 
 
-Total: 8 working days
-
-
-### Iteration 2 [duration 3-4 weeks], Start: 11/02/2025, End: 7/04/2025
+## Iteration 2 [duration 3-4 weeks], Start: 11/02/2025, End: 7/04/2025
 Goal is to have 2 iterations during a trimester of teaching.
 
-1. [Dashboard Management](./user_stories/user_story_01_title.md), priority 20, 2 days
-2. [Calendar](./user_stories/user_story_01_title.md), priority 20, 1 days
-3. [Earnings/Finance](./user_stories/user_story_01_title.md), priority 20, 1 days
-4. [Profiles](./user_stories/user_story_01_title.md), priority 20, 1 days
-5. [Business Profiles (management)](./user_stories/user_story_01_title.md), priority 20, 3 days
+* [Track job completion](./user_stories/user_story_01_title.md), priority 30, 1 days
+* [Rescheduling bookings](./user_stories/user_story_01_title.md) priority 20, 2 days
+* [Bookings calendar](./user_stories/user_story_01_title.md), priority 10, 4 days
+* [Rate a cleaner](./user_stories/user_story_01_title.md), priority 10, 1 day
 
-Total: 8 working days
-
-### Not enough time/developers: 
-1. [Safety Verification](./user_stories/user_story_01_title.md), priority 20, 1 days
-2. [Customer Conflicts](./user_stories/user_story_01_title.md), priority 20, 1 days
-3. [Reschedule](./user_stories/user_story_01_title.md), priority 30, 2 days
-4. [Focused Clean Request](./user_stories/user_story_01_title.md), priority 20, 2 days
-5. Communication channel between user and SP, priority 30, 2 days
-
-Total: 8 days
+## Not enough time/developers:
+* [Create a cleaning checklist](./user_stories/user_story_01_title.md), priority 20, 1 day
+* [User and cleaner communication](./user_stories/user_story_01_title.md), priority 20, 2 days
+* [Earnings and payment management](./user_stories/user_story_01_title.md) priority 30, 3 days
+* [Handling customer disputes](./user_stories/user_story_01_title.md) priority 30, 2 days
 
 # Actual iterations
 1. [Iteration-1](./iteration_1.md)
@@ -162,3 +129,15 @@ V2 = 4/8 * 0.6154
    = 0.3077
 
 Therefore, the new velocity is 0.3077
+
+E1 = Number of user story days per person for iteration 1. Before we apply the velocity for iteration 1.
+A1 = The actual number of days that we have 
+
+Have list of user stories with estimates. Add them up to get total E1. TE1. Then we divide by number of people to get E1.
+A1 is always less than estimated. A1 = E1 * v1. Apply velocity to E1 to get the actual number of dats.
+Before the iteration: How many days does each person do per week? A1 *
+
+ if each person has 2 days a week that they will work and we go for 4 weeks, then A1 per developer is equal to 2 * 4 = 8 days?
+ 8 * 0.7 = 5.6 ideal days we have. We can choose 5.6 days worth of user stories from the backlog.
+ 
+E1 * v1 (0.7) = A1
