@@ -8,6 +8,7 @@ from bookings.models import Booking
 
 class BookingTests(TestCase):
     def setUp(self):
+        """Set up tests by creating objects."""
         print("Creating a user...")
         self.user = User.objects.create_user(
             username="TestUser2",

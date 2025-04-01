@@ -6,6 +6,7 @@ from authuser.models import User
 
 class UserModelTests(TestCase):
     def setUp(self):
+        """Set up tests by creating user object."""
         print("Creating a user...")
         self.user = User.objects.create_user(
             username="TestUser",
@@ -26,6 +27,7 @@ class UserModelTests(TestCase):
     #     )
 
     def test_phone(self):
+        """Test phone number validation."""
         print("Test phone number validation.")
         self.user.phone = "NotAPhoneNumber"
         self.assertRaises(ValidationError, self.user.full_clean)
