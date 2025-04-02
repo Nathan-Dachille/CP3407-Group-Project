@@ -1,42 +1,27 @@
-Create more md files like this one as needed. Place them into the same folder 
-as this [user_stories folder](./)
+# Earnings and payment management
+Allow cleaners to view and manage their earnings.
 
-# User story title: e.g. Show current deals
+## Priority: 30
+This was assigned a priority of 30 before iteration 1.
 
-Keep any other version here as well, e.g. Display current deals, Let user to click on "show-current-deals".
-
-## Priority: 10 (e.g. latest for iteration-1)
-Any notes on priority go here. 
-Note you may have different priorities at different stages of you project.
-Again, keep all changes here for marking.
-
-## Estimation: e.g. 2 days
-Any notes on estimation go here. Keep your planning poker game numbers. For example
-* Bob: 1 day (e.g. estimated before iteration-1)
-* Lisa: 2 days
-* Jack: 3 days
+## Estimation: 3 days
+(Estimated days before iteration 1)
+* David: 3 days
+* Bailey: 2.5 days
+* Nathan: 3.5 days
+* Quinn: 3 days
 
 ## Assumptions (if any):
+* Payments are processed through a third-party provider.
+* Cleaners can request withdrawals or see pending payments.
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
-You need to keep all versions here so that your instructor/marker can see your changes easily. 
-In a real project, your older versions could be viewed via commits.
+## Description: A system that allows cleaners to track earnings and request payouts.
+Description-v1: A system that allows cleaners to track earnings and request payouts.
 
-Description-v1: e.g. The web site will show current deals to Orion's orbits users
-
-## Tasks, see chapter 4.
-
-1. Task 1, Estimation XX days
-2. ...
-
+## Tasks:
+* Develop a dashboard to display earnings, 1.5 days
+* Integrate third-party payment processing, 1.5 days
 
 # UI Design:
-* (New, not in the textbook) 
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
-

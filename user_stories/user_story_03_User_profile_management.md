@@ -1,39 +1,29 @@
-Create more md files like this one as needed. Place them into the same folder 
-as this [user_stories folder](./)
+# User profile management
+Each user/ cleaner user will be able to view their profile and update their details.
 
-# User story title: e.g. Show current deals
+## Priority: 10
+This was assigned a priority of 10 before iteration 1.
 
-Keep any other version here as well, e.g. Display current deals, Let user to click on "show-current-deals".
-
-## Priority: 10 (e.g. latest for iteration-1)
-Any notes on priority go here. 
-Note you may have different priorities at different stages of you project.
-Again, keep all changes here for marking.
-
-## Estimation: e.g. 2 days
-Any notes on estimation go here. Keep your planning poker game numbers. For example
-* Bob: 1 day (e.g. estimated before iteration-1)
-* Lisa: 2 days
-* Jack: 3 days
+## Estimation: 3 days
+(Estimated days before iteration 1)
+* David: 4 day
+* Bailey: 3 days
+* Nathan: 2 day
+* Quinn: 3 day
 
 ## Assumptions (if any):
+A database table must be made for the profiles to be stored.
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
-You need to keep all versions here so that your instructor/marker can see your changes easily. 
-In a real project, your older versions could be viewed via commits.
+## Description: A web page that will allow users to view their personal details and profile information.
+Description-v1: A web page that will allow users to view their personal details and profile information.
 
-Description-v1: e.g. The web site will show current deals to Orion's orbits users
-
-## Tasks, see chapter 4.
-
-1. Task 1, Estimation XX days
-2. ...
-
+## Tasks:
+* Create a profile page view, 1 day
+  - Will include forms to update personal details such as password, email, phone, etc.
+* Create a dashboard to house the booking details, 2 days
 
 # UI Design:
-* (New, not in the textbook) 
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
+
 
 # Completed:
 * (New, not in the textbook) 
