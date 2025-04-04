@@ -24,7 +24,7 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
 * Create a booking model, 1 days
 
 # UI Design:
-
+[Book cleaner wireframe](wireframes/Booking_WF.png)
 
 # Completed:
 * (New, not in the textbook) 
