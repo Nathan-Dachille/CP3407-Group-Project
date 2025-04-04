@@ -203,7 +203,7 @@ function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
 }
 
 function dupAvailability() {
-    let selectedDate = document.getElementById("duplicateDateInput").value;
+    let selectedDate = document.getElementByID("duplicateDateInput").value;
     console.log(selectedDate)
 
     if (!selectedDate) {

@@ -71,10 +71,15 @@
     color: white;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline-block; /* Use flexbox */
+    justify-content: center; /* Centers the text horizontally */
+    align-items: center; /* Centers the text vertically */
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    width: auto; /* Ensure button width adjusts based on content */
+    height: auto; /* Ensure button height adjusts based on content */
+    padding: 0.2em;
 }
 
 .symbol_button:hover {
@@ -257,4 +262,35 @@
 #timetable td:not(:first-child) {
     width: 12.25%; /* Distributes remaining space among 7 day columns (100% - 10%) */
     text-align: center;
+}
+
+/* Date Input Styling */
+
+#duplicateDateInput {
+    width: 80%;               /* Limit the width to make it look proportional */
+    max-width: 200px;
+    padding: 10px;            /* Add padding for better spacing */
+    margin: 5px auto;         /* Center the input with some top margin */
+    border: none;   /* Light border for subtle outline */
+    border-radius: 5px;       /* Rounded corners for a softer look */
+    display: block;           /* Block-level to make it fill available space */
+    font-size: 16px;          /* Set font size for readability */
+    background-color: lightcoral;   /* White background for input */
+    color: white;
+}
+
+#duplicateDateInput::-webkit-calendar-picker-indicator {
+    background-color: white; /* Color of the calendar indicator */
+    border-radius: 5px;        /* Make the calendar picker indicator rounded */
+}
+
+#duplicateDateInput:hover {
+    filter: brightness(80%);
+}
+
+/* Optional: Styling for date input when inside a model */
+.model-content #duplicateDateInput {
+    width: 90%;               /* Make it take more space in model */
+    margin: 10px auto;        /* Center it with extra space for model */
+    padding: 12px;            /* Padding for larger input */
 }
