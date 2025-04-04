@@ -4,12 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let focusDate = storedDate ? new Date(storedDate) : new Date(); // Start with the user's current date
 
     document.getElementById("prev-week").addEventListener("click", () => {
+        let focusDate = new Date(sessionStorage.getItem("focusDate"));
         focusDate.setDate(focusDate.getDate() - 7);
         sessionStorage.setItem("focusDate", focusDate.toISOString());
         updateWeekInfo(focusDate);
     });
 
     document.getElementById("next-week").addEventListener("click", () => {
+        let focusDate = new Date(sessionStorage.getItem("focusDate"));
         focusDate.setDate(focusDate.getDate() + 7);
         sessionStorage.setItem("focusDate", focusDate.toISOString());
         updateWeekInfo(focusDate);
@@ -203,7 +205,7 @@ function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
 }
 
 function dupAvailability() {
-    let selectedDate = document.getElementByID("duplicateDateInput").value;
+    let selectedDate = document.getElementById("DateInput").value;
     console.log(selectedDate)
 
     if (!selectedDate) {
@@ -246,6 +248,12 @@ function dupAvailability() {
     });
 }
 
+function moveTo() {
+    let focusDate = new Date(document.getElementById("DateInput").value);
+    console.log(focusDate)
+    sessionStorage.setItem("focusDate", focusDate.toISOString());
+    updateWeekInfo(focusDate);
+}
 function toggleEdit() {
     let displaySpan = document.getElementById("phone_display");
     let inputField = document.getElementById("phone_input");

@@ -266,7 +266,7 @@
 
 /* Date Input Styling */
 
-#duplicateDateInput {
+#DateInput {
     width: 80%;               /* Limit the width to make it look proportional */
     max-width: 200px;
     padding: 10px;            /* Add padding for better spacing */
@@ -279,17 +279,17 @@
     color: white;
 }
 
-#duplicateDateInput::-webkit-calendar-picker-indicator {
+#DateInput::-webkit-calendar-picker-indicator {
     background-color: white; /* Color of the calendar indicator */
     border-radius: 5px;        /* Make the calendar picker indicator rounded */
 }
 
-#duplicateDateInput:hover {
+#DateInput:hover {
     filter: brightness(80%);
 }
 
 /* Optional: Styling for date input when inside a model */
-.model-content #duplicateDateInput {
+.model-content #DateInput {
     width: 90%;               /* Make it take more space in model */
     margin: 10px auto;        /* Center it with extra space for model */
     padding: 12px;            /* Padding for larger input */
