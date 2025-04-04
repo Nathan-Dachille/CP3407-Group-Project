@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.utils.dateparse import parse_date
 from datetime import datetime, timedelta
 from django.http import JsonResponse
 from authuser.models import CleanerAvailability
@@ -7,6 +8,21 @@ import json
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def get_date_range(start_date, end_date):
+    """
+    Returns a list of dates from start_date to end_date (inclusive).
+    Assumes start_date and end_date are datetime objects.
+    """
+    date_list = []
+    current_date = start_date
+
+    while current_date <= end_date:
+        date_list.append(current_date)  # Add the date part only
+        current_date += timedelta(days=1)  # Move to the next day
+
+    return date_list
 
 
 def get_date_info(date):
@@ -125,3 +141,72 @@ def toggle_availability(request):
             return JsonResponse({"error": "Invalid JSON"}, status=400)
 
     return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
+
+
+@login_required(login_url="/sign_in/")
+def duplicate_availability(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        logger.debug(f"Received data: {data}")
+        user = request.user
+        target_date = datetime.strptime(data.get("t_date"), "%Y-%m-%d").date()
+        week_dates = [datetime.strptime(date_str, "%Y-%m-%d").date() for date_str in data.get("s_week")]
+
+        if not target_date:
+            return JsonResponse({"success": False, "error": "Invalid target date."})
+        if not week_dates:
+            return JsonResponse({"success": False, "error": "Invalid week dates."})
+
+        # Fetch the availability for the current week
+        week_dates_start = week_dates[0]  # Assuming week_dates is a list with start and end date
+        week_dates_end = week_dates[6]
+
+        # Fetch availability data for the current week
+        availability_records = CleanerAvailability.objects.filter(
+            cleaner=user,
+            date__range=[week_dates_start, week_dates_end],
+        )
+
+        # Initialize a dictionary to hold the availability for each weekday
+        current_week_availability = {}
+        for availability in availability_records:
+            weekday = availability.date.weekday()
+            if weekday not in current_week_availability:
+                current_week_availability[weekday] = []
+            current_week_availability[weekday].extend(availability.available_hours)
+
+        date_range = get_date_range(week_dates[6], target_date)
+
+        for date in date_range:
+            # Get the available hours for the current date's weekday (if it exists)
+            new_available_hours = current_week_availability.get(date.weekday(), [])
+
+            # Fetch the existing availability for this date
+            availability, created = CleanerAvailability.objects.get_or_create(
+                cleaner=user,
+                date=date,
+            )
+
+            # If there are available hours for this date, update them
+            if new_available_hours:
+                # Remove hours that are no longer available
+                hours_to_remove = set(availability.available_hours) - set(new_available_hours)
+                for hour in hours_to_remove:
+                    availability.available_hours.remove(hour)
+
+                # Add hours that are now available
+                hours_to_add = set(new_available_hours) - set(availability.available_hours)
+                for hour in hours_to_add:
+                    availability.available_hours.append(hour)
+            else:
+                # If no available hours for this day, make it fully unavailable (empty list)
+                availability.available_hours = []
+
+            if availability.available_hours:
+                availability.save()
+            else:
+                availability.delete()  # If no hours are left, remove the entry
+
+        return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False, "error": "Invalid request method."})

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateWeekInfo(focusDate);
 });
 
-function updateWeekInfo(focusDate = null) {
+function fetchWeekData(focusDate = null) {
     if (!focusDate) {
         let storedDate = sessionStorage.getItem("focusDate");
         focusDate = storedDate ? new Date(storedDate) : new Date();
@@ -32,7 +32,7 @@ function updateWeekInfo(focusDate = null) {
     const formatDate = focusDate.toISOString().split('T')[0]; // Formats date as YYYY-MM-DD
 
     // Send the new date via AJAX to the server
-    fetch(`/profile/?user_date=${formatDate}`, {
+    return fetch(`/profile/?user_date=${formatDate}`, {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -43,8 +43,19 @@ function updateWeekInfo(focusDate = null) {
         if (!data || !data.current_date || !data.week_dates
             || !data.week_number || !data.ava_data) {
             console.error("Invalid data received:", data);
-            return;
+            return null;
         }
+        return data; // Return the valid data
+    })
+    .catch(error => {
+        console.error("Error fetching week data:", error);
+        return null;
+    });
+}
+
+function updateWeekInfo(focusDate = null) {
+    fetchWeekData(focusDate).then(data => {
+        if (!data) return;
         console.log("Current Date:", data.current_date);
         console.log("Week Number:", data.week_number);
         console.log("Week Dates:", data.week_dates);
@@ -188,7 +199,51 @@ function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
             console.error("Error:", data.error);
         }
     })
-    .catch(error => console.error("Request failed:", error));
+    .catch(error => console.error("Error:", error));
+}
+
+function dupAvailability() {
+    let selectedDate = document.getElementById("duplicateDateInput").value;
+    console.log(selectedDate)
+
+    if (!selectedDate) {
+        alert("Please select a date.");
+        return;
+    }
+
+    fetchWeekData().then(data => {
+        if (!data) return;
+        console.log("Current Date:", data.current_date);
+        console.log("Week Number:", data.week_number);
+        console.log("Week Dates:", data.week_dates);
+        console.log("Availability Data:", data.ava_data);
+
+
+        const request_data = {
+            t_date: selectedDate,
+            s_week: data.week_dates,
+        }
+        console.log("Request body:", JSON.stringify(request_data))
+
+        fetch("/duplicate_availability/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()  // Ensure CSRF token is included
+            },
+            body: JSON.stringify(request_data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateWeekInfo();
+                    alert("Availability duplicated successfully!");
+                } else {
+                    console.error("Error:", data.error);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    });
 }
 
 function toggleEdit() {
