@@ -212,9 +212,9 @@
     justify-content: center; /* Centers content horizontally */
 }
 
-/* Available state (green) */
+/* Available state (gray) */
 .toggle_set.ava {
-    background-color: darkgray; /* Green */
+    background-color: darkgray; /* Gray */
     color: darkgray;
 }
 
@@ -222,6 +222,18 @@
 .toggle_set.n_ava {
     background-color: #f44336; /* Red */
     color: #f44336;
+}
+
+/* unbooked state (blue) */
+.toggle_set.u_book {
+    background-color: blue; /* Blue */
+    color: blue;
+}
+
+/* booked state (green) */
+.toggle_set.a_book {
+    background-color: green; /* Green */
+    color: green;
 }
 
 /* Timetable Texts */

@@ -115,7 +115,6 @@ function updateWeekInfo(focusDate = null) {
             data.week_dates.forEach((date) => {
                 // Create a Date object from the date string
                 const date_d = new Date(date);
-                console.log(date)
 
                 // Get the day name from the Date object
                 const dayName = date_d.toLocaleString('en-US', { weekday: 'short' });
@@ -141,11 +140,38 @@ function updateWeekInfo(focusDate = null) {
                     let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
                     let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
 
-                    let buttonClass = isAvailable ? "ava" : "n_ava";
+                    let bookedBookings = []; // To store all booked booking IDs for this time
+                    let isBooked = false;
+                    if (b_data.bookings_a) {
+                        // Find the booking for this specific date
+                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate);
 
-                    timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
-                    ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
-                    target_hours:[${i}]})">‎</button></th>`;
+                        if (booking && booking.booking_hours && booking.booking_hours.includes(i)) {
+                            timetableHTML += `<th><button class="toggle_set fields a_book"` +
+                            ` onClick="openBooking({IDs:[${booking.id}]})">‎</button></th>`;
+                            isBooked = true;
+                        }
+                    }
+                    if (!isBooked && b_data.bookings_u) {
+                        let bookings = b_data.bookings_u.filter(booking => booking.date === currentDate
+                            && booking.booking_hours.includes(i));
+
+                        if (bookings.length > 0) {
+                            bookings.forEach(booking => {
+                                bookedBookings.push(booking.id); // Add unassigned booking ID to the array
+                                timetableHTML += `<th><button class="toggle_set fields u_book"` +
+                                ` onClick="openBooking({IDs: ${JSON.stringify(bookedBookings)}})">‎</button></th>`;
+                            });
+                            isBooked = true;
+                        }
+                    }
+                    if (!isBooked) {
+                        let buttonClass = isAvailable ? "ava" : "n_ava";
+
+                        timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
+                        ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
+                        target_hours:[${i}]})">‎</button></th>`;
+                    }
                 }
 
                 timetableHTML += `</tr>`;
