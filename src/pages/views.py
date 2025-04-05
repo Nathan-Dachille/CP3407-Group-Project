@@ -3,5 +3,8 @@ from django.shortcuts import render
 
 # Create your views here.
 
+
 def home(request, *args, **kwargs):
-    return render(request, "home.html", {})
+    confirmed = True if "confirmed" in request.GET else False
+    signout = True if "signout" in request.GET else False
+    return render(request, "home.html", {"confirmed": confirmed, "signout": signout})
