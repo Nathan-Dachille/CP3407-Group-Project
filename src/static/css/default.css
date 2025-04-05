@@ -89,6 +89,20 @@ body {
     color: white;
 }
 
+.primary-navigation a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.primary-navigation a:hover {
+    background-color: white;
+    color: lightcoral;
+}
+
 .menu-toggle {
     visibility: hidden;
 }
