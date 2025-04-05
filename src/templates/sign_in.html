@@ -1,13 +1,14 @@
 {% extends "navbar.html" %}
+{% load static %}
 
 {% block content %}
 
-    <div>
-        <h1>Sign In</h1>
-        <p> Please enter your username and password to sign in. </p>
-    </div>
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
 
-    <div>
+    <div class="auth-div background-grey round">
+        <h1 class="auth-title">Sign In</h1>
+        <p> Please enter your username and password to sign in. </p>
+
         <form class="form-with-validation" action="/sign_in/" method="post">
             {% csrf_token %}
             {{ form }}

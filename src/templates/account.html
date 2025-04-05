@@ -1,0 +1,147 @@
+{% extends "navbar.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Link Files -->
+    <link rel="stylesheet" href="{% static '/css/account.css' %}">
+    <script src="{% static '/js/account.js' %}"></script>
+
+    <!-- Content -->
+    <div class="layout">
+        <div class="content_section">
+            <!-- Account and Password Section -->
+            <div class="content_box background-grey round">
+                <!--Username and User Type-->
+                <h1>{{ request.user.username }} - {{ request.user.role }}</h1>
+
+                <!-- Rating -->
+                <p class="stars">
+                    {% for i in "12345"|make_list %}
+                        {% if forloop.counter <= request.user.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </p>
+
+                <!-- Email Section -->
+                <p>Email: {{ request.user.email }}</p>
+                <!-- Change Email Button -->
+                <button class="change_button" onclick="openModel('emailModel')">
+                    Change Email
+                </button>
+
+                <!-- Change Password Button -->
+                <button class="change_button" onclick="openModel('passwordModel')">
+                    Change Password
+                </button>
+            </div>
+            <!-- Email Change Popup Model -->
+            <div id="emailModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeModel('emailModel')">&times;</span>
+                    <h2>Change Email</h2>
+                    <form action="{% url 'email_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>New Email:</label>
+                        <input type="email" name="new email" placeholder="Enter new email" required>
+                        <label>Password:</label>
+                        <input type="password" name="password" placeholder="Enter password" required>
+                        <button type="submit">Change Email</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Password Change Popup Model -->
+            <div id="passwordModel" class="model">
+                <div class="model-content">
+                    <span class="close" onclick="closeModel('passwordModel')">&times;</span>
+                    <h2>Change Password</h2>
+                    <form action="{% url 'password_change' %}" method="post">
+                        {% csrf_token %}
+                        <label>Old Password:</label>
+                        <input type="password" name="old_password" placeholder="Enter old password" required>
+
+                        <label>New Password:</label>
+                        <input type="password" name="new_password1" placeholder="Enter new password" required>
+
+                        <label>Confirm Password:</label>
+                        <input type="password" name="new_password2" placeholder="confirm new password" required>
+
+                        <button type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+            <div class="content_box info background-grey round">
+                <p>
+                    <button class="symbol_button" onclick="toggleEdit()">
+                        ⇄
+                    </button>
+                    Phone:
+                    <span id="phone_display">{{ request.user.phone }}</span>
+                    <input id="phone_input" type="email" value="{{ request.user.phone }}"
+                           placeholder="04XX XXX XXX" style="display: none;">
+                </p>
+                {% if request.user.role == 'CLEANER' %}
+                    <p>
+                        <button class="symbol_button" onclick="toggleEdit()">
+                            ⇄
+                        </button>
+                        Working Area:
+                        <span id="area_display">{{ request.user.suburb }}</span>
+                        <input id="area_input" type="email" value="{{ request.area }}"
+                               placeholder="State, City, Suburb" style="display: none;">
+                    </p>
+                    <p>
+                        <button class="symbol_button" onclick="toggleEdit()">
+                            ⇄
+                        </button>
+                        Working Rate:
+                        <span id="rate_display">{{ request.user.rate }}</span>
+                        <input id="rate_input" type="email" value="{{ request.user.rate }}"
+                               placeholder="Base Rate (%modifiers)" style="display: none;">
+                    </p>
+                {% elif request.user.role == 'CUSTOMER' %}
+                    <!-- Customer Properties listings TBD -->
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="content_section">
+            <div class="content_box background-grey round">
+                <h1>Timetable</h1>
+            </div>
+            <div class="content_box info background-grey round">
+                {% load tz %}
+                {% localtime on %}
+                    <ul>
+                        {% for date in week_dates %}
+                            <li>{{ date }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="t_header">
+                        <button class="symbol_button" id="prev-week">
+                            ←
+                        </button>
+
+                        <div class="header-content">
+                            <span id="year-display"></span> Week <span id="week-number"></span>:
+                            <span id="week-range"></span>
+                        </div>
+
+                        <button class="symbol_button" id="next-week">
+                            →
+                        </button>
+                    </div>
+                    <div id="timetable">
+
+                    </div>
+                {% endlocaltime %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,13 +1,14 @@
 {% extends "navbar.html" %}
+{% load static %}
 
 {% block content %}
 
-    <div>
-        <h1>Register</h1>
-        <p> Please enter your details to register for an account. </p>
-    </div>
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
 
-    <div>
+    <div class="auth-div background-grey round">
+        <h1 class="auth-title">Register</h1>
+        <p> Please enter your details to register for an account. </p>
+
         <form class="form-with-validation" action="/register/" method="post">
             {% csrf_token %}
             {{ form }}

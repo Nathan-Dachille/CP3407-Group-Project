@@ -8,7 +8,10 @@ def book_appointment(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.save()
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.save()
+            return redirect("/?confirmed")
     else:
         form = BookingForm()
 
