@@ -3,6 +3,7 @@ from django.utils.dateparse import parse_date
 from datetime import datetime, timedelta
 from django.http import JsonResponse
 from authuser.models import CleanerAvailability
+from bookings.models import Booking
 from django.contrib.auth.decorators import login_required
 import json
 import logging
@@ -23,6 +24,12 @@ def get_date_range(start_date, end_date):
         current_date += timedelta(days=1)  # Move to the next day
 
     return date_list
+
+
+class AvailabilityWrapper(dict):
+    @property
+    def dates(self):
+        return list(self.keys())
 
 
 def get_date_info(date):
@@ -68,6 +75,92 @@ def account(request, *args, **kwargs):
         "week_number": week_num,
         "ava_data": ava_data,
     })
+
+
+@login_required(login_url="/sign_in/")
+def get_booking(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user = request.user
+            dates = data.get("dates", [])
+            print(dates)
+            raw_availability = data.get("availability", [])
+            availability = AvailabilityWrapper({
+                entry["ava_date"]: entry["available_hours"]
+                for entry in raw_availability
+            })
+            print(availability.dates)
+
+            # Get all unassigned bookings within the requested dates
+            booking_data = list(Booking.objects.filter(assigned__isnull=True, date__in=dates))
+            print(booking_data)
+
+            filtered_bookings = []
+
+            for booking in booking_data:
+                print(booking.date)
+                booking_date = str(booking.date)  # Format to match availability keys
+
+                # Skip if no availability data for this date
+                if booking_date not in availability.dates:
+                    print("error")
+                    continue
+
+                available_hours = availability[booking_date]
+                print(available_hours)
+
+                # Get integer hours from booking start to end
+                print(booking.start_time)
+                start_hour = booking.start_time.hour
+                print(start_hour)
+
+                # If end_time is null, return only the start hour
+                if booking.end_time is None:
+                    booking_hours = [start_hour]
+                else:
+                    print(booking.end_time)
+                    end_hour = booking.end_time.hour
+                    print(end_hour)
+
+                    # Round down end_time if it has minutes
+                    if booking.end_time.minute > 0:
+                        end_hour += 1
+                        print(end_hour)
+
+                    # If the start hour is the same as the end hour, return that one hour
+                    if start_hour == end_hour:
+                        booking_hours = [start_hour]
+                    else:
+                        # Otherwise, return all hours between start and end, excluding the end hour
+                        booking_hours = list(range(start_hour, end_hour))
+
+                print(booking_hours)
+
+                # Include booking only if all hours are available
+                if all(hour in available_hours for hour in booking_hours):
+                    filtered_bookings.append({
+                        "id": booking.id,
+                        "date": booking_date,
+                        "booking_hours": booking_hours
+                    })
+
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({
+                        "booking_data": filtered_bookings,
+                    })
+                return render(request, "account.html", {
+                    "booking_data": filtered_bookings,
+                })
+
+            return JsonResponse({
+                "success": True,
+                "bookings": filtered_bookings
+            })
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
 
 
 @login_required(login_url="/sign_in/")

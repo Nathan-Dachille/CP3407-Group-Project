@@ -19,7 +19,7 @@ from django.urls import include, path
 from pages.views import home
 from authuser.views import sign_in_view, register_view, sign_out_view
 from bookings.views import book_appointment
-from account.views import account, toggle_availability, duplicate_availability
+from account.views import account, toggle_availability, duplicate_availability, get_booking
 from django.contrib.auth.views import PasswordChangeView
 
 
@@ -39,4 +39,5 @@ urlpatterns = [
     path('change-email/', CustomPasswordChangeView.as_view(), name='email_change'),
     path("toggle_availability/", toggle_availability, name="toggle_availability"),
     path("duplicate_availability/", duplicate_availability, name="duplicate_availability"),
+    path("get_booking/", get_booking, name="get_booking"),
 ]

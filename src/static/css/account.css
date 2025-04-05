@@ -1,9 +1,5 @@
 /* Webpage General Divs */
 
-#input {
-
-}
-
 .layout {
     display: inline-flex;
     flex-wrap: wrap;

@@ -78,56 +78,86 @@ function updateWeekInfo(focusDate = null) {
         document.getElementById("year-display").textContent =
             (startYear !== endYear) ? ` ${startYear} - ${endYear} ` : ` ${startYear} `;
 
-        // Table Section:
-        const timetableContainer = document.getElementById("timetable")
-        let timetableHTML = '<table class="timetable">';
+        const request_data = {
+            dates: data.week_dates,
+            availability: data.ava_data,
+        }
+        console.log("Request body:", JSON.stringify(request_data))
 
-        // Add table headers
-        timetableHTML += `<tr><th><button class="toggle_set" ` +
-            `onClick="toggleAvailable({togType:1, target_days:'${data.week_dates}'.split(','), target_hours:[]})">+` +
-            `</button></th>`;
-
-        data.week_dates.forEach((date) => {
-            // Create a Date object from the date string
-            const date_d = new Date(date);
-            console.log(date)
-
-            // Get the day name from the Date object
-            const dayName = date_d.toLocaleString('en-US', { weekday: 'short' });
-            timetableHTML += `<th><button class="toggle_set"` +
-            ` onClick="toggleAvailable({togType:1, target_days:'${date}'.split(','), target_hours:[]})">${dayName}`
-                +`</button></th>`;
-        });
-
-        timetableHTML += `</tr>`;
-
-        // Add table content
-
-        for (let i = 0, weekDates = data.week_dates, avail = data.ava_data; i < 24; i++) {
-            let t_string = convertToTimeString(i)
-
-            timetableHTML += `<tr><th><button class="toggle_set" ` +
-            `onClick="toggleAvailable({togType:1,target_days:'${weekDates}'.split(','),target_hours:[${[i]}]})">
-            ${t_string}</button></th>`;
-
-            for (let j = 0; j < weekDates.length; j++) {
-                let currentDate = weekDates[j]; // Get the current date from the week
-                // Find availability for this date and time
-                let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
-                let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
-
-                let buttonClass = isAvailable ? "ava" : "n_ava";
-
-                timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
-                ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
-                target_hours:[${i}]})">‎</button></th>`;
+        return fetch(`/get_booking/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                "X-CSRFToken": getCSRFToken() // Needed for Django security
+            },
+            body: JSON.stringify(request_data)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+            return response.json();
+        })
+        .then(b_data => {
+            if (!b_data) {
+                console.error("Invalid data received:", b_data);
+                return null;
             }
+            console.log(b_data)
+            // Table Section:
+            const timetableContainer = document.getElementById("timetable")
+            let timetableHTML = '<table class="timetable">';
+
+            // Add table headers
+            timetableHTML += `<tr><th><button class="toggle_set" ` +
+                `onClick="toggleAvailable({togType:1, target_days:'${data.week_dates}'.split(','), target_hours:[]})">+` +
+                `</button></th>`;
+
+            data.week_dates.forEach((date) => {
+                // Create a Date object from the date string
+                const date_d = new Date(date);
+                console.log(date)
+
+                // Get the day name from the Date object
+                const dayName = date_d.toLocaleString('en-US', { weekday: 'short' });
+                timetableHTML += `<th><button class="toggle_set"` +
+                ` onClick="toggleAvailable({togType:1, target_days:'${date}'.split(','), target_hours:[]})">${dayName}`
+                    +`</button></th>`;
+            });
 
             timetableHTML += `</tr>`;
-        }
 
-        // Insert the HTML into the timetable container
-        timetableContainer.innerHTML = timetableHTML;
+            // Add table content
+
+            for (let i = 0, weekDates = data.week_dates, avail = data.ava_data; i < 24; i++) {
+                let t_string = convertToTimeString(i)
+
+                timetableHTML += `<tr><th><button class="toggle_set" ` +
+                `onClick="toggleAvailable({togType:1,target_days:'${weekDates}'.split(','),target_hours:[${[i]}]})">
+                ${t_string}</button></th>`;
+
+                for (let j = 0; j < weekDates.length; j++) {
+                    let currentDate = weekDates[j]; // Get the current date from the week
+                    // Find availability for this date and time
+                    let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
+                    let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
+
+                    let buttonClass = isAvailable ? "ava" : "n_ava";
+
+                    timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
+                    ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
+                    target_hours:[${i}]})">‎</button></th>`;
+                }
+
+                timetableHTML += `</tr>`;
+            }
+
+            // Insert the HTML into the timetable container
+            timetableContainer.innerHTML = timetableHTML;
+        })
+        .catch(error => {
+            console.error("Error fetching week data:", error);
+            return null;
+        });
     })
     .catch(error => console.error("Error fetching data:", error));
 }
