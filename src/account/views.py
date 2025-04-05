@@ -41,6 +41,33 @@ def get_date_info(date):
 
     return week_dates, week_num
 
+def get_booking_hours(booking):
+    """
+    Get the list of hours for a booking, from start time to end time.
+    If end_time is None, return only the start hour.
+    """
+    start_hour = booking.start_time.hour
+    booking_hours = []
+
+    if booking.end_time is None:
+        # If end_time is null, return only the start hour
+        booking_hours = [start_hour]
+    else:
+        end_hour = booking.end_time.hour
+
+        # Round down end_time if it has minutes
+        if booking.end_time.minute > 0:
+            end_hour += 1
+
+        # If the start hour is the same as the end hour, return that one hour
+        if start_hour == end_hour:
+            booking_hours = [start_hour]
+        else:
+            # Otherwise, return all hours between start and end, excluding the end hour
+            booking_hours = list(range(start_hour, end_hour))
+
+    return booking_hours
+
 
 # Create your views here.
 @login_required(login_url="/sign_in/")
@@ -82,23 +109,56 @@ def get_booking(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            user = request.user
             dates = data.get("dates", [])
-            print(dates)
+            user = request.user
+            # Get all assigned bookings within the requested dates
+            booking_data_a = list(Booking.objects.filter(assigned=user, date__in=dates))
+            print(booking_data_a)
+
             raw_availability = data.get("availability", [])
+
             availability = AvailabilityWrapper({
                 entry["ava_date"]: entry["available_hours"]
                 for entry in raw_availability
             })
             print(availability.dates)
 
+            filtered_bookings_assigned = []
+
+            # Iterate over each assigned booking and remove the available hours that are already booked
+            for booking in booking_data_a:
+                # Get the booking hours using the helper function
+                booking_hours = get_booking_hours(booking)
+
+                booking_date = str(booking.date)
+
+                filtered_bookings_assigned.append({
+                    "id": booking.id,
+                    "date": booking_date,
+                    "booking_hours": booking_hours
+                })
+                if booking.date in availability.dates:
+                    # Get the available hours for this booking date
+                    available_hours = availability.dates[booking.date]
+
+                    # Remove the hours of the booking from the available hours
+                    for hour in booking_hours:
+                        if hour in available_hours:
+                            available_hours.remove(hour)
+
+                    # After modifying the available hours, update the availability dictionary
+                    availability.dates[booking.date] = available_hours
+
+            # Print the updated availability after removing assigned hours
+            print(availability.dates)
+
             # Get all unassigned bookings within the requested dates
-            booking_data = list(Booking.objects.filter(assigned__isnull=True, date__in=dates))
-            print(booking_data)
+            booking_data_u = list(Booking.objects.filter(assigned__isnull=True, date__in=availability.dates))
+            print(booking_data_u)
 
-            filtered_bookings = []
+            filtered_bookings_unassigned = []
 
-            for booking in booking_data:
+            for booking in booking_data_u:
                 print(booking.date)
                 booking_date = str(booking.date)  # Format to match availability keys
 
@@ -110,52 +170,22 @@ def get_booking(request):
                 available_hours = availability[booking_date]
                 print(available_hours)
 
-                # Get integer hours from booking start to end
-                print(booking.start_time)
-                start_hour = booking.start_time.hour
-                print(start_hour)
-
-                # If end_time is null, return only the start hour
-                if booking.end_time is None:
-                    booking_hours = [start_hour]
-                else:
-                    print(booking.end_time)
-                    end_hour = booking.end_time.hour
-                    print(end_hour)
-
-                    # Round down end_time if it has minutes
-                    if booking.end_time.minute > 0:
-                        end_hour += 1
-                        print(end_hour)
-
-                    # If the start hour is the same as the end hour, return that one hour
-                    if start_hour == end_hour:
-                        booking_hours = [start_hour]
-                    else:
-                        # Otherwise, return all hours between start and end, excluding the end hour
-                        booking_hours = list(range(start_hour, end_hour))
+                booking_hours = get_booking_hours(booking)
 
                 print(booking_hours)
 
                 # Include booking only if all hours are available
                 if all(hour in available_hours for hour in booking_hours):
-                    filtered_bookings.append({
+                    filtered_bookings_unassigned.append({
                         "id": booking.id,
                         "date": booking_date,
                         "booking_hours": booking_hours
                     })
 
-                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                    return JsonResponse({
-                        "booking_data": filtered_bookings,
-                    })
-                return render(request, "account.html", {
-                    "booking_data": filtered_bookings,
-                })
-
             return JsonResponse({
                 "success": True,
-                "bookings": filtered_bookings
+                "bookings_u": filtered_bookings_unassigned,
+                "bookings_a": filtered_bookings_assigned,
             })
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
