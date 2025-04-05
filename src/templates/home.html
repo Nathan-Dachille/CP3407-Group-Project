@@ -18,14 +18,78 @@
 </div>
 {% endif %}
 
-  <div class="round background-grey home-div">
-	<h1>Hello World!</h1>
-	{{request.user}}
-	<p>This is a template</p>
-	<p>Homepage Content Goes Here!</p>
+<!-- Hero Section -->
+<section class="hero block wide">
+  <div class="hero-text">
+    <h1>✨ SparkleClean</h1>
+    <p>
+      Experience a spotless home with our professional cleaning services. Our dedicated team goes above and beyond to transform your space into a pristine haven, ensuring every corner shines. Enjoy a cleaner, healthier home tailored to your lifestyle.
+    </p>
+    <a href="/register" class="btn">Book a Clean</a>
   </div>
-  
-  <div class="round background-grey home-div">
-	<p> Additional Sections Can be Added as Divs! </p>
+</section>
+
+<!-- Services Section -->
+<section class="services block wide">
+  <h2>What We Offer</h2>
+  <div class="service-grid">
+    <div class="service-card">
+      <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-cleaning-3d-icon-download-in-png-blend-fbx-gltf-file-formats--home-service-work-from-pack-network-communication-icons-10648777.png?f=webp" alt="House Cleaning" />
+      <h3>Home Cleaning</h3>
+      <p>
+        Immaculate results, every time – so you can relax.
+      </p>
+    </div>
+    <div class="service-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3638/3638422.png" alt="Eco Friendly" />
+      <h3>Eco-Friendly</h3>
+      <p>
+        Our cleaners use safe, sustainable products that protect your family &amp; planet.
+      </p>
+    </div>
+    <div class="service-card">
+      <img src="https://media.lordicon.com/icons/wired/flat/45-clock-time.svg" alt="Quick Turnaround" />
+      <h3>Same-Day Service</h3>
+      <p>
+        Need it done fast? We've got hundreds of cleaners ready. Clean today, smile tonight.
+      </p>
+    </div>
+    <div class="service-card">
+      <!-- Placeholder image for additional service -->
+      <img src="https://cdn-icons-png.flaticon.com/512/9321/9321321.png" alt="Placeholder Service" />
+      <h3>Extra Service</h3>
+      <p>
+        Our cleaners can tailor their services to your needs.
+      </p>
+    </div>
   </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery block wide">
+  <h2>Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://3pigletscleaning.com.au/wp-content/uploads/2024/03/house_cleaning_img2.jpg" alt="Gallery Image 1" />
+      <p>-</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://thecleanables.com/wp-content/uploads/2023/08/Portrait-of-young-latin-man-sw-1-scaled-1.jpg" alt="Gallery Image 2" />
+      <p>-</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://cdn-dklbl.nitrocdn.com/oXDvJuVCqRLDRWEFBNMOfPAolZdLNJNA/assets/images/optimized/rev-3e260d4/casaterracleaning.ca/wp-content/uploads/2023/06/House-Residential-Cleaning-1024x685.jpg" alt="Gallery Image 3" />
+      <p>-</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call To Action -->
+<section class="cta block wide">
+  <h2>Ready to Experience the Sparkle?</h2>
+  <p>
+    Get a free quote today and let us bring the shine back to your home.
+  </p>
+  <a href="/register" class="btn btn-secondary">Get a Free Quote</a>
+</section>
 {% endblock content %}
