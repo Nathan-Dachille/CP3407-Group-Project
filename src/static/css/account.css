@@ -302,3 +302,11 @@
     margin: 10px auto;        /* Center it with extra space for model */
     padding: 12px;            /* Padding for larger input */
 }
+
+.booking_section {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}

@@ -84,7 +84,7 @@ function updateWeekInfo(focusDate = null) {
         }
         console.log("Request body:", JSON.stringify(request_data))
 
-        return fetch(`/get_booking/`, {
+        return fetch(`/get_bookings/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -158,10 +158,13 @@ function updateWeekInfo(focusDate = null) {
 
                         if (bookings.length > 0) {
                             bookings.forEach(booking => {
-                                bookedBookings.push(booking.id); // Add unassigned booking ID to the array
-                                timetableHTML += `<th><button class="toggle_set fields u_book"` +
-                                ` onClick="openBooking({IDs: ${JSON.stringify(bookedBookings)}})">‎</button></th>`;
+                                console.log(booking.id)
+                                bookedBookings.push(booking.id); // Add booking ID to the array
                             });
+                            console.log(bookedBookings)
+                            console.log(JSON.stringify(bookedBookings))
+                            timetableHTML += `<th><button class="toggle_set fields u_book"` +
+                                ` onClick="openBooking({ IDs: ${JSON.stringify(bookedBookings) }})">‎</button></th>`;
                             isBooked = true;
                         }
                     }
@@ -310,6 +313,73 @@ function moveTo() {
     sessionStorage.setItem("focusDate", focusDate.toISOString());
     updateWeekInfo(focusDate);
 }
+
+// Assuming the fetch function is fetching booking data from your server
+function fetchBookingDetails(bookingId) {
+    console.log(bookingId)
+    return fetch(`/find_booking/?booking_id=${bookingId}`, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data) {
+            console.error("Invalid data received:", data);
+            return null;
+        }
+        console.log(data)
+        return data; // Return the valid data
+    })
+    .catch(error => {
+        console.error("Error fetching booking data:", error);
+        return null;
+    });
+}
+
+function openBooking({ IDs }) {
+    const bookingIds = Array.isArray(IDs) ? IDs : JSON.parse(IDs);
+    console.log(bookingIds)
+    if (Array.isArray(bookingIds)) {
+        console.log("Booking IDs:", bookingIds);
+    } else {
+        console.error("Received an invalid value for bookingIds:", bookingIds);
+    }
+
+    // Get the container where booking details will be displayed
+    let bookingDetailsContainer = document.getElementById("booking-details-container");
+
+    // Start with header
+    bookingDetailsContainer.innerHTML = '<div class="content_box background-grey round"><h3>Bookings:</h3></div>';
+
+    // Loop through each ID and append as they arrive
+    bookingIds.forEach(bookingId => {
+        fetchBookingDetails(bookingId)
+            .then(booking => {
+                if (booking && booking.bookingInfo) {
+                    const b = booking.bookingInfo;
+                    const bookingHTML = `<div class="content_box background-grey round">
+                        <h3>Booking Details for ${b.user_name} - Booking ID: ${b.id}</h3>
+                        <p><strong>Date:</strong> ${b.date}</p>
+                        <p><strong>Time Period:</strong> ${b.start_time}${b.end_time ? ` - ${b.end_time}` : ''}</p>
+                        <p><strong>Service:</strong> ${b.service}</p>
+                        <p><strong>Notes:</strong> ${b.notes || 'None'}</p>
+                    </div>`;
+
+                    // Append it
+                    bookingDetailsContainer.innerHTML += bookingHTML;
+                } else {
+                    bookingDetailsContainer.innerHTML += `<p>Booking not found for ID ${bookingId}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching booking:", error);
+                bookingDetailsContainer.innerHTML += `<p>Error loading booking ID ${bookingId}</p>`;
+            });
+    });
+}
+
 function toggleEdit() {
     let displaySpan = document.getElementById("phone_display");
     let inputField = document.getElementById("phone_input");

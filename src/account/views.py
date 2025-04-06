@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.dateparse import parse_date
+from django.core import serializers
 from datetime import datetime, timedelta
 from django.http import JsonResponse
 from authuser.models import CleanerAvailability
@@ -40,6 +41,7 @@ def get_date_info(date):
     week_num = date.isocalendar().week
 
     return week_dates, week_num
+
 
 def get_booking_hours(booking):
     """
@@ -105,7 +107,7 @@ def account(request, *args, **kwargs):
 
 
 @login_required(login_url="/sign_in/")
-def get_booking(request):
+def get_bookings(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -191,6 +193,31 @@ def get_booking(request):
             return JsonResponse({"error": "Invalid JSON"}, status=400)
 
     return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
+
+
+def find_booking(request):
+    booking_id = request.GET.get("booking_id", None)
+    print(booking_id)
+    if booking_id:
+        booking = Booking.objects.select_related("user", "assigned").get(id=booking_id)
+        print(booking)
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                "bookingInfo": {
+                    "id": booking.id,
+                    "date": str(booking.date),
+                    "start_time": booking.start_time.strftime("%H:%M"),
+                    "end_time": booking.end_time.strftime("%H:%M") if booking.end_time else None,
+                    "service": booking.service,
+                    "notes": booking.notes,
+                    "user_id": booking.user.id,
+                    "user_name": booking.user.get_full_name() or booking.user.username,
+                    "assigned_id": booking.assigned.id if booking.assigned else None,
+                }
+            })
+        return render(request, "account.html", {
+            "bookingInfo": booking,
+        })
 
 
 @login_required(login_url="/sign_in/")
