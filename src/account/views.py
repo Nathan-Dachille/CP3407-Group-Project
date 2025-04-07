@@ -391,6 +391,24 @@ General Functions
 """
 
 
+@login_required(login_url="/sign_in/")
+def delete_booking(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            logger.debug(f"Received data: {data}")  # Debugging line
+            booking_id = data.get("target")
+            booking = Booking.objects.select_related("user", "assigned").get(id=booking_id)
+            booking.delete()
+
+            return JsonResponse({"success": True})
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
+
+
 def get_date_range(start_date, end_date):
     """
     Returns a list of dates from start_date to end_date (inclusive).

@@ -1,12 +1,13 @@
 // Account Javascript File
-
+let userRole = "";
 // General Account scripts
 document.addEventListener("DOMContentLoaded", function () {
     // Retrieve the last focused date from sessionStorage or default to today
     let storedDate = sessionStorage.getItem("focusDate");
     let focusDate = storedDate ? new Date(storedDate) : new Date(); // Start with the user's current date
 
-    const userRole = document.getElementById("page_layout").getAttribute("data-user-role")
+    userRole = document.getElementById("page_layout").getAttribute("data-user-role")
+
     console.log(userRole)
     // If the user is a Cleaner, do the cleaner-specific functionality
     if (userRole === 'CLEANER') {
@@ -457,7 +458,7 @@ function openBooking({ IDs }) {
                             bookingHTML += `<p>
                                             <input type="number" class="booking_rating" id="rating-${b.id}" name="rating" min="1" max="5" required>
                                             <button class="booking_button"
-                                                onClick="addRating({ ID: ${b.id}, rating: 'rating-${b.id}' })">
+                                                onClick="addRating({ Source: 2, ID: ${b.id}, rating: 'rating-${b.id}' })">
                                                 Set Rating
                                             </button>
                                             </p>`;
@@ -508,7 +509,11 @@ function toggleAccept({ ID }) {
     .then(data => {
         console.log("Response", data);
         if (data.success) {
-            updateWeekInfo();
+            if (userRole === 'CLEANER') {
+                updateWeekInfo();
+            } else {
+                fetchBookings();
+            }
         } else {
             console.error("Error:", data.error);
         }
@@ -560,6 +565,12 @@ function renderBookings(bookings) {
                 stars += i <= rating ? "★" : "☆";
             }
             card.innerHTML += `<p><strong>Rating:</strong> ${stars}</p>`;
+            if (b.status === "Upcoming") {
+                card.innerHTML += `<p><button class="booking_button"
+                                onClick="toggleAccept({ ID: ${b.id} })">
+                                Reject Cleaner
+                                </button></p>`;
+            }
         } else {
             card.innerHTML += `
                 <p><strong>Assignment:</strong> Unassigned</p>
@@ -568,7 +579,22 @@ function renderBookings(bookings) {
         card.innerHTML += `
             <h5><strong>Notes:</strong></h5>
             <p>${b.notes || 'None'}</p>
-        `;
+            `;
+        if (b.status === "Upcoming") {
+            card.innerHTML += `<p><button class="booking_button"
+                                onClick="deleteBooking({ ID: ${b.id} })">
+                                Cancel Booking
+                                </button></p>
+                            `;
+        } else {
+            card.innerHTML += `<p>
+                            <input type="number" class="booking_rating" id="rating-${b.id}" name="rating" min="1" max="5" required>
+                            <button class="booking_button"
+                                onClick="addRating({ Source: 1, ID: ${b.id}, rating: 'rating-${b.id}' })">
+                                Set Rating
+                            </button>
+                            </p>`;
+        }
         container.appendChild(card);
     });
 }
@@ -604,4 +630,33 @@ function applyFilters() {
     });
 
     renderBookings(filtered);
+}
+
+function deleteBooking({ ID }) {
+    const request_data = {
+            target: ID,
+    }
+    console.log("Request body:", JSON.stringify(request_data))
+    fetch("/delete_booking/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken() // Needed for Django security
+        },
+        body: JSON.stringify(request_data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response", data);
+        if (data.success) {
+            if (userRole === 'CLEANER') {
+                updateWeekInfo();
+            } else {
+                fetchBookings();
+            }
+        } else {
+            console.error("Error:", data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
 }
