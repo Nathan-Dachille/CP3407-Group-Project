@@ -21,7 +21,7 @@ from authuser.views import sign_in_view, register_view, sign_out_view
 from bookings.views import book_appointment
 from account.views import (account, CustomPasswordChangeView, change_email, update_user_info, toggle_availability,
                            duplicate_availability, get_bookings, find_booking, toggle_accept, customer_bookings,
-                           delete_booking)
+                           delete_booking, set_booking_rating)
 from django.contrib.auth.views import PasswordChangeDoneView
 
 
@@ -44,4 +44,5 @@ urlpatterns = [
     path("toggle_accept/", toggle_accept, name="toggle_accept"),
     path('api/customer_bookings/', customer_bookings, name='customer_bookings'),
     path('delete_booking/', delete_booking, name='delete_booking'),
+    path('set_booking_rating/', set_booking_rating, name='set_booking_rating'),
 ]

@@ -480,6 +480,35 @@ def delete_booking(request):
     return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
 
 
+@login_required(login_url="/sign_in/")
+def set_booking_rating(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            booking_id = data.get("id")
+            rating = data.get("rating")
+            source = data.get("source")
+
+            booking = Booking.objects.get(id=booking_id)
+
+            if source == 1:
+                booking.cleaner_rating = rating
+            elif source == 2:
+                booking.customer_rating = rating
+            else:
+                return JsonResponse({"error": "Invalid source."}, status=400)
+
+            booking.save()
+            return JsonResponse({"success": True})
+
+        except Booking.DoesNotExist:
+            return JsonResponse({"error": "Booking not found."}, status=404)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request method."}, status=405)
+
+
 def get_date_range(start_date, end_date):
     """
     Returns a list of dates from start_date to end_date (inclusive).

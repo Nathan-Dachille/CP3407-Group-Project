@@ -375,6 +375,10 @@
     border-radius: 5px;
 }
 
+.booking_rating.dark {
+    background: lightgray;
+}
+
 /* Customer Section */
 
 .filter-bar {

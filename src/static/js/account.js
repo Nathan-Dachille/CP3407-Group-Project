@@ -136,6 +136,45 @@ function toggleEdit(field) {
     }
 }
 
+function setRating({ Source, ID, rating }) {
+    const ratingValue = document.getElementById(rating).value;
+
+    // Validate the rating value is between 1 and 5
+    const numericRating = parseInt(ratingValue, 10);
+    if (isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+        alert("Please enter a rating between 1 and 5.");
+        return;
+    }
+
+    const request_data = {
+        id: ID,
+        rating: numericRating,
+        source: Source
+    }
+    console.log("Request body:", JSON.stringify(request_data))
+
+    return fetch(`/set_booking_rating/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            "X-CSRFToken": getCSRFToken() // Needed for Django security
+        },
+        body: JSON.stringify(request_data)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Rating updated successfully!");
+        } else {
+            alert("Failed to update rating.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong.");
+    });
+}
+
 // Utility function to get CSRF token from cookies
 function getCSRFToken() {
     const cookies = document.cookie.split("; ");
@@ -477,7 +516,7 @@ function openBooking({ IDs }) {
                             bookingHTML += `<p>
                                             <input type="number" class="booking_rating" id="rating-${b.id}" name="rating" min="1" max="5" required>
                                             <button class="booking_button"
-                                                onClick="addRating({ Source: 2, ID: ${b.id}, rating: 'rating-${b.id}' })">
+                                                onClick="setRating({ Source: 2, ID: ${b.id}, rating: 'rating-${b.id}' })">
                                                 Set Rating
                                             </button>
                                             </p>`;
@@ -607,9 +646,9 @@ function renderBookings(bookings) {
                             `;
         } else {
             card.innerHTML += `<p>
-                            <input type="number" class="booking_rating" id="rating-${b.id}" name="rating" min="1" max="5" required>
+                            <input type="number" class="booking_rating dark" id="rating-${b.id}" name="rating" min="1" max="5" required>
                             <button class="booking_button"
-                                onClick="addRating({ Source: 1, ID: ${b.id}, rating: 'rating-${b.id}' })">
+                                onClick="setRating({ Source: 1, ID: ${b.id}, rating: 'rating-${b.id}' })">
                                 Set Rating
                             </button>
                             </p>`;
