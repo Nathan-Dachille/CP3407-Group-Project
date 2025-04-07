@@ -1,25 +1,126 @@
+// Account Javascript File
+
+// General Account scripts
 document.addEventListener("DOMContentLoaded", function () {
     // Retrieve the last focused date from sessionStorage or default to today
     let storedDate = sessionStorage.getItem("focusDate");
     let focusDate = storedDate ? new Date(storedDate) : new Date(); // Start with the user's current date
 
-    document.getElementById("prev-week").addEventListener("click", () => {
-        let focusDate = new Date(sessionStorage.getItem("focusDate"));
-        focusDate.setDate(focusDate.getDate() - 7);
-        sessionStorage.setItem("focusDate", focusDate.toISOString());
-        updateWeekInfo(focusDate);
-    });
+    const userRole = document.getElementById("page_layout").getAttribute("data-user-role")
+    console.log(userRole)
+    // If the user is a Cleaner, do the cleaner-specific functionality
+    if (userRole === 'CLEANER') {
+        console.log(userRole)
+        document.getElementById("prev-week").addEventListener("click", () => {
+            let focusDate = new Date(sessionStorage.getItem("focusDate"));
+            focusDate.setDate(focusDate.getDate() - 7);
+            sessionStorage.setItem("focusDate", focusDate.toISOString());
+            updateWeekInfo(focusDate);
+        });
 
-    document.getElementById("next-week").addEventListener("click", () => {
-        let focusDate = new Date(sessionStorage.getItem("focusDate"));
-        focusDate.setDate(focusDate.getDate() + 7);
-        sessionStorage.setItem("focusDate", focusDate.toISOString());
-        updateWeekInfo(focusDate);
-    });
+        document.getElementById("next-week").addEventListener("click", () => {
+            let focusDate = new Date(sessionStorage.getItem("focusDate"));
+            focusDate.setDate(focusDate.getDate() + 7);
+            sessionStorage.setItem("focusDate", focusDate.toISOString());
+            updateWeekInfo(focusDate);
+        });
 
-    // Trigger the AJAX request when the page loads
-    updateWeekInfo(focusDate);
+        // Trigger the AJAX request when the page loads
+        updateWeekInfo(focusDate);
+    }
+    // If the user is a Customer, do the customer-specific functionality
+    else if (userRole === 'CUSTOMER') {
+        fetchBookings();
+    }
 });
+
+function convertToTimeString(hour) {
+    // Handle hour 0 as 12am, and 12 as 12pm
+    if (hour === 0) {
+        return "12am";
+    } else if (hour === 12) {
+        return "12pm";
+    }
+
+    // Convert hour to 12-hour format
+    const hour12 = hour > 12 ? hour - 12 : hour;
+
+    // Determine AM or PM
+    const period = hour >= 12 ? "pm" : "am";
+
+    // Return the formatted time string
+    return `${hour12}${period}`;
+}
+
+function formatDateWithOrdinal(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "short" });
+
+    // Function to get ordinal suffix (st, nd, rd, th)
+    function getOrdinal(n) {
+        if (n > 3 && n < 21) return "th"; // Covers 11th, 12th, 13th
+        switch (n % 10) {
+            case 1: return "st";
+            case 2: return "nd";
+            case 3: return "rd";
+            default: return "th";
+        }
+    }
+
+    return `${day}${getOrdinal(day)} of ${month}`;
+}
+
+function openModel(modelId) {
+    document.getElementById(modelId).style.display = "flex";
+}
+
+function closeModel(modelId) {
+    document.getElementById(modelId).style.display = "none";
+}
+
+function toggleEdit() {
+    let displaySpan = document.getElementById("phone_display");
+    let inputField = document.getElementById("phone_input");
+    let button = document.querySelector(".toggle_edit");
+
+    if (displaySpan.style.display === "none") {
+        // Validate the input
+        let phoneValue = inputField.value.trim();
+        let phoneRegex = /^[\d\s\-\+\(\)]*$/; // Allows digits, spaces, dashes, plus, and parentheses
+
+        if (phoneValue === "" || phoneRegex.test(phoneValue)) {
+            // Valid input or blank, save and switch back to text mode
+            displaySpan.textContent = phoneValue || "No phone number"; // Fallback text
+            displaySpan.style.display = "inline";
+            inputField.style.display = "none";
+            button.textContent = "⇄"; // Reset button text
+        } else {
+            alert("Please enter a valid phone number.");
+            inputField.focus();
+        }
+    } else {
+        // Switching to edit mode
+        inputField.style.display = "inline";
+        inputField.focus();
+        displaySpan.style.display = "none";
+        button.textContent = "✔"; // Change button text to indicate save
+    }
+}
+
+// Utility function to get CSRF token from cookies
+function getCSRFToken() {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+        const [name, value] = cookie.split("=");
+        if (name === "csrftoken") {
+            return value;
+        }
+    }
+    return "";
+}
+
+// Cleaner Account Scripts
 
 function fetchWeekData(focusDate = null) {
     if (!focusDate) {
@@ -189,51 +290,6 @@ function updateWeekInfo(focusDate = null) {
         });
     })
     .catch(error => console.error("Error fetching data:", error));
-}
-
-function convertToTimeString(hour) {
-    // Handle hour 0 as 12am, and 12 as 12pm
-    if (hour === 0) {
-        return "12am";
-    } else if (hour === 12) {
-        return "12pm";
-    }
-
-    // Convert hour to 12-hour format
-    const hour12 = hour > 12 ? hour - 12 : hour;
-
-    // Determine AM or PM
-    const period = hour >= 12 ? "pm" : "am";
-
-    // Return the formatted time string
-    return `${hour12}${period}`;
-}
-
-function formatDateWithOrdinal(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "short" });
-
-    // Function to get ordinal suffix (st, nd, rd, th)
-    function getOrdinal(n) {
-        if (n > 3 && n < 21) return "th"; // Covers 11th, 12th, 13th
-        switch (n % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    }
-
-    return `${day}${getOrdinal(day)} of ${month}`;
-}
-
-function openModel(modelId) {
-    document.getElementById(modelId).style.display = "flex";
-}
-
-function closeModel(modelId) {
-    document.getElementById(modelId).style.display = "none";
 }
 
 function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
@@ -452,43 +508,60 @@ function toggleAccept({ ID }) {
     .catch(error => console.error("Error:", error));
 }
 
-function toggleEdit() {
-    let displaySpan = document.getElementById("phone_display");
-    let inputField = document.getElementById("phone_input");
-    let button = document.querySelector(".toggle_edit");
+// Customer Account Scripts
+let allBookings = [];
 
-    if (displaySpan.style.display === "none") {
-        // Validate the input
-        let phoneValue = inputField.value.trim();
-        let phoneRegex = /^[\d\s\-\+\(\)]*$/; // Allows digits, spaces, dashes, plus, and parentheses
+function fetchBookings() {
+    fetch('/api/customer_bookings/', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        allBookings = data.bookings;
+        renderBookings(allBookings);
+    })
+    .catch(err => console.error("Error fetching bookings:", err));
+}
 
-        if (phoneValue === "" || phoneRegex.test(phoneValue)) {
-            // Valid input or blank, save and switch back to text mode
-            displaySpan.textContent = phoneValue || "No phone number"; // Fallback text
-            displaySpan.style.display = "inline";
-            inputField.style.display = "none";
-            button.textContent = "⇄"; // Reset button text
+function renderBookings(bookings) {
+    const container = document.getElementById("customer-bookings-container");
+    container.innerHTML = '';
+
+    if (bookings.length === 0) {
+        container.innerHTML = '<p>No bookings found.</p>';
+        return;
+    }
+
+    bookings.forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'booking-card';
+        card.innerHTML = `
+            <h4>${b.service} on ${b.date} from ${b.start_time} to ${b.end_time}</h4>
+            <p><strong>Status:</strong> ${b.status}</p>
+        `;
+        if (b.user_name) {
+            card.innerHTML += `
+                <p><strong>Assignment:</strong> ${b.user_name}</p>
+                <p><strong>Email:</strong> ${b.email || "N/A"}</p>
+                <p><strong>Phone:</strong> ${b.phone || "N/A"}</p>
+            `;
+            // Render stars for rating
+            const rating = b.rating || 0;
+            let stars = "";
+            for (let i = 1; i <= 5; i++) {
+                stars += i <= rating ? "★" : "☆";
+            }
+            card.innerHTML += `<p><strong>Rating:</strong> ${stars}</p>`;
         } else {
-            alert("Please enter a valid phone number.");
-            inputField.focus();
+            card.innerHTML += `
+                <p><strong>Assignment:</strong> Unassigned</p>
+            `;
         }
-    } else {
-        // Switching to edit mode
-        inputField.style.display = "inline";
-        inputField.focus();
-        displaySpan.style.display = "none";
-        button.textContent = "✔"; // Change button text to indicate save
-    }
+        card.innerHTML += `
+            <h5><strong>Notes:</strong></h5>
+            <p>${b.notes || 'None'}</p>
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Utility function to get CSRF token from cookies
-function getCSRFToken() {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-        const [name, value] = cookie.split("=");
-        if (name === "csrftoken") {
-            return value;
-        }
-    }
-    return "";
-}
