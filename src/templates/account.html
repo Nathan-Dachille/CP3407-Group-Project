@@ -43,12 +43,16 @@
                 <div class="model-content">
                     <span class="close" onclick="closeModel('emailModel')">&times;</span>
                     <h2>Change Email</h2>
+
+                    <!-- Email Change Form -->
                     <form action="{% url 'email_change' %}" method="post">
                         {% csrf_token %}
-                        <label>New Email:</label>
-                        <input type="email" name="new email" placeholder="Enter new email" required>
-                        <label>Password:</label>
-                        <input type="password" name="password" placeholder="Enter password" required>
+                        <label for="new_email">New Email:</label>
+                        <input type="email" name="new_email" id="new_email" placeholder="Enter new email" required value="{{ form.new_email.value }}">
+
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" placeholder="Enter password" required>
+
                         <button type="submit">Change Email</button>
                     </form>
                 </div>
@@ -74,24 +78,27 @@
                 </div>
             </div>
             <div class="content_box info background-grey round">
-                <p>
-                    <button class="symbol_button" onclick="toggleEdit()">
-                        ⇄
-                    </button>
-                    Phone:
-                    <span id="phone_display">{{ request.user.phone }}</span>
-                    <input class="text_box" id="phone_input" type="email" value="{{ request.user.phone }}"
-                           placeholder="04XX XXX XXX" style="display: none;">
-                </p>
-                <p>
-                    <button class="symbol_button" onclick="toggleEdit()">
-                        ⇄
-                    </button>
-                    Address:
-                    <span id="area_display">Placeholder</span>
-                    <input class="text_box" id="area_input" type="email" value="Placeholder"
-                           placeholder="State, City, Suburb" style="display: none;">
-                </p>
+                <form id="info_form" action="{% url 'update_user_info' %}" method="POST">
+                    {% csrf_token %}
+                    <p>
+                        <button type="button" class="symbol_button" onclick="toggleEdit('phone')" data-mode="view">
+                            ⇄
+                        </button>
+                        Phone:
+                        <span id="phone_display">{{ request.user.phone }}</span>
+                        <input class="text_box" id="phone_input" name="phone" type="text" value="{{ request.user.phone }}"
+                               placeholder="04XX XXX XXX" style="display: none;">
+                    </p>
+                    <p>
+                        <button type="button" class="symbol_button" onclick="toggleEdit('address')" data-mode="view">
+                            ⇄
+                        </button>
+                        Address:
+                        <span id="address_display">{{ request.user.address }}</span>
+                        <input class="text_box" id="address_input" name="address" type="text" value="{{ request.user.address }}"
+                               placeholder="State, City, Suburb" style="display: none;">
+                    </p>
+                </form>
             </div>
         </div>
 

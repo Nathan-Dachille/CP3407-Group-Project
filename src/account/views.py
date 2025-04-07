@@ -7,6 +7,12 @@ from django.utils import timezone
 from authuser.models import CleanerAvailability
 from bookings.models import Booking
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.contrib.auth import update_session_auth_hash
+from django.core.exceptions import ValidationError
+from authuser.forms import EmailChangeForm
 import json
 import logging
 
@@ -50,6 +56,71 @@ def account(request, *args, **kwargs):
         "ava_data": ava_data,
         'user_role': request.user.role,
     })
+
+
+"""
+Primary Account Functions
+"""
+
+
+@login_required
+def update_user_info(request):
+    if request.method == 'POST':
+        # Get the user from the request
+        user = request.user
+
+        # Update the phone and address if the user provided new values
+        if 'phone' in request.POST:
+            user.phone = request.POST['phone']
+        if 'address' in request.POST:
+            user.address = request.POST['address']
+
+        print(user.phone)
+        print(user.address)
+
+        # Save the updated user information
+        user.save()
+
+        # Redirect back to the profile page or wherever you want
+        return redirect('account')  # Make sure you have a 'profile' view and URL
+
+    return redirect('account')  # In case it's not a POST request
+
+
+"""
+Password and email change views
+"""
+
+
+class CustomPasswordChangeView(PasswordChangeView):
+    template_name = "registration/password_change_form.html"
+
+    def get_success_url(self):
+        # After successfully changing the password, redirect to the profile page
+        return reverse_lazy('account')  # 'account' should match your profile URL name
+
+
+@login_required(login_url="/sign_in/")
+def change_email(request):
+    if request.method == 'POST':
+        form = EmailChangeForm(request.POST)
+        if form.is_valid():
+            # Check password validity
+            password = form.cleaned_data['password']
+            new_email = form.cleaned_data['new_email']
+
+            user = request.user
+            if user.check_password(password):
+                user.email = new_email
+                user.save()
+                messages.success(request, "Your email has been successfully updated.")
+                return redirect('account')  # Redirect to the profile page or another appropriate view
+            else:
+                messages.error(request, "Incorrect password.")
+    else:
+        form = EmailChangeForm()
+
+    return render(request, 'account.html', {'form': form})
 
 
 """

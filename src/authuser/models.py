@@ -66,7 +66,23 @@ class User(AbstractUser):
                              validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                                         message="Phone number must be entered in the format: "
                                                                 "'+999999999'. Up to 15 digits allowed.")])
+    address = models.CharField(max_length=100, null=True, blank=True,
+                               validators=[RegexValidator(regex=r'^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*\d+\s+[A-Za-z\s]+$',
+                                                          message="Address must be in the format: State, Suburb,"
+                                                                  " AddressNumber Street")])
     rating = models.IntegerField(null=True)
+
+    def get_state(self):
+        return self.address.split(',')[0].strip() if self.address else None
+
+    def get_suburb(self):
+        return self.address.split(',')[1].strip() if self.address else None
+
+    def get_address_number(self):
+        return self.address.split(',')[2].strip().split(' ')[0] if self.address else None
+
+    def get_street(self):
+        return ' '.join(self.address.split(',')[2].strip().split(' ')[1:]) if self.address else None
 
 
 class CleanerAvailability(models.Model):

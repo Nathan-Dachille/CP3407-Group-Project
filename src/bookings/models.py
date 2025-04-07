@@ -11,6 +11,8 @@ class Booking(models.Model):
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     assigned = models.ForeignKey(User, related_name='assigned_bookings', blank=True, null=True, on_delete=models.SET_NULL)
+    cleaner_rating = models.IntegerField(null=True)
+    customer_rating = models.IntegerField(null=True)
 
     def __str__(self):
         return f"Booking by {self.user.email} on {self.date} from {self.start_time} to {self.end_time or 'N/A'}"

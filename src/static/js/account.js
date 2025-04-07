@@ -88,32 +88,51 @@ function closeModel(modelId) {
     document.getElementById(modelId).style.display = "none";
 }
 
-function toggleEdit() {
-    let displaySpan = document.getElementById("phone_display");
-    let inputField = document.getElementById("phone_input");
-    let button = document.querySelector(".toggle_edit");
+function toggleEdit(field) {
+    const displaySpan = document.getElementById(`${field}_display`);
+    const inputField = document.getElementById(`${field}_input`);
+    const button = document.querySelector(`button[onclick="toggleEdit('${field}')"]`);
 
-    if (displaySpan.style.display === "none") {
-        // Validate the input
-        let phoneValue = inputField.value.trim();
-        let phoneRegex = /^[\d\s\-\+\(\)]*$/; // Allows digits, spaces, dashes, plus, and parentheses
+    let currentMode = button.getAttribute("data-mode") || "view";
 
-        if (phoneValue === "" || phoneRegex.test(phoneValue)) {
-            // Valid input or blank, save and switch back to text mode
-            displaySpan.textContent = phoneValue || "No phone number"; // Fallback text
-            displaySpan.style.display = "inline";
-            inputField.style.display = "none";
-            button.textContent = "⇄"; // Reset button text
-        } else {
-            alert("Please enter a valid phone number.");
-            inputField.focus();
-        }
-    } else {
-        // Switching to edit mode
+    if (currentMode === "view") {
+        displaySpan.style.display = "none";
         inputField.style.display = "inline";
         inputField.focus();
-        displaySpan.style.display = "none";
-        button.textContent = "✔"; // Change button text to indicate save
+        button.textContent = "✔";
+        button.setAttribute("data-mode", "edit");
+    } else {
+        const fieldValue = inputField.value.trim();
+
+        if (field === 'phone') {
+            const phoneRegex = /^[\d\s\-\+\(\)]*$/;
+            if (fieldValue === "" || phoneRegex.test(fieldValue)) {
+                displaySpan.textContent = fieldValue || "No phone number";
+            } else {
+                alert("Please enter a valid phone number.");
+                inputField.focus();
+                return;
+            }
+        }
+
+        if (field === 'address') {
+            const addressRegex = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*\d+\s+[A-Za-z\s]+$/;
+            if (fieldValue === "" || addressRegex.test(fieldValue)) {
+                displaySpan.textContent = fieldValue || "No address";
+            } else {
+                alert("Address must be in the format: State, Suburb, 123 Street");
+                inputField.focus();
+                return;
+            }
+        }
+
+        // Switch to view mode
+        inputField.style.display = "none";
+        displaySpan.style.display = "inline";
+        button.textContent = "⇄";
+        button.setAttribute("data-mode", "view");
+
+        document.getElementById("info_form").submit();
     }
 }
 

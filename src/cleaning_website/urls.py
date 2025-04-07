@@ -15,17 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import reverse, path
 from pages.views import home
 from authuser.views import sign_in_view, register_view, sign_out_view
 from bookings.views import book_appointment
-from account.views import (account, toggle_availability, duplicate_availability, get_bookings, find_booking,
-                           toggle_accept, customer_bookings, delete_booking)
-from django.contrib.auth.views import PasswordChangeView
-
-
-class CustomPasswordChangeView(PasswordChangeView):
-    template_name = "registration/password_change_form.html"
+from account.views import (account, CustomPasswordChangeView, change_email, update_user_info, toggle_availability,
+                           duplicate_availability, get_bookings, find_booking, toggle_accept, customer_bookings,
+                           delete_booking)
+from django.contrib.auth.views import PasswordChangeDoneView
 
 
 urlpatterns = [
@@ -37,7 +34,9 @@ urlpatterns = [
     path('sign_out/', sign_out_view, name="sign_out"),
     path('profile/', account, name='account'),
     path('change-password/', CustomPasswordChangeView.as_view(), name='password_change'),
-    path('change-email/', CustomPasswordChangeView.as_view(), name='email_change'),
+    path('password_change/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('change-email/', change_email, name='email_change'),
+    path('update_user_info/', update_user_info, name='update_user_info'),
     path("toggle_availability/", toggle_availability, name="toggle_availability"),
     path("duplicate_availability/", duplicate_availability, name="duplicate_availability"),
     path("get_bookings/", get_bookings, name="get_bookings"),

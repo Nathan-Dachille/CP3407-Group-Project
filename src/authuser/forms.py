@@ -18,3 +18,8 @@ class SignInForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('email', 'password')
+
+
+class EmailChangeForm(forms.Form):
+    new_email = forms.EmailField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
