@@ -427,6 +427,31 @@ function openBooking({ IDs }) {
     });
 }
 
+function toggleAccept({ ID }) {
+    const request_data = {
+            target: ID,
+    }
+    console.log("Request body:", JSON.stringify(request_data))
+    fetch("/toggle_accept/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken() // Needed for Django security
+        },
+        body: JSON.stringify(request_data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response", data);
+        if (data.success) {
+            updateWeekInfo();
+        } else {
+            console.error("Error:", data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
 function toggleEdit() {
     let displaySpan = document.getElementById("phone_display");
     let inputField = document.getElementById("phone_input");

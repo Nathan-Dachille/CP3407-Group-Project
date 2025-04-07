@@ -19,7 +19,7 @@ from django.urls import include, path
 from pages.views import home
 from authuser.views import sign_in_view, register_view, sign_out_view
 from bookings.views import book_appointment
-from account.views import account, toggle_availability, duplicate_availability, get_bookings, find_booking
+from account.views import account, toggle_availability, duplicate_availability, get_bookings, find_booking, toggle_accept
 from django.contrib.auth.views import PasswordChangeView
 
 
@@ -41,4 +41,5 @@ urlpatterns = [
     path("duplicate_availability/", duplicate_availability, name="duplicate_availability"),
     path("get_bookings/", get_bookings, name="get_bookings"),
     path("find_booking/", find_booking, name="find_booking"),
+    path("toggle_accept/", toggle_accept, name="toggle_accept"),
 ]

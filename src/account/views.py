@@ -225,6 +225,29 @@ def find_booking(request):
 
 
 @login_required(login_url="/sign_in/")
+def toggle_accept(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user = request.user
+            logger.debug(f"Received data: {data}")  # Debugging line
+            booking_id = data.get("target")
+            booking = Booking.objects.select_related("user", "assigned").get(id=booking_id)
+            if booking.assigned is None:
+                booking.assigned = user
+            else:
+                booking.assigned = None
+            booking.save()
+
+            return JsonResponse({"success": True})
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    return JsonResponse({"success": False, "error": "Invalid request method"}, status=405)
+
+
+@login_required(login_url="/sign_in/")
 def toggle_availability(request):
     if request.method == "POST":
         try:
