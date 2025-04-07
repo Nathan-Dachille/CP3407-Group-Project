@@ -288,6 +288,7 @@ def get_bookings(request):
             data = json.loads(request.body)
             dates = data.get("dates", [])
             user = request.user
+
             # Get all assigned bookings within the requested dates
             booking_data_a = list(Booking.objects.filter(assigned=user, date__in=dates))
             print(booking_data_a)
@@ -306,7 +307,6 @@ def get_bookings(request):
             for booking in booking_data_a:
                 # Get the booking hours using the helper function
                 booking_hours = get_booking_hours(booking)
-
                 booking_date = str(booking.date)
 
                 filtered_bookings_assigned.append({
@@ -314,6 +314,7 @@ def get_bookings(request):
                     "date": booking_date,
                     "booking_hours": booking_hours
                 })
+
                 if booking.date in availability.dates:
                     # Get the available hours for this booking date
                     available_hours = availability.dates[booking.date]
@@ -343,6 +344,13 @@ def get_bookings(request):
                 if booking_date not in availability.dates:
                     print("error")
                     continue
+
+                # Check if the cleaner's suburb matches the customer's suburb (if both have addresses)
+                cleaner_suburb = user.get_suburb() if user.get_suburb() else None
+                customer_suburb = booking.user.get_suburb() if booking.user.get_suburb() else None
+
+                if cleaner_suburb and customer_suburb and cleaner_suburb != customer_suburb:
+                    continue  # Skip this booking if the suburbs don't match
 
                 available_hours = availability[booking_date]
                 print(available_hours)
