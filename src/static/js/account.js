@@ -346,12 +346,13 @@ function openBooking({ IDs }) {
     } else {
         console.error("Received an invalid value for bookingIds:", bookingIds);
     }
+    const now = new Date(); // current local time of the user
 
     // Get the container where booking details will be displayed
     let bookingDetailsContainer = document.getElementById("booking-details-container");
 
     // Start with header
-    bookingDetailsContainer.innerHTML = '<div class="content_box background-grey round"><h3>Bookings:</h3></div>';
+    bookingDetailsContainer.innerHTML = '<div class="content_box background-grey round booking_layout"><h1>Bookings:</h1></div>';
 
     // Loop through each ID and append as they arrive
     bookingIds.forEach(bookingId => {
@@ -359,15 +360,61 @@ function openBooking({ IDs }) {
             .then(booking => {
                 if (booking && booking.bookingInfo) {
                     const b = booking.bookingInfo;
-                    const bookingHTML = `<div class="content_box background-grey round">
-                        <h3>Booking Details for ${b.user_name} - Booking ID: ${b.id}</h3>
+                    const lockoutTime = new Date(new Date(`${b.date}T${b.start_time}`) - (1 * 3600000));
+
+                    let bookingHTML = `<div class="content_box background-grey round booking_layout">
+                        <div class="booking_element">
+                        <h3>Booking Details for ${b.user_name}</h3>
+                        <h3>Booking ID: ${b.id}</h3>
                         <p><strong>Date:</strong> ${b.date}</p>
                         <p><strong>Time Period:</strong> ${b.start_time}${b.end_time ? ` - ${b.end_time}` : ''}</p>
-                        <p><strong>Service:</strong> ${b.service}</p>
-                        <p><strong>Notes:</strong> ${b.notes || 'None'}</p>
-                    </div>`;
+                        <p><strong>Service:</strong> ${b.service}</p>`;
 
-                    // Append it
+                    // Render stars for rating
+                    const rating = b.rating || 0;
+                    let stars = "";
+                    for (let i = 1; i <= 5; i++) {
+                        stars += i <= rating ? "★" : "☆";
+                    }
+                    bookingHTML += `<p><strong>Rating:</strong> ${stars}</p>`;
+
+                    bookingHTML += `<p><strong>Email:</strong> ${b.email || "N/A"}</p>`;
+
+                    if (b.assigned_id) {
+                        bookingHTML += `<p><strong>Phone:</strong> ${b.phone || "N/A"}</p>
+                                        <p><strong>Address:</strong> ${b.address_str || "N/A"}</p>`;
+
+                        if (lockoutTime > now) {
+                            bookingHTML += `<p><button class="booking_button"
+                                            onClick="toggleAccept({ ID: ${b.id} })">
+                                            Cancel Booking
+                                            </button></p>`;
+                        } else {
+                            bookingHTML += `<p>
+                                            <input type="number" class="booking_rating" id="rating-${b.id}" name="rating" min="1" max="5" required>
+                                            <button class="booking_button"
+                                                onClick="addRating({ ID: ${b.id}, rating: 'rating-${b.id}' })">
+                                                Set Rating
+                                            </button>
+                                            </p>`;
+                        }
+
+                        bookingHTML += `</div>
+                                        <div class="booking_element">
+                                        <h3>Notes:</h3>
+                                        <div class="note_block">
+                                            <p>${b.notes || 'None'}</p>
+                                        </div>
+                                        </div>`;
+                    } else {
+                        bookingHTML += `<p><button class="booking_button"
+                                            onClick="toggleAccept({ ID: ${b.id} })">
+                                            Accept Booking
+                                            </button></p></div>`;
+                    }
+
+                    bookingHTML += `</div>`;
+
                     bookingDetailsContainer.innerHTML += bookingHTML;
                 } else {
                     bookingDetailsContainer.innerHTML += `<p>Booking not found for ID ${bookingId}</p>`;

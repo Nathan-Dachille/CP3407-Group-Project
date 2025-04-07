@@ -212,6 +212,10 @@ def find_booking(request):
                     "notes": booking.notes,
                     "user_id": booking.user.id,
                     "user_name": booking.user.get_full_name() or booking.user.username,
+                    "rating": booking.user.rating,
+                    "email": booking.user.email,
+                    "phone": booking.user.phone,
+                    "address_str": None,
                     "assigned_id": booking.assigned.id if booking.assigned else None,
                 }
             })
