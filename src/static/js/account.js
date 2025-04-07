@@ -30,6 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // If the user is a Customer, do the customer-specific functionality
     else if (userRole === 'CUSTOMER') {
+        document.getElementById("sort-toggle").addEventListener("click", () => {
+            const btn = document.getElementById("sort-toggle");
+            const currentOrder = btn.getAttribute("data-order");
+            const newOrder = currentOrder === "asc" ? "desc" : "asc";
+            btn.setAttribute("data-order", newOrder);
+            btn.textContent = newOrder === "asc" ? "↓" : "↑";
+            applyFilters();
+        });
         fetchBookings();
     }
 });
@@ -565,3 +573,35 @@ function renderBookings(bookings) {
     });
 }
 
+function applyFilters() {
+    const assignmentFilter = document.getElementById("assignment-filter").value;
+    const statusFilter = document.getElementById("status-filter").value;
+    const serviceFilter = document.getElementById("service-filter").value.toLowerCase();
+    const sortOrder = document.getElementById("sort-toggle").getAttribute("data-order");
+
+    let filtered = allBookings.filter(b => {
+        // Assignment filter
+        if (assignmentFilter === "assigned" && !b.user_name) return false;
+        if (assignmentFilter === "unassigned" && b.user_name) return false;
+
+        // Status filter (date comparison)
+        const bookingDate = new Date(`${b.date}T${b.start_time}`);
+        const now = new Date();
+        if (statusFilter === "upcoming" && bookingDate < now) return false;
+        if (statusFilter === "past" && bookingDate >= now) return false;
+
+        // Service filter (basic text match)
+        if (serviceFilter && !b.service.toLowerCase().includes(serviceFilter)) return false;
+
+        return true;
+    });
+
+    // Sorting
+    filtered.sort((a, b) => {
+        const dateA = new Date(`${a.date}T${a.start_time}`);
+        const dateB = new Date(`${b.date}T${b.start_time}`);
+        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    });
+
+    renderBookings(filtered);
+}

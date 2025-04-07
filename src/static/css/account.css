@@ -82,6 +82,22 @@
     background: #D87373;
 }
 
+.text_box {
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 4px 2px;
+    padding: 0.2em;
+}
+
+.dropdown {
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    margin: 4px 2px;
+    padding: 0.1em;
+}
+
 /* Model Divs */
 
 .model {
@@ -363,10 +379,28 @@
 
 .filter-bar {
     display: flex;
+    flex-wrap: wrap; /* Allow the items to wrap when needed */
     gap: 10px;
+    align-items: stretch;
     margin-bottom: 10px;
-    align-items: center;
+}
+
+.filter_parameters {
+    display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+    width: 91.85%;
+    margin-right: auto; /* pushes to the right side of the row */
+}
+
+.filter_buttons {
+    width: 5.85%;
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto; /* pushes to the right side of the row */
+    align-self: stretch;        /* Stretches height to match filter-bar line */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to stack vertically */
 }
 
 .booking-scrollbox {

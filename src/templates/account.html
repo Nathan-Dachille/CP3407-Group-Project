@@ -80,7 +80,7 @@
                     </button>
                     Phone:
                     <span id="phone_display">{{ request.user.phone }}</span>
-                    <input id="phone_input" type="email" value="{{ request.user.phone }}"
+                    <input class="text_box" id="phone_input" type="email" value="{{ request.user.phone }}"
                            placeholder="04XX XXX XXX" style="display: none;">
                 </p>
                 <p>
@@ -89,7 +89,7 @@
                     </button>
                     Address:
                     <span id="area_display">Placeholder</span>
-                    <input id="area_input" type="email" value="Placeholder"
+                    <input class="text_box" id="area_input" type="email" value="Placeholder"
                            placeholder="State, City, Suburb" style="display: none;">
                 </p>
             </div>
@@ -139,17 +139,34 @@
                 <div class="content_box info background-grey round">
                     <!-- Filter Controls -->
                     <div id="booking-filters" class="filter-bar">
-                        <label for="status-filter">Status:</label>
-                        <select id="status-filter">
-                            <option value="all">All</option>
-                            <option value="upcoming">Upcoming</option>
-                            <option value="past">Past</option>
-                        </select>
+                        <div class="filter_parameters">
+                            <div>
+                                <label for="status-filter">Status:</label>
+                                <select class="dropdown" id="status-filter">
+                                    <option value="all">All</option>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="past">Past</option>
+                                </select>
+                            </div>
 
-                        <label for="service-filter">Service:</label>
-                        <input type="text" id="service-filter" placeholder="Filter by service...">
+                            <div>
+                                <label for="assignment-filter">Assignment:</label>
+                                <select class="dropdown" id="assignment-filter">
+                                    <option value="all">All</option>
+                                    <option value="assigned">Assigned</option>
+                                    <option value="unassigned">Unassigned</option>
+                                </select>
+                            </div>
 
-                        <button onclick="applyFilters()">Filter</button>
+                            <div>
+                                <label for="service-filter">Service:</label>
+                                <input class="text_box" type="text" id="service-filter" placeholder="Filter by service...">
+                        </div>
+                        </div>
+                        <div class="filter_buttons">
+                            <button class="symbol_button" onclick="applyFilters()">🝖</button>
+                            <button class="symbol_button" id="sort-toggle" data-order="asc">↓</button>
+                        </div>
                     </div>
 
                     <!-- Scrollable Bookings Container -->
