@@ -1,7 +1,9 @@
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import Avg
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
+from authuser.ratings_service import update_user_rating  # Import the service function
 
 
 # Create your models here.
@@ -83,6 +85,23 @@ class User(AbstractUser):
 
     def get_street(self):
         return ' '.join(self.address.split(',')[2].strip().split(' ')[1:]) if self.address else None
+
+    def update_rating(self, by_signal=False):
+        # Only update the rating if it wasn't triggered by a signal
+        if by_signal:
+            # Avoid recursive updates triggered by the signal
+            if getattr(self, '_is_updating_rating', False):
+                return
+            self._is_updating_rating = True  # Set flag to avoid recursive calls
+
+        current_rating = self.rating
+        update_user_rating(self)
+
+        if current_rating != self.rating:
+            self.save(update_fields=["rating"])
+
+        if by_signal:
+            self._is_updating_rating = False  # Reset flag after saving
 
 
 class CleanerAvailability(models.Model):
