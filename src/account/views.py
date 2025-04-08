@@ -131,6 +131,7 @@ def change_email(request):
 Cleaner Requests, Functions, and Classes
 """
 
+
 # Availability Requests and Classes
 
 
@@ -442,6 +443,7 @@ Customer Requests, Functions, and Classes
 @login_required
 def customer_bookings(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        now = timezone.now()
         bookings = Booking.objects.filter(user=request.user).order_by('-date')
         for b in bookings:
             if (b.assigned):
@@ -462,7 +464,8 @@ def customer_bookings(request):
                 "rating": b.assigned.rating if b.assigned else None,
                 "email": b.assigned.email if b.assigned else None,
                 "phone": b.assigned.phone if b.assigned else None,
-                "status": "Past" if (b.date < timezone.now().date()) else "Upcoming"
+                "status": "Past" if (b.date < now.date() or (b.date == now.date() and b.start_time < now.time()))
+                else "Upcoming"
             }
             for b in bookings
         ]
