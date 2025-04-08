@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import ValidationError
 from authuser.forms import EmailChangeForm
@@ -108,9 +109,12 @@ def change_email(request):
             # Check password validity
             password = form.cleaned_data['password']
             new_email = form.cleaned_data['new_email']
-
             user = request.user
-            if user.check_password(password):
+            correct_password = user.password
+
+            match_check = check_password(password, correct_password)
+
+            if match_check:
                 user.email = new_email
                 user.save()
                 messages.success(request, "Your email has been successfully updated.")
