@@ -312,7 +312,10 @@ def get_bookings(request):
             for booking in booking_data_a:
                 # Get the booking hours using the helper function
                 booking_hours = get_booking_hours(booking)
-                booking_date = str(booking.date)
+                booking_date = booking.date.strftime("%Y-%m-%d")
+                print(booking.date.strftime("%Y-%m-%d"))
+                print("unfiltered:", availability[booking.date.strftime("%Y-%m-%d")])
+                print("filter targets:", booking_hours)
 
                 filtered_bookings_assigned.append({
                     "id": booking.id,
@@ -320,9 +323,10 @@ def get_bookings(request):
                     "booking_hours": booking_hours
                 })
 
-                if booking.date in availability.dates:
+                if booking_date in availability.dates:
+                    print("here")
                     # Get the available hours for this booking date
-                    available_hours = availability.dates[booking.date]
+                    available_hours = availability[booking.date.strftime("%Y-%m-%d")]
 
                     # Remove the hours of the booking from the available hours
                     for hour in booking_hours:
@@ -330,10 +334,12 @@ def get_bookings(request):
                             available_hours.remove(hour)
 
                     # After modifying the available hours, update the availability dictionary
-                    availability.dates[booking.date] = available_hours
+                    availability[booking.date.strftime("%Y-%m-%d")] = available_hours
+
+                print("filtered: ", availability[booking.date.strftime("%Y-%m-%d")])
 
             # Print the updated availability after removing assigned hours
-            print(availability.dates)
+            print("filtered: ", availability.dates)
 
             # Get all unassigned bookings within the requested dates
             booking_data_u = list(Booking.objects.filter(assigned__isnull=True, date__in=availability.dates))
