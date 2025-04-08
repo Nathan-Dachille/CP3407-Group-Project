@@ -8,7 +8,7 @@
     <script src="{% static '/js/account.js' %}"></script>
 
     <!-- Content -->
-    <div class="layout">
+    <div class="layout" id="page_layout" data-user-role="{{ request.user.role }}">
         <div class="content_section">
             <!-- Account and Password Section -->
             <div class="content_box background-grey round">
@@ -43,12 +43,16 @@
                 <div class="model-content">
                     <span class="close" onclick="closeModel('emailModel')">&times;</span>
                     <h2>Change Email</h2>
+
+                    <!-- Email Change Form -->
                     <form action="{% url 'email_change' %}" method="post">
                         {% csrf_token %}
-                        <label>New Email:</label>
-                        <input type="email" name="new email" placeholder="Enter new email" required>
-                        <label>Password:</label>
-                        <input type="password" name="password" placeholder="Enter password" required>
+                        <label for="new_email">New Email:</label>
+                        <input type="email" name="new_email" id="new_email" placeholder="Enter new email" required value="{{ form.new_email.value }}">
+
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" placeholder="Enter password" required>
+
                         <button type="submit">Change Email</button>
                     </form>
                 </div>
@@ -74,73 +78,110 @@
                 </div>
             </div>
             <div class="content_box info background-grey round">
-                <p>
-                    <button class="symbol_button" onclick="toggleEdit()">
-                        ⇄
-                    </button>
-                    Phone:
-                    <span id="phone_display">{{ request.user.phone }}</span>
-                    <input id="phone_input" type="email" value="{{ request.user.phone }}"
-                           placeholder="04XX XXX XXX" style="display: none;">
-                </p>
-                {% if request.user.role == 'CLEANER' %}
+                <form id="info_form" action="{% url 'update_user_info' %}" method="POST">
+                    {% csrf_token %}
                     <p>
-                        <button class="symbol_button" onclick="toggleEdit()">
+                        <button type="button" class="symbol_button" onclick="toggleEdit('phone')" data-mode="view">
                             ⇄
                         </button>
-                        Working Area:
-                        <span id="area_display">{{ request.user.suburb }}</span>
-                        <input id="area_input" type="email" value="{{ request.area }}"
+                        Phone:
+                        <span id="phone_display">{{ request.user.phone }}</span>
+                        <input class="text_box" id="phone_input" name="phone" type="text" value="{{ request.user.phone }}"
+                               placeholder="04XX XXX XXX" style="display: none;">
+                    </p>
+                    <p>
+                        <button type="button" class="symbol_button" onclick="toggleEdit('address')" data-mode="view">
+                            ⇄
+                        </button>
+                        Address:
+                        <span id="address_display">{{ request.user.address }}</span>
+                        <input class="text_box" id="address_input" name="address" type="text" value="{{ request.user.address }}"
                                placeholder="State, City, Suburb" style="display: none;">
                     </p>
-                    <p>
-                        <button class="symbol_button" onclick="toggleEdit()">
-                            ⇄
-                        </button>
-                        Working Rate:
-                        <span id="rate_display">{{ request.user.rate }}</span>
-                        <input id="rate_input" type="email" value="{{ request.user.rate }}"
-                               placeholder="Base Rate (%modifiers)" style="display: none;">
-                    </p>
-                {% elif request.user.role == 'CUSTOMER' %}
-                    <!-- Customer Properties listings TBD -->
-                {% endif %}
+                </form>
             </div>
         </div>
 
 
         <div class="content_section">
-            <div class="content_box background-grey round">
-                <h1>Timetable</h1>
-            </div>
-            <div class="content_box info background-grey round">
-                {% load tz %}
-                {% localtime on %}
-                    <ul>
-                        {% for date in week_dates %}
-                            <li>{{ date }}</li>
-                        {% endfor %}
-                    </ul>
-                    <div class="t_header">
-                        <button class="symbol_button" id="prev-week">
-                            ←
-                        </button>
+            {% if request.user.role == 'CLEANER' %}
+                <div class="content_box background-grey round">
+                    <h1>Timetable</h1>
+                </div>
+                <div class="content_box info background-grey round">
+                    {% load tz %}
+                    {% localtime on %}
+                        <div class="t_header">
+                            <button class="symbol_button" id="prev-week">
+                                ←
+                            </button>
 
-                        <div class="header-content">
-                            <span id="year-display"></span> Week <span id="week-number"></span>:
-                            <span id="week-range"></span>
+                            <div class="header-content">
+                                <span id="year-display"></span> Week <span id="week-number"></span>:
+                                <span id="week-range"></span>
+                            </div>
+
+                            <button class="symbol_button" id="next-week">
+                                →
+                            </button>
                         </div>
-
-                        <button class="symbol_button" id="next-week">
-                            →
-                        </button>
+                        <div id="timetable">
+                        </div>
+                    {% endlocaltime %}
+                    <div class="t_header">
+                        <button id="moveTo" class="symbol_button" onclick="moveTo()">↗</button>
+                        <input type="date" id="DateInput">
+                        <button id="dupAvailability" class="symbol_button" onclick="dupAvailability()">⧉</button>
                     </div>
-                    <div id="timetable">
 
+                </div>
+                <!-- Container for booking details -->
+                <div id="booking-details-container" class="booking_section">
+                    <!-- Booking details will be dynamically inserted here -->
+                </div>
+            {% elif request.user.role == 'CUSTOMER' %}
+                <div class="content_box background-grey round">
+                    <h1>Bookings</h1>
+                </div>
+                <div class="content_box info background-grey round">
+                    <!-- Filter Controls -->
+                    <div id="booking-filters" class="filter-bar">
+                        <div class="filter_parameters">
+                            <div>
+                                <label for="status-filter">Status:</label>
+                                <select class="dropdown" id="status-filter">
+                                    <option value="all">All</option>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="past">Past</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="assignment-filter">Assignment:</label>
+                                <select class="dropdown" id="assignment-filter">
+                                    <option value="all">All</option>
+                                    <option value="assigned">Assigned</option>
+                                    <option value="unassigned">Unassigned</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="service-filter">Service:</label>
+                                <input class="text_box" type="text" id="service-filter" placeholder="Filter by service...">
+                        </div>
+                        </div>
+                        <div class="filter_buttons">
+                            <button class="symbol_button" onclick="applyFilters()">🝖</button>
+                            <button class="symbol_button" id="sort-toggle" data-order="asc">↓</button>
+                        </div>
                     </div>
-                {% endlocaltime %}
-            </div>
 
+                    <!-- Scrollable Bookings Container -->
+                    <div id="customer-bookings-container" class="booking-scrollbox">
+                        <!-- Bookings will be injected here via JS -->
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 
