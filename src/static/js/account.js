@@ -312,7 +312,8 @@ function updateWeekInfo(focusDate = null) {
                     let isBooked = false;
                     if (b_data.bookings_a) {
                         // Find the booking for this specific date
-                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate);
+                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate
+                            && booking.booking_hours.includes(i));
 
                         if (booking && booking.booking_hours && booking.booking_hours.includes(i)) {
                             timetableHTML += `<th><button class="toggle_set fields a_book"` +
