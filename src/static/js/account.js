@@ -570,6 +570,7 @@ function toggleAccept({ ID }) {
         if (data.success) {
             if (userRole === 'CLEANER') {
                 updateWeekInfo();
+                openBooking({IDs:[ID]});
             } else {
                 fetchBookings();
             }
