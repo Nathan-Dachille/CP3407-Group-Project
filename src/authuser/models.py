@@ -58,10 +58,11 @@ from authuser.ratings_service import update_user_rating  # Import the service fu
 #     def get_short_name(self):
 #         return self.name or self.email.split('@')[0]
 
+
 class User(AbstractUser):
     class Role(models.TextChoices):
-        CUSTOMER = "CUSTOMER", 'Customer'
-        CLEANER = "CLEANER", 'Cleaner'
+        CUSTOMER = "CUSTOMER", "Customer"
+        CLEANER = "CLEANER", "Cleaner"
 
     role = models.CharField(max_length=50, choices=Role.choices, help_text="Required. Select an account type.")
     phone = models.CharField(max_length=20,
@@ -72,7 +73,9 @@ class User(AbstractUser):
                                validators=[RegexValidator(regex=r'^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*\d+\s+[A-Za-z\s]+$',
                                                           message="Address must be in the format: State, Suburb,"
                                                                   " AddressNumber Street")])
+
     rating = models.IntegerField(null=True)
+    objects = UserManager()
 
     def get_state(self):
         return self.address.split(',')[0].strip() if self.address else None
@@ -105,12 +108,14 @@ class User(AbstractUser):
 
 
 class CleanerAvailability(models.Model):
-    cleaner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="availabilities")
+    cleaner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="availabilities"
+    )
     date = models.DateField()
     available_hours = models.JSONField(default=list)
 
     class Meta:
-        unique_together = ('cleaner', 'date')
+        unique_together = ("cleaner", "date")
 
     def day_of_week(self):
-        return self.date.strftime('%A')  # Returns 'Monday', 'Tuesday', etc.
+        return self.date.strftime("%A")  # Returns 'Monday', 'Tuesday', etc.

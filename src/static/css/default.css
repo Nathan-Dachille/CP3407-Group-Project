@@ -1,3 +1,4 @@
+/* --- GLOBAL STYLES --- */
 .flex {
     display: flex;
     --gap: 1em;
@@ -25,19 +26,22 @@ body {
     margin: 0;
     background: rgb(24, 24, 26);
     overflow-x: hidden;
+    color: #e0e0e0;
 }
 
 .logo {
     display: inline-block;
     margin: 2rem;
-    background: hsl(0 100% 0% / 0.1);
-    backdrop-filter: blur(1rem);
-    font-family: 'Impact', 'sans-serif';
-    font-size: 20px;
-    font-weight: 900;
-    color: white;
-    text-decoration: none;
-    padding: 1rem;
+    background: url('https://cdn-icons-png.flaticon.com/512/8634/8634252.png') no-repeat center center;
+    background-size: contain;
+    /* Adjust to 'cover' if you prefer */
+    width: 100px;
+    /* Set an appropriate width */
+    height: 100px;
+    /* Set an appropriate height */
+    text-indent: -9999px;
+    /* Hides any text inside the element */
+    /* Remove unnecessary font properties if you don't need them */
 }
 
 .content {
@@ -52,6 +56,7 @@ body {
     margin-top: 0.5rem;
 }
 
+/* --- NAVIGATION --- */
 .primary-header {
     position: fixed;
     top: 0;
@@ -59,8 +64,7 @@ body {
     background: lightcoral;
     border-radius: 0 0 15px 15px;
     align-items: center;
-    justify-content: space-between;
-
+    justify-contentce-between;
     transform: translateY(0%);
     transition: transform 150ms linear;
 }
@@ -74,7 +78,6 @@ body {
     padding: 0.5rem;
     margin: 2rem;
     align-items: center;
-
     background: hsl(0 100% 0% / 0.1);
     backdrop-filter: blur(1rem);
 }
@@ -86,17 +89,31 @@ body {
 
 .primary-navigation li:last-of-type {
     border-right: none;
-    padding: 0.5rem;
 }
 
 .primary-navigation a {
     text-decoration: none;
+    color: white;
 }
 
 .menu-toggle {
     visibility: hidden;
 }
 
+/* --- SIGN OUT --- */
+.sign-out {
+    display: inline-block;
+    margin: 0;
+}
+
+.sign-out-button {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- MEDIA QUERIES --- */
 @media (max-width: 40em) {
     .logo {
         margin: 2rem;
@@ -107,11 +124,9 @@ body {
         margin: 0;
         position: fixed;
         inset: 0 0 0 40%;
-
         flex-direction: column;
         padding: 50vh 1em;
         border-radius: 15px 0 0 15px;
-
         transform: translateX(100%);
         transition: transform 200ms ease-in;
     }
