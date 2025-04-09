@@ -1,3 +1,14 @@
+html,
+body {
+    font-family: 'Verdana', sans-serif;
+    display: grid;
+    padding-top: 3rem;
+    margin: 0;
+    background: rgb(24, 24, 26);
+    overflow-x: hidden;
+    color: #e0e0e0;
+}
+
 .home-div {
     box-sizing: border-box;
     padding: 1rem;
@@ -21,7 +32,6 @@
 /* --- HOMEPAGE BLOCK LAYOUT --- */
 .block {
     border: 4px solid lightcoral;
-    /* Thicker white border */
     border-radius: 15px;
     margin: 3rem auto;
     padding: 3rem 2rem;
@@ -33,7 +43,6 @@
 
 .block:hover {
     filter: brightness(1.1);
-    /* Brighten up on hover */
 }
 
 /* --- HERO SECTION --- */
@@ -64,22 +73,22 @@
 }
 
 .service-card {
+    flex: 1 1 260px;
+    max-width: 320px;
     background-color: #2c2c34;
     padding: 2rem;
     border-radius: 12px;
-    width: 260px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     border: 3px solid lightcoral;
-    /* Thicker white border */
     color: #ffffffcc;
     transition: filter 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
 }
 
 .service-card:hover {
     background-color: #3a3a45;
     transform: scale(1.03);
     filter: brightness(1.1);
-    /* Brighten up on hover */
     box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
 }
 
@@ -106,7 +115,8 @@
 }
 
 /* --- BUTTONS --- */
-.btn {
+.btn,
+.btn-secondary {
     background-color: #F08080;
     color: white;
     padding: 0.75rem 1.5rem;
@@ -116,44 +126,124 @@
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn:hover {
+.btn:hover,
+.btn-secondary:hover {
     background-color: #D46043;
     box-shadow: 0 0 12px rgba(58, 175, 169, 0.6);
 }
 
-.btn-secondary {
-    background-color: #def2f1;
-    color: #17252a;
+/* --- GALLERY SECTION --- */
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
-.btn-secondary:hover {
-    background-color: #ffffff;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+.gallery-item {
+    flex: 1 1 280px;
+    max-width: 400px;
+    box-sizing: border-box;
 }
 
 .gallery-item img {
-    width: 400px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-.gallery-grid {
-    display: flex;
-    overflow-x: auto;
-    /* Allows scrolling if needed */
-    gap: 1rem;
-    justify-content: center;
-}
-
+/* --- ANIMATIONS --- */
 @keyframes slide-out {
     from {
         transform: translateX(0%);
     }
-
     to {
         transform: translateX(200%);
         position: absolute;
         visibility: hidden;
         display: none;
+    }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1024px) {
+    .block {
+        padding: 2rem 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .service-grid {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-div,
+    .confirmation-div {
+        width: 95vw;
+        padding: 0.5rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .services h2,
+    .cta h2 {
+        font-size: 1.6rem;
+    }
+
+    .service-grid,
+    .gallery-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card,
+    .gallery-item {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .gallery-item img {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p,
+    .service-card p {
+        font-size: 0.9rem;
+    }
+
+    .btn,
+    .btn-secondary {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .gallery-grid {
+        gap: 1rem;
+    }
+
+    .gallery-item {
+        width: 95%;
     }
 }
