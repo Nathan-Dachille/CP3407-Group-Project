@@ -22,7 +22,7 @@
 html,
 body {
     display: grid;
-    padding-top: 60px;
+    padding-top: 70px;
     margin: 0;
     background: rgb(24, 24, 26);
     overflow-x: hidden;
