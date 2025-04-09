@@ -42,7 +42,7 @@ jobs:
         run: python ./src/manage.py collectstatic --noinput
 
       - name: Create zip deployment package
-        run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
+        run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./src -x *.git*
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
