@@ -3,7 +3,7 @@ env:
   DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
   EB_S3_BUCKET_NAME: "elasticbeanstalk-ap-southeast-2-682296103416"
   EB_APPLICATION_NAME: "CP3407 Cleaning Website"
-  EB_ENVIRONMENT_NAME: "cleaning-website-env"
+  EB_ENVIRONMENT_NAME: "CP3407CleaningWebsite-env"
   DEPLOY_PACKAGE_NAME: "cleaning-website-${{ github.sha }}.zip"
   VERSION_NAME: ${{ github.sha }}
   AWS_REGION_NAME: "ap-southeast-2"
