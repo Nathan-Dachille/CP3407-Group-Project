@@ -1,17 +1,14 @@
+import os
 from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# Read SECRET_KEY from environment
+SECRET_KEY = os.environ["SECRET_KEY"]
+DEBUG = False
 
-# SECURITY WARNING: keep the secret key used in production secret!
-
-SECRET_KEY = 'django-insecure-u=x@-4^ntr+4pr6p&%f=8-w@nhe&+co_^&j(!xs@r-vuqs-mt4'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['MyCleanCP3407.ap-southeast-2.elasticbeanstalk.com']
 
 # Application definition
 
