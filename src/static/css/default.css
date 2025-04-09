@@ -22,7 +22,7 @@
 html,
 body {
     display: grid;
-    padding-top: 100px;
+    padding-top: 60px;
     margin: 0;
     background: rgb(24, 24, 26);
     overflow-x: hidden;
@@ -64,9 +64,10 @@ body {
     background: lightcoral;
     border-radius: 0 0 15px 15px;
     align-items: center;
-    justify-contentce-between;
+    justify-content: space-between;
     transform: translateY(0%);
     transition: transform 150ms linear;
+    z-index: 9999;
 }
 
 .primary-header[data-hide="true"] {

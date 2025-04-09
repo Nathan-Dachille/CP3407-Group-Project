@@ -39,6 +39,8 @@ body {
     background-color: #1f1f23;
     text-align: center;
     transition: filter 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .block:hover {
@@ -46,6 +48,10 @@ body {
 }
 
 /* --- HERO SECTION --- */
+.hero {
+    margin-top: 6rem;
+}
+
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -191,6 +197,10 @@ body {
     .confirmation-div {
         width: 95vw;
         padding: 0.5rem;
+    }
+
+    .hero {
+        margin-top: 8rem;
     }
 
     .hero h1 {
