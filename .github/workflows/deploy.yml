@@ -20,6 +20,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
     steps:
       - name: Clone the repo
         uses: actions/checkout@v4
@@ -32,9 +35,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
-
-      - name: Change to src directory
-        run: cd ./src
 
       - name: Install dependencies
         run: |
