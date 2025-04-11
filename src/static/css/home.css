@@ -18,11 +18,20 @@ body {
 
 .confirmation-div {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px; /* Slightly smaller font */
     box-sizing: border-box;
-    padding: 1rem;
-    width: 80vw;
-    max-width: 1280px;
+    padding: 0.75rem; /* Reduced padding */
+    width: 100%;
+    margin: 1rem auto;
+    z-index: 100;
+    border-radius: 8px;
+    background-color: #2c2c34;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 3px solid lightcoral;
+    position: relative; /* Change from fixed to relative */
+    top: auto; /* Remove the top positioning */
+    left: auto; /* Remove the left positioning */
+    transform: none; /* Remove the transform */
 }
 
 .confirmation-div[data-hidden="True"] {
@@ -140,21 +149,26 @@ body {
 
 /* --- GALLERY SECTION --- */
 .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+    width: 100%;
+    justify-items: center; /* Center items horizontally in grid */
 }
 
 .gallery-item {
-    flex: 1 1 280px;
-    max-width: 400px;
+    width: 100%;
+    max-width: 400px; /* Limit maximum width */
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
 }
 
 .gallery-item img {
     width: 100%;
-    height: auto;
+    height: 250px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -251,9 +265,10 @@ body {
 
     .gallery-grid {
         gap: 1rem;
+        place-items: center;
     }
 
     .gallery-item {
-        width: 95%;
+        width: 90%;
     }
 }
