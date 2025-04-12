@@ -5,6 +5,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/sign_in/")
 def book_appointment(request):
+
+    # Check to see if user is a cleaner. Redirect to calendar.
+    user_role = request.user.role
+    if user_role == "CLEANER":
+        return redirect("/profile")
+
+    # User is a customer. Proceed to bookings.
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
