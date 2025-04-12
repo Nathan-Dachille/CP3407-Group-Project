@@ -19,17 +19,17 @@ body {
 .confirmation-div {
     position: relative;
     text-align: center;
-    font-size: 18px; /* Slightly smaller font */
+    font-size: 18px;
     box-sizing: border-box;
-    padding: 0.75rem; /* Reduced padding */
+    padding: 0.75rem;
     width: 100%;
     margin: 1rem auto;
     z-index: 100;
     border-radius: 8px;
     background-color: #2c2c34;
-    top: 50px;
-    left: auto; /* Remove the left positioning */
-    transform: none; /* Remove the transform */
+    top: 20px;
+    left: auto;
+    transform: none;
 }
 
 .confirmation-div[data-hidden="True"] {
@@ -206,8 +206,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .home-div,
-    .confirmation-div {
+    .home-div {
         width: 95vw;
         padding: 0.5rem;
     }
