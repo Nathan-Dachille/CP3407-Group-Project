@@ -312,11 +312,12 @@ function updateWeekInfo(focusDate = null) {
                     let isBooked = false;
                     if (b_data.bookings_a) {
                         // Find the booking for this specific date
-                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate);
+                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate
+                            && booking.booking_hours.includes(i));
 
                         if (booking && booking.booking_hours && booking.booking_hours.includes(i)) {
                             timetableHTML += `<th><button class="toggle_set fields a_book"` +
-                            ` onClick="openBooking({IDs:[${booking.id}]})">‎</button></th>`;
+                            ` onClick="openBooking({IDs:[${booking.id}]})"></button></th>`;
                             isBooked = true;
                         }
                     }
@@ -332,7 +333,7 @@ function updateWeekInfo(focusDate = null) {
                             console.log(bookedBookings)
                             console.log(JSON.stringify(bookedBookings))
                             timetableHTML += `<th><button class="toggle_set fields u_book"` +
-                                ` onClick="openBooking({ IDs: ${JSON.stringify(bookedBookings) }})">‎</button></th>`;
+                                ` onClick="openBooking({ IDs: ${JSON.stringify(bookedBookings) }})"></button></th>`;
                             isBooked = true;
                         }
                     }
@@ -341,7 +342,7 @@ function updateWeekInfo(focusDate = null) {
 
                         timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
                         ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
-                        target_hours:[${i}]})">‎</button></th>`;
+                        target_hours:[${i}]})"></button></th>`;
                     }
                 }
 
@@ -569,6 +570,7 @@ function toggleAccept({ ID }) {
         if (data.success) {
             if (userRole === 'CLEANER') {
                 updateWeekInfo();
+                openBooking({IDs:[ID]});
             } else {
                 fetchBookings();
             }

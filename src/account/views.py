@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import ValidationError
 from authuser.forms import EmailChangeForm
@@ -108,9 +109,12 @@ def change_email(request):
             # Check password validity
             password = form.cleaned_data['password']
             new_email = form.cleaned_data['new_email']
-
             user = request.user
-            if user.check_password(password):
+            correct_password = user.password
+
+            match_check = check_password(password, correct_password)
+
+            if match_check:
                 user.email = new_email
                 user.save()
                 messages.success(request, "Your email has been successfully updated.")
@@ -126,6 +130,7 @@ def change_email(request):
 """
 Cleaner Requests, Functions, and Classes
 """
+
 
 # Availability Requests and Classes
 
@@ -307,7 +312,10 @@ def get_bookings(request):
             for booking in booking_data_a:
                 # Get the booking hours using the helper function
                 booking_hours = get_booking_hours(booking)
-                booking_date = str(booking.date)
+                booking_date = booking.date.strftime("%Y-%m-%d")
+                print(booking.date.strftime("%Y-%m-%d"))
+                print("unfiltered:", availability[booking.date.strftime("%Y-%m-%d")])
+                print("filter targets:", booking_hours)
 
                 filtered_bookings_assigned.append({
                     "id": booking.id,
@@ -315,9 +323,10 @@ def get_bookings(request):
                     "booking_hours": booking_hours
                 })
 
-                if booking.date in availability.dates:
+                if booking_date in availability.dates:
+                    print("here")
                     # Get the available hours for this booking date
-                    available_hours = availability.dates[booking.date]
+                    available_hours = availability[booking.date.strftime("%Y-%m-%d")]
 
                     # Remove the hours of the booking from the available hours
                     for hour in booking_hours:
@@ -325,10 +334,12 @@ def get_bookings(request):
                             available_hours.remove(hour)
 
                     # After modifying the available hours, update the availability dictionary
-                    availability.dates[booking.date] = available_hours
+                    availability[booking.date.strftime("%Y-%m-%d")] = available_hours
+
+                print("filtered: ", availability[booking.date.strftime("%Y-%m-%d")])
 
             # Print the updated availability after removing assigned hours
-            print(availability.dates)
+            print("filtered: ", availability.dates)
 
             # Get all unassigned bookings within the requested dates
             booking_data_u = list(Booking.objects.filter(assigned__isnull=True, date__in=availability.dates))
@@ -438,6 +449,7 @@ Customer Requests, Functions, and Classes
 @login_required
 def customer_bookings(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        now = timezone.now()
         bookings = Booking.objects.filter(user=request.user).order_by('-date')
         for b in bookings:
             if (b.assigned):
@@ -458,7 +470,8 @@ def customer_bookings(request):
                 "rating": b.assigned.rating if b.assigned else None,
                 "email": b.assigned.email if b.assigned else None,
                 "phone": b.assigned.phone if b.assigned else None,
-                "status": "Past" if (b.date < timezone.now().date()) else "Upcoming"
+                "status": "Past" if (b.date < now.date() or (b.date == now.date() and b.start_time < now.time()))
+                else "Upcoming"
             }
             for b in bookings
         ]
