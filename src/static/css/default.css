@@ -135,7 +135,7 @@ body {
 }
 
 /* --- MEDIA QUERIES --- */
-@media (max-width: 40em) {
+@media (max-width: 50em) {
     .logo {
         margin: 2rem;
     }
@@ -185,5 +185,9 @@ body {
         filter: invert(1);
         background-repeat: no-repeat;
         background-position: center;
+    }
+
+    .menu-toggle:hover{
+        cursor: pointer;
     }
 }

@@ -56,7 +56,7 @@ body {
 
 /* --- HERO SECTION --- */
 .hero {
-    margin-top: 6rem;
+    margin-top: 2rem;
 }
 
 .hero h1 {
@@ -185,6 +185,7 @@ body {
 }
 
 /* --- RESPONSIVE DESIGN --- */
+
 @media (max-width: 1024px) {
     .block {
         padding: 2rem 1.5rem;
@@ -209,10 +210,6 @@ body {
     .confirmation-div {
         width: 95vw;
         padding: 0.5rem;
-    }
-
-    .hero {
-        margin-top: 8rem;
     }
 
     .hero h1 {

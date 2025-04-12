@@ -1,7 +1,7 @@
 const nav = document.querySelector(".primary-navigation");
 const toggle = document.querySelector(".menu-toggle");
 const header = document.querySelector(".primary-header");
-var last_scroll_pos = window.pageYOffset;
+var last_scroll_pos = window.scrollY;
 
 function toggle_navbar() {
 	const visible = nav.getAttribute("data-visible");
@@ -17,7 +17,7 @@ function toggle_navbar() {
 }
 
 function hide_topbar() {
-	var new_scroll_pos = window.pageYOffset;
+	var new_scroll_pos = window.scrollY;
 
 	if (last_scroll_pos < new_scroll_pos) {
 		header.setAttribute("data-hide", "true");
