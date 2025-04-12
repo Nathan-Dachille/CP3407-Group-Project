@@ -19,8 +19,6 @@
 
     <nav>
         <ul data-visible="false" class="primary-navigation flex round">
-            <li><a class="verdana-ss-20px" href="#default">Link 1</a></li>
-            <li><a class="verdana-ss-20px" href="#default">Link 2</a></li>
             <li><a class="verdana-ss-20px" href="{% url 'book_appointment' %}">Bookings</a></li>  <!-- Bookings Link -->
             {% if user.is_authenticated %}
                 <li>

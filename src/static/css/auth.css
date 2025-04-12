@@ -87,20 +87,3 @@
 .errorlist li::marker {
     content: '🚨 ';
 }
-
-/*
-The sign out classes below are used for the testing sign out button in the navbar.
-This might be removed in the future.
-*/
-
-.sign-out {
-    display: inline-block;
-    margin: 0;
-}
-
-.sign-out-button {
-    background-color: rgba(0 0 0 / 0);
-    padding: 0;
-    border: none;
-    cursor: pointer;
-}
