@@ -23,7 +23,11 @@
             {% if user.is_authenticated %}
                 <li>
                     <a class="verdana-ss-20px" href="{% url 'account' %}">
-                        Hello, {{ user.username }}.
+                        {% if user.first_name != ""%}
+                            Hello, {{ user.first_name }}.
+                        {% else %}
+                            Hello, {{ user.username }}.
+                        {% endif %}
                     </a>
                 </li>
                 <li>
