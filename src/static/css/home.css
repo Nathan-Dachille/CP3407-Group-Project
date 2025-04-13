@@ -185,7 +185,7 @@ body {
     }
     to {
         transform: translateX(200%);
-        position: absolute;
+        position: fixed;
         visibility: hidden;
         display: none;
     }
