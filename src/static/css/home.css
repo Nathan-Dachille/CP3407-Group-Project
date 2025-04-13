@@ -139,6 +139,13 @@ body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Add margin around the CTA button */
+.cta .btn,
+.cta .btn-secondary {
+    margin: 1.5rem auto;
+    display: inline-block;
+}
+
 .btn:hover,
 .btn-secondary:hover {
     background-color: #D46043;
@@ -151,17 +158,17 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     width: 100%;
-    justify-items: center; /* Center items horizontally in grid */
+    justify-items: center;
 }
 
 .gallery-item {
     width: 100%;
-    max-width: 400px; /* Limit maximum width */
+    max-width: 400px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-item img {
@@ -178,14 +185,13 @@ body {
     }
     to {
         transform: translateX(200%);
-        position: absolute;
+        position: fixed;
         visibility: hidden;
         display: none;
     }
 }
 
 /* --- RESPONSIVE DESIGN --- */
-
 @media (max-width: 1024px) {
     .block {
         padding: 2rem 1.5rem;
@@ -265,4 +271,15 @@ body {
     .gallery-item {
         width: 90%;
     }
+
+    /* Also keep spacing on mobile CTA button */
+    .cta .btn,
+    .cta .btn-secondary {
+        margin: 1.5rem auto;
+    }
+}
+.hero .btn {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: inline-block;
 }
