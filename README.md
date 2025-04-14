@@ -101,3 +101,6 @@ Total milestone estimate = 8 x 2 = **16 actual people days for the milestone**
 
 1. [Iteration-1](./iteration_1.md)
 2. [Iteration-2](./iteration_2.md)
+
+# Additional Technical Information
+Some additional technical information can be found in the [technical information file](./technical_information.md).
