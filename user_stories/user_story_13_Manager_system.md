@@ -25,6 +25,3 @@ Description-v1: A system that allows cleaning companies to manage multiple clean
 * Implement cleaner performance tracking for managers, 1 day
 * Allow managers to view earnings and payment reports, 0.5 days
 
-# UI Design:
-
-# Completed:
