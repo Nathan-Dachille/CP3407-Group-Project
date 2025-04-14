@@ -26,6 +26,8 @@ Continued from iteration 1:
 
 ### In progress:
 
+### Completed:
+
 **Accept a booking**
 * Show cleaner booking requests, 0.5 days
 * Assign cleaner to the booking request if it's accepted, 0.5 days
@@ -37,8 +39,6 @@ Continued from iteration 1:
 **Rate a cleaner**
 * Design the rating system UI, 0.5 days
 * Implement backend logic to store and display ratings, 0.5 days
-
-### Completed:
 
 **User profile management**
 * Create a profile page view, 1 day, End Date: 30/03/2025
