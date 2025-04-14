@@ -21,7 +21,3 @@ Description-v1: A cleaning checklist to ensure high-quality service.
 ## Tasks:
 * Design the checklist interface, 0.5 days
 * Implement functionality for users and cleaners to check off tasks, 0.5 days
-
-# UI Design:
-
-# Completed:
