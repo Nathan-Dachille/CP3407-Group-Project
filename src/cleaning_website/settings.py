@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Read SECRET_KEY from environment
 SECRET_KEY = os.environ["SECRET_KEY"]
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['MyCleanCP3407.ap-southeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['MyCleanCP3407.ap-southeast-2.elasticbeanstalk.com', '*']
 
 # Application definition
 

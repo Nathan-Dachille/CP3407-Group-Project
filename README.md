@@ -68,7 +68,7 @@ Total milestone estimate = 8 x 2 = **16 actual people days for the milestone**
 * [Accept a booking](./user_stories/user_story_02_Accept_a_booking.md), priority 10, 1 day
 * [User profile management](./user_stories/user_story_03_User_profile_management.md), priority 10, 3 days
 
-## Iteration 2 [duration 3-4 weeks], Start: 11/03/2025, End: 7/04/2025
+## Iteration 2 [duration 3-4 weeks], Start: 11/03/2025, End: 10/04/2025
 
 * [Track job completion](./user_stories/user_story_04_Track_job_completion.md), priority 20, 1 day
 * [Rescheduling bookings](./user_stories/user_story_06_Rescheduling_bookings.md) priority 20, 2 days

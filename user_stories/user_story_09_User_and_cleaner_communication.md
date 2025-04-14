@@ -22,6 +22,4 @@ Description-v1: A messaging system allowing users and cleaners to communicate.
 * Create a chat interface for messaging, 1 day
 * Implement a system to store messages in a database, 1 day
 
-# UI Design:
-
-# Completed:
+## NOTE: We ran out of time for this user story. It will have to be completed in future iterations.

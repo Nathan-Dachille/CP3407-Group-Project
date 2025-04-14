@@ -23,10 +23,8 @@ Description-v1: A web page that will allow users to view their personal details 
 * Create a dashboard to house the booking details, 2 days
 
 # UI Design:
-
+[User profile management wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
-
+[User profile management final page (normal)](final_images/Profile_Normal.png)
+[User profile management final page (phone)](final_images/Profile_Phone.png)

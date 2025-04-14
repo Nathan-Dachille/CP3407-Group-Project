@@ -22,11 +22,4 @@ Description-v1: The webpage that will allow users to track the progress of their
 * Create an interface to show completion for users, 0.5 days
 * Create a button so cleaners can clock in/clock out of a booked clean, 0.5 days.
 
-# UI Design:
-
-
-# Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
-
+## NOTE: We ran out of time for this user story. It will have to be completed in future iterations.

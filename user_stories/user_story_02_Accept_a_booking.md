@@ -24,10 +24,9 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
 * Assign cleaner to the booking request if it's accepted, 0.5 days
 
 # UI Design:
-
+[Accept booking wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+[Accept booking final page (normal)](final_images/Profile_Normal.png)
+[Accept booking final page (phone)](final_images/Profile_Phone.png)
 
