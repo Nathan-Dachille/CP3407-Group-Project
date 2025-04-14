@@ -21,3 +21,5 @@ Description-v1: A system that allows users to reschedule their bookings easily.
 ## Tasks:
 * Develop a rescheduling interface for users, 1 day
 * Notify cleaners of rescheduled bookings via email or dashboard alerts, 1 day
+
+## NOTE: We ran out of time for this user story. It will have to be completed in future iterations.

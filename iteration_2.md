@@ -1,8 +1,4 @@
-# Actual iteration-2 board, (see chapters 3 and 4), Start: 11/02/2025, End: 7/04/2025
-
-Checklist: 
-1. github entry timestamps
-2. User stories are correct: see p39
+# Actual iteration-2 board, (see chapters 3 and 4), Start: 11/03/2025, End: 10/04/2025
 
 * Assumed Velocity FROM iteration-1: 0.4
 * Number of developers: 4
@@ -29,28 +25,36 @@ Continued from iteration 1:
 ### Completed:
 
 **Accept a booking**
-* Show cleaner booking requests, 0.5 days
-* Assign cleaner to the booking request if it's accepted, 0.5 days
+* Show cleaner booking requests, 0.5 days, Quinn, End Date: 08/04/2025
+* Assign cleaner to the booking request if it's accepted, 0.5 days, Quinn, End Date: 08/04/2025
 
 **Bookings calendar**
-* Design the calendar interface, 2 days
-* Implement the booking and availability tracking logic, 2 days
+* Design the calendar interface, 2 days, Quinn, End Date: 08/04/2025
+* Implement the booking and availability tracking logic, 2 days, Quinn, End Date: 08/04/2025
 
 **Rate a cleaner**
-* Design the rating system UI, 0.5 days
-* Implement backend logic to store and display ratings, 0.5 days
+* Design the rating system UI, 0.5 days, Quinn, End Date: 08/04/2025
+* Implement backend logic to store and display ratings, 0.5 days, Quinn, End Date: 08/04/2025
 
 **User profile management**
-* Create a profile page view, 1 day, End Date: 30/03/2025
-* Create a dashboard to house the booking details, 2 days, End Date: 30/03/2025
+* Create a profile page view, 1 day, Quinn, End Date: 30/03/2025
+* Create a dashboard to house the booking details, 2 days, Bailey, End Date: 30/03/2025
 
 **Account Creation**
-* Create custom user model in Django to store account type and key details, 0.75 days, 23/03/2025
+* Create custom user model in Django to store account type and key details, 0.75 days, David, End Date: 23/03/2025
+
+**Setup Continuous Deployment**
+* Setup continuous deployment with AWS and github actions, 2 days, Nathan, End Date: 10/04/2025
 
 ### Burn Down for iteration-2 (see chapter 4):
 Update this at least once per week
 * 4 weeks left, 6 days of estimated amount of work 
 * 2 weeks left, 5.25 days
 * 1 weeks left, 2.25 days
-* 0 weeks left, xx days
-* Actual Velocity: ?? 
+* 0 weeks left, -5.75 days
+* Actual Velocity:  1.5
+
+A lot of the tasks that were not finished in iteration 1 rolled over to iteration 2, meaning that we ended
+up with a very large iteration 2 actual velocity. Despite this, this is not 100% indicative of the actual velocity 
+of the team. If the project were continued for a longer number of iterations this oscillation between small and large
+velocities would shallow out and the predictions would become more accurate.

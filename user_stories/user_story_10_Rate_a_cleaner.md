@@ -23,5 +23,8 @@ Description-v1: A rating system for users to review their cleaners.
 * Implement backend logic to store and display ratings, 0.5 days
 
 # UI Design:
+[Rating wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
+[Rating final page (normal)](final_images/Profile_Normal.png)
+[Rating final page (phone)](final_images/Profile_Phone.png)
