@@ -27,6 +27,6 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
 [Accept booking wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-[Accept booking final page (normal)](final_images/Profile_Normal.png)
+[Accept booking final page (normal)](final_images/Profile_Normal.png) \
 [Accept booking final page (phone)](final_images/Profile_Phone.png)
 

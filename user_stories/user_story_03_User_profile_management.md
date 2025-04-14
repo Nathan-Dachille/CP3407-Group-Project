@@ -26,5 +26,5 @@ Description-v1: A web page that will allow users to view their personal details 
 [User profile management wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-[User profile management final page (normal)](final_images/Profile_Normal.png)
+[User profile management final page (normal)](final_images/Profile_Normal.png)\
 [User profile management final page (phone)](final_images/Profile_Phone.png)

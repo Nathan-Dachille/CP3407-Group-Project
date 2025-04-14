@@ -26,5 +26,5 @@ Description-v1: A rating system for users to review their cleaners.
 [Rating wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-[Rating final page (normal)](final_images/Profile_Normal.png)
+[Rating final page (normal)](final_images/Profile_Normal.png) \
 [Rating final page (phone)](final_images/Profile_Phone.png)
