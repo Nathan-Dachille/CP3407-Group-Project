@@ -1,8 +1,5 @@
 # CP3407 Group Assignment
 
-This a project assignment template for CP3407.
-The following is the list of items, which are required to be completed.
-
 ## Team
 
 - [Bailey Johannsmann](https://www.github.com/Bailey-Johannsmann)
