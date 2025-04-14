@@ -21,7 +21,3 @@ Description-v1: A system that allows customers to report disputes and seek resol
 ## Tasks:
 * Create a form for users to submit disputes, 1 day
 * Implement an admin interface for reviewing and resolving disputes, 1 day
-
-# UI Design:
-
-# Completed:
