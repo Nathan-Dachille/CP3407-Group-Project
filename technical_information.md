@@ -21,9 +21,11 @@ It uses the following process:
 
 ## UML Class Diagram
 Below is a UML Class Diagram of the website, the rounded boxes are the names of the python modules.
+
 ![UML Class Diagram](Cleaning_Site_UML.svg)
 
 ## ERD for the Database
 Below is an ERD of the MySQL database.
+
 ![ERD of Database](Cleaning_Site_ERD.svg)
 
