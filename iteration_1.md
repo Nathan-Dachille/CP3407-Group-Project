@@ -1,8 +1,4 @@
-# Actual iteration-1 board, (see chapters 3 and 4), Start: 10/02/2025, End: 10/03/2025 
-
-Checklist: 
-1. github entry timestamps
-2. User stories are correct: see p39
+# Actual iteration-1 board, (see chapters 3 and 4), Start: 10/02/2025, End: 10/03/2025
 
 * Assumed Velocity: 0.5
 * Number of developers: 4
@@ -30,13 +26,13 @@ Checklist:
 ### Completed:
 
 **Account Creation**
-* Create sign up page view, 0.5 days, End Date: 09/03/2025
-* Create sign in page view, 0.5 days, End Date: 09/03/2025
-* Create home page view, 0.25 days, End Date: 02/03/2025
+* Create sign up page view, 0.5 days, David, End Date: 09/03/2025
+* Create sign in page view, 0.5 days, David, End Date: 09/03/2025
+* Create home page view, 0.25 days, Bailey, End Date: 02/03/2025
 
 **Book Cleaner**
-* Create a booking page view (Customers can book cleans), 1 day, End Date: 09/03/2025
-* Create a booking model, 1 days, End Date: 09/03/2025
+* Create a booking page view (Customers can book cleans), 1 day, Bailey, End Date: 09/03/2025
+* Create a booking model, 1 days, Bailey, End Date: 09/03/2025
 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
