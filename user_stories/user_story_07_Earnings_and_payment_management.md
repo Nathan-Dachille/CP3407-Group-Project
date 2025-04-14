@@ -22,6 +22,3 @@ Description-v1: A system that allows cleaners to track earnings and request payo
 * Develop a dashboard to display earnings, 1.5 days
 * Integrate third-party payment processing, 1.5 days
 
-# UI Design:
-
-# Completed:
