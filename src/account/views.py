@@ -76,9 +76,6 @@ def update_user_info(request):
         if 'address' in request.POST:
             user.address = request.POST['address']
 
-        print(user.phone)
-        print(user.address)
-
         # Save the updated user information
         user.save()
 
@@ -296,7 +293,6 @@ def get_bookings(request):
 
             # Get all assigned bookings within the requested dates
             booking_data_a = list(Booking.objects.filter(assigned=user, date__in=dates))
-            print(booking_data_a)
 
             raw_availability = data.get("availability", [])
 
@@ -304,7 +300,6 @@ def get_bookings(request):
                 entry["ava_date"]: entry["available_hours"]
                 for entry in raw_availability
             })
-            print(availability.dates)
 
             filtered_bookings_assigned = []
 
@@ -313,9 +308,6 @@ def get_bookings(request):
                 # Get the booking hours using the helper function
                 booking_hours = get_booking_hours(booking)
                 booking_date = booking.date.strftime("%Y-%m-%d")
-                print(booking.date.strftime("%Y-%m-%d"))
-                print("unfiltered:", availability[booking.date.strftime("%Y-%m-%d")])
-                print("filter targets:", booking_hours)
 
                 filtered_bookings_assigned.append({
                     "id": booking.id,
@@ -324,7 +316,6 @@ def get_bookings(request):
                 })
 
                 if booking_date in availability.dates:
-                    print("here")
                     # Get the available hours for this booking date
                     available_hours = availability[booking.date.strftime("%Y-%m-%d")]
 
@@ -336,24 +327,16 @@ def get_bookings(request):
                     # After modifying the available hours, update the availability dictionary
                     availability[booking.date.strftime("%Y-%m-%d")] = available_hours
 
-                print("filtered: ", availability[booking.date.strftime("%Y-%m-%d")])
-
-            # Print the updated availability after removing assigned hours
-            print("filtered: ", availability.dates)
-
             # Get all unassigned bookings within the requested dates
             booking_data_u = list(Booking.objects.filter(assigned__isnull=True, date__in=availability.dates))
-            print(booking_data_u)
 
             filtered_bookings_unassigned = []
 
             for booking in booking_data_u:
-                print(booking.date)
                 booking_date = str(booking.date)  # Format to match availability keys
 
                 # Skip if no availability data for this date
                 if booking_date not in availability.dates:
-                    print("error")
                     continue
 
                 # Check if the cleaner's suburb matches the customer's suburb (if both have addresses)
@@ -364,11 +347,8 @@ def get_bookings(request):
                     continue  # Skip this booking if the suburbs don't match
 
                 available_hours = availability[booking_date]
-                print(available_hours)
 
                 booking_hours = get_booking_hours(booking)
-
-                print(booking_hours)
 
                 # Include booking only if all hours are available
                 if all(hour in available_hours for hour in booking_hours):
@@ -391,10 +371,8 @@ def get_bookings(request):
 
 def find_booking(request):
     booking_id = request.GET.get("booking_id", None)
-    print(booking_id)
     if booking_id:
         booking = Booking.objects.select_related("user", "assigned").get(id=booking_id)
-        print(booking)
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 "bookingInfo": {
@@ -451,9 +429,6 @@ def customer_bookings(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         now = timezone.now()
         bookings = Booking.objects.filter(user=request.user).order_by('-date')
-        for b in bookings:
-            if (b.assigned):
-                print(b.assigned.username)
         booking_data = [
             {
                 "id": b.id,
