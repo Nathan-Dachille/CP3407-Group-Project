@@ -8,10 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     userRole = document.getElementById("page_layout").getAttribute("data-user-role")
 
-    console.log(userRole)
     // If the user is a Cleaner, do the cleaner-specific functionality
     if (userRole === 'CLEANER') {
-        console.log(userRole)
         document.getElementById("prev-week").addEventListener("click", () => {
             let focusDate = new Date(sessionStorage.getItem("focusDate"));
             focusDate.setDate(focusDate.getDate() - 7);
@@ -64,16 +62,20 @@ function convertToTimeString(hour) {
 function formatDateWithOrdinal(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "short" });
+    const month = date.toLocaleString("en-US", {month: "short"});
 
     // Function to get ordinal suffix (st, nd, rd, th)
     function getOrdinal(n) {
         if (n > 3 && n < 21) return "th"; // Covers 11th, 12th, 13th
         switch (n % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
+            case 1:
+                return "st";
+            case 2:
+                return "nd";
+            case 3:
+                return "rd";
+            default:
+                return "th";
         }
     }
 
@@ -136,7 +138,7 @@ function toggleEdit(field) {
     }
 }
 
-function setRating({ Source, ID, rating }) {
+function setRating({Source, ID, rating}) {
     const ratingValue = document.getElementById(rating).value;
 
     // Validate the rating value is between 1 and 5
@@ -151,7 +153,6 @@ function setRating({ Source, ID, rating }) {
         rating: numericRating,
         source: Source
     }
-    console.log("Request body:", JSON.stringify(request_data))
 
     return fetch(`/set_booking_rating/`, {
         method: 'POST',
@@ -162,17 +163,17 @@ function setRating({ Source, ID, rating }) {
         },
         body: JSON.stringify(request_data)
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Rating updated successfully!");
-        } else {
-            alert("Failed to update rating.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Something went wrong.");
-    });
+        .then(response => {
+            if (response.ok) {
+                alert("Rating updated successfully!");
+            } else {
+                alert("Failed to update rating.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong.");
+        });
 }
 
 // Utility function to get CSRF token from cookies
@@ -208,28 +209,24 @@ function fetchWeekData(focusDate = null) {
             'X-Requested-With': 'XMLHttpRequest'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (!data || !data.current_date || !data.week_dates
-            || !data.week_number || !data.ava_data) {
-            console.error("Invalid data received:", data);
+        .then(response => response.json())
+        .then(data => {
+            if (!data || !data.current_date || !data.week_dates
+                || !data.week_number || !data.ava_data) {
+                console.error("Invalid data received:", data);
+                return null;
+            }
+            return data; // Return the valid data
+        })
+        .catch(error => {
+            console.error("Error fetching week data:", error);
             return null;
-        }
-        return data; // Return the valid data
-    })
-    .catch(error => {
-        console.error("Error fetching week data:", error);
-        return null;
-    });
+        });
 }
 
 function updateWeekInfo(focusDate = null) {
     fetchWeekData(focusDate).then(data => {
         if (!data) return;
-        console.log("Current Date:", data.current_date);
-        console.log("Week Number:", data.week_number);
-        console.log("Week Dates:", data.week_dates);
-        console.log("Availability Data:", data.ava_data);
 
         // Subheader Section:
         document.getElementById("week-number").textContent = ` ${data.week_number} `;
@@ -250,7 +247,6 @@ function updateWeekInfo(focusDate = null) {
             dates: data.week_dates,
             availability: data.ava_data,
         }
-        console.log("Request body:", JSON.stringify(request_data))
 
         return fetch(`/get_bookings/`, {
             method: 'POST',
@@ -261,112 +257,111 @@ function updateWeekInfo(focusDate = null) {
             },
             body: JSON.stringify(request_data)
         })
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-            return response.json();
-        })
-        .then(b_data => {
-            if (!b_data) {
-                console.error("Invalid data received:", b_data);
-                return null;
-            }
-            console.log(b_data)
-            // Table Section:
-            const timetableContainer = document.getElementById("timetable")
-            let timetableHTML = '<table class="timetable">';
-
-            // Add table headers
-            timetableHTML += `<tr><th><button class="toggle_set" ` +
-                `onClick="toggleAvailable({togType:1, target_days:'${data.week_dates}'.split(','), target_hours:[]})">+` +
-                `</button></th>`;
-
-            data.week_dates.forEach((date) => {
-                // Create a Date object from the date string
-                const date_d = new Date(date);
-
-                // Get the day name from the Date object
-                const dayName = date_d.toLocaleString('en-US', { weekday: 'short' });
-                timetableHTML += `<th><button class="toggle_set"` +
-                ` onClick="toggleAvailable({togType:1, target_days:'${date}'.split(','), target_hours:[]})">${dayName}`
-                    +`</button></th>`;
-            });
-
-            timetableHTML += `</tr>`;
-
-            // Add table content
-
-            for (let i = 0, weekDates = data.week_dates, avail = data.ava_data; i < 24; i++) {
-                let t_string = convertToTimeString(i)
-
-                timetableHTML += `<tr><th><button class="toggle_set" ` +
-                `onClick="toggleAvailable({togType:1,target_days:'${weekDates}'.split(','),target_hours:[${[i]}]})">
-                ${t_string}</button></th>`;
-
-                for (let j = 0; j < weekDates.length; j++) {
-                    let currentDate = weekDates[j]; // Get the current date from the week
-                    // Find availability for this date and time
-                    let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
-                    let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
-
-                    let bookedBookings = []; // To store all booked booking IDs for this time
-                    let isBooked = false;
-                    if (b_data.bookings_a) {
-                        // Find the booking for this specific date
-                        let booking = b_data.bookings_a.find(booking => booking.date === currentDate
-                            && booking.booking_hours.includes(i));
-
-                        if (booking && booking.booking_hours && booking.booking_hours.includes(i)) {
-                            timetableHTML += `<th><button class="toggle_set fields a_book"` +
-                            ` onClick="openBooking({IDs:[${booking.id}]})"></button></th>`;
-                            isBooked = true;
-                        }
-                    }
-                    if (!isBooked && b_data.bookings_u) {
-                        let bookings = b_data.bookings_u.filter(booking => booking.date === currentDate
-                            && booking.booking_hours.includes(i));
-
-                        if (bookings.length > 0) {
-                            bookings.forEach(booking => {
-                                console.log(booking.id)
-                                bookedBookings.push(booking.id); // Add booking ID to the array
-                            });
-                            console.log(bookedBookings)
-                            console.log(JSON.stringify(bookedBookings))
-                            timetableHTML += `<th><button class="toggle_set fields u_book"` +
-                                ` onClick="openBooking({ IDs: ${JSON.stringify(bookedBookings) }})"></button></th>`;
-                            isBooked = true;
-                        }
-                    }
-                    if (!isBooked) {
-                        let buttonClass = isAvailable ? "ava" : "n_ava";
-
-                        timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
-                        ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
-                        target_hours:[${i}]})"></button></th>`;
-                    }
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+                return response.json();
+            })
+            .then(b_data => {
+                if (!b_data) {
+                    console.error("Invalid data received:", b_data);
+                    return null;
                 }
 
-                timetableHTML += `</tr>`;
-            }
+                // Table Section:
+                const timetableContainer = document.getElementById("timetable")
+                let timetableHTML = '<table class="timetable">';
 
-            // Insert the HTML into the timetable container
-            timetableContainer.innerHTML = timetableHTML;
-        })
-        .catch(error => {
-            console.error("Error fetching week data:", error);
-            return null;
-        });
+                // Add table headers
+                timetableHTML += `<tr><th><button class="toggle_set" ` +
+                    `onClick="toggleAvailable({togType:1, target_days:'${data.week_dates}'.split(','), target_hours:[]})">+` +
+                    `</button></th>`;
+
+                data.week_dates.forEach((date) => {
+                    // Create a Date object from the date string
+                    const date_d = new Date(date);
+
+                    // Get the day name from the Date object
+                    const dayName = date_d.toLocaleString('en-US', {weekday: 'short'});
+                    timetableHTML += `<th><button class="toggle_set"` +
+                        ` onClick="toggleAvailable({togType:1, target_days:'${date}'.split(','), target_hours:[]})">${dayName}`
+                        + `</button></th>`;
+                });
+
+                timetableHTML += `</tr>`;
+
+                // Add table content
+
+                for (let i = 0, weekDates = data.week_dates, avail = data.ava_data; i < 24; i++) {
+                    let t_string = convertToTimeString(i)
+
+                    timetableHTML += `<tr><th><button class="toggle_set" ` +
+                        `onClick="toggleAvailable({togType:1,target_days:'${weekDates}'.split(','),target_hours:[${[i]}]})">
+                ${t_string}</button></th>`;
+
+                    for (let j = 0; j < weekDates.length; j++) {
+                        let currentDate = weekDates[j]; // Get the current date from the week
+                        // Find availability for this date and time
+                        let dayAvailability = avail.find(entry => entry.ava_date === currentDate);
+                        let isAvailable = dayAvailability && dayAvailability.available_hours.includes(i);
+
+                        let bookedBookings = []; // To store all booked booking IDs for this time
+                        let isBooked = false;
+                        if (b_data.bookings_a) {
+                            // Find the booking for this specific date
+                            let booking = b_data.bookings_a.find(booking => booking.date === currentDate
+                                && booking.booking_hours.includes(i));
+
+                            if (booking && booking.booking_hours && booking.booking_hours.includes(i)) {
+                                timetableHTML += `<th><button class="toggle_set fields a_book"` +
+                                    ` onClick="openBooking({IDs:[${booking.id}]})"></button></th>`;
+                                isBooked = true;
+                            }
+                        }
+                        if (!isBooked && b_data.bookings_u) {
+                            let bookings = b_data.bookings_u.filter(booking => booking.date === currentDate
+                                && booking.booking_hours.includes(i));
+
+                            if (bookings.length > 0) {
+                                bookings.forEach(booking => {
+
+                                    bookedBookings.push(booking.id); // Add booking ID to the array
+                                });
+
+                                timetableHTML += `<th><button class="toggle_set fields u_book"` +
+                                    ` onClick="openBooking({ IDs: ${JSON.stringify(bookedBookings)}})"></button></th>`;
+                                isBooked = true;
+                            }
+                        }
+                        if (!isBooked) {
+                            let buttonClass = isAvailable ? "ava" : "n_ava";
+
+                            timetableHTML += `<th><button class="toggle_set fields ${buttonClass}"` +
+                                ` onClick="toggleAvailable({togType:2, target_days:'${weekDates[j]}'.split(','),
+                        target_hours:[${i}]})"></button></th>`;
+                        }
+                    }
+
+                    timetableHTML += `</tr>`;
+                }
+
+                // Insert the HTML into the timetable container
+                timetableContainer.innerHTML = timetableHTML;
+            })
+            .catch(error => {
+                console.error("Error fetching week data:", error);
+                return null;
+            });
     })
-    .catch(error => console.error("Error fetching data:", error));
+        .catch(error => console.error("Error fetching data:", error));
 }
 
-function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
+function toggleAvailable({togType = 0, target_days = [""], target_hours = []}) {
     const request_data = {
-            type: togType,
-            days: Array.isArray(target_days) ? target_days : [target_days],
-            hours: Array.isArray(target_hours) ? target_hours : [target_hours],
+        type: togType,
+        days: Array.isArray(target_days) ? target_days : [target_days],
+        hours: Array.isArray(target_hours) ? target_hours : [target_hours],
     }
-    console.log("Request body:", JSON.stringify(request_data))
+
     fetch("/toggle_availability/", {
         method: "POST",
         headers: {
@@ -375,21 +370,21 @@ function toggleAvailable({togType=0, target_days=[""], target_hours=[]}) {
         },
         body: JSON.stringify(request_data)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response", data);
-        if (data.success) {
-            updateWeekInfo();
-        } else {
-            console.error("Error:", data.error);
-        }
-    })
-    .catch(error => console.error("Error:", error));
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.success) {
+                updateWeekInfo();
+            } else {
+                console.error("Error:", data.error);
+            }
+        })
+        .catch(error => console.error("Error:", error));
 }
 
 function dupAvailability() {
     let selectedDate = document.getElementById("DateInput").value;
-    console.log(selectedDate)
+
 
     if (!selectedDate) {
         alert("Please select a date.");
@@ -398,17 +393,11 @@ function dupAvailability() {
 
     fetchWeekData().then(data => {
         if (!data) return;
-        console.log("Current Date:", data.current_date);
-        console.log("Week Number:", data.week_number);
-        console.log("Week Dates:", data.week_dates);
-        console.log("Availability Data:", data.ava_data);
-
 
         const request_data = {
             t_date: selectedDate,
             s_week: data.week_dates,
         }
-        console.log("Request body:", JSON.stringify(request_data))
 
         fetch("/duplicate_availability/", {
             method: "POST",
@@ -433,41 +422,35 @@ function dupAvailability() {
 
 function moveTo() {
     let focusDate = new Date(document.getElementById("DateInput").value);
-    console.log(focusDate)
     sessionStorage.setItem("focusDate", focusDate.toISOString());
     updateWeekInfo(focusDate);
 }
 
 // Assuming the fetch function is fetching booking data from your server
 function fetchBookingDetails(bookingId) {
-    console.log(bookingId)
     return fetch(`/find_booking/?booking_id=${bookingId}`, {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (!data) {
-            console.error("Invalid data received:", data);
+        .then(response => response.json())
+        .then(data => {
+            if (!data) {
+                console.error("Invalid data received:", data);
+                return null;
+            }
+            return data; // Return the valid data
+        })
+        .catch(error => {
+            console.error("Error fetching booking data:", error);
             return null;
-        }
-        console.log(data)
-        return data; // Return the valid data
-    })
-    .catch(error => {
-        console.error("Error fetching booking data:", error);
-        return null;
-    });
+        });
 }
 
-function openBooking({ IDs }) {
+function openBooking({IDs}) {
     const bookingIds = Array.isArray(IDs) ? IDs : JSON.parse(IDs);
-    console.log(bookingIds)
-    if (Array.isArray(bookingIds)) {
-        console.log("Booking IDs:", bookingIds);
-    } else {
+    if (!Array.isArray(bookingIds)) {
         console.error("Received an invalid value for bookingIds:", bookingIds);
     }
     const now = new Date(); // current local time of the user
@@ -551,11 +534,10 @@ function openBooking({ IDs }) {
     });
 }
 
-function toggleAccept({ ID }) {
+function toggleAccept({ID}) {
     const request_data = {
-            target: ID,
+        target: ID,
     }
-    console.log("Request body:", JSON.stringify(request_data))
     fetch("/toggle_accept/", {
         method: "POST",
         headers: {
@@ -564,21 +546,20 @@ function toggleAccept({ ID }) {
         },
         body: JSON.stringify(request_data)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response", data);
-        if (data.success) {
-            if (userRole === 'CLEANER') {
-                updateWeekInfo();
-                openBooking({IDs:[ID]});
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (userRole === 'CLEANER') {
+                    updateWeekInfo();
+                    openBooking({IDs: [ID]});
+                } else {
+                    fetchBookings();
+                }
             } else {
-                fetchBookings();
+                console.error("Error:", data.error);
             }
-        } else {
-            console.error("Error:", data.error);
-        }
-    })
-    .catch(error => console.error("Error:", error));
+        })
+        .catch(error => console.error("Error:", error));
 }
 
 // Customer Account Scripts
@@ -586,14 +567,14 @@ let allBookings = [];
 
 function fetchBookings() {
     fetch('/api/customer_bookings/', {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
     })
-    .then(res => res.json())
-    .then(data => {
-        allBookings = data.bookings;
-        renderBookings(allBookings);
-    })
-    .catch(err => console.error("Error fetching bookings:", err));
+        .then(res => res.json())
+        .then(data => {
+            allBookings = data.bookings;
+            renderBookings(allBookings);
+        })
+        .catch(err => console.error("Error fetching bookings:", err));
 }
 
 function renderBookings(bookings) {
@@ -692,11 +673,10 @@ function applyFilters() {
     renderBookings(filtered);
 }
 
-function deleteBooking({ ID }) {
+function deleteBooking({ID}) {
     const request_data = {
-            target: ID,
+        target: ID,
     }
-    console.log("Request body:", JSON.stringify(request_data))
     fetch("/delete_booking/", {
         method: "POST",
         headers: {
@@ -705,18 +685,17 @@ function deleteBooking({ ID }) {
         },
         body: JSON.stringify(request_data)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response", data);
-        if (data.success) {
-            if (userRole === 'CLEANER') {
-                updateWeekInfo();
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (userRole === 'CLEANER') {
+                    updateWeekInfo();
+                } else {
+                    fetchBookings();
+                }
             } else {
-                fetchBookings();
+                console.error("Error:", data.error);
             }
-        } else {
-            console.error("Error:", data.error);
-        }
-    })
-    .catch(error => console.error("Error:", error));
+        })
+        .catch(error => console.error("Error:", error));
 }
