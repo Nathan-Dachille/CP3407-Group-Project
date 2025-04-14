@@ -22,9 +22,10 @@
     gap: 1rem;
 }
 
-@media (max-width: 1350px) { /* Adjust breakpoint as needed */
+@media (max-width: 40em) { /* Adjust breakpoint as needed */
     .content_section {
         width: 100%; /* Takes full width when wrapped into 1 column */
+        min-width: 300px;
     }
 }
 
