@@ -26,5 +26,5 @@ Description-v1: A calendar that helps users and cleaners manage bookings.
 [Bookings calendar wireframe](wireframes/Profile_WF.drawio.svg)
 
 # Completed:
-[Bookings calendar final page (normal)](final_images/Profile_Normal.png)
+[Bookings calendar final page (normal)](final_images/Profile_Normal.png) \
 [Bookings calendar final page (phone)](final_images/Profile_Phone.png)

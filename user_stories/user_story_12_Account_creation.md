@@ -28,9 +28,9 @@ Description-v1: Web pages that will allow the user to create an account and sign
 [Sign in account wireframe](wireframes/Sign_In_WF.png)
 
 # Completed:
-[Register account final page (normal)](final_images/Register_Normal.png)
-[Register account final page (phone)](final_images/Register_Phone.png)
-
-[Sign in account final page (normal)](final_images/Sign_In_Normal.png)]
-[Sign in account final page (phone)](final_images/Sign_In_Phone.png)]
+[Register account final page (normal)](final_images/Register_Normal.png)\
+[Register account final page (phone)](final_images/Register_Phone.png)\
+\
+[Sign in account final page (normal)](final_images/Sign_In_Normal.png)\
+[Sign in account final page (phone)](final_images/Sign_In_Phone.png)
 

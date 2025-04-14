@@ -27,6 +27,6 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
 [Book cleaner wireframe](wireframes/Booking_WF.png)
 
 # Completed:
-[Book cleaner final page (normal)](final_images/Bookings_Normal.png)
+[Book cleaner final page (normal)](final_images/Bookings_Normal.png) \
 [Book cleaner final page (phone)](final_images/Bookings_Phone.png)
 
