@@ -22,6 +22,14 @@ Description-v1: A rating system for users to review their cleaners.
 * Design the rating system UI, 0.5 days
 * Implement backend logic to store and display ratings, 0.5 days
 
+# Related Tests
+- [Test accessing ratings in profile while not signed in](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/59ba25e24b539a83ca81f7fe64136ac89dcab4b4/src/account/tests.py#L28)
+  - Tests that users that are not signed in a redirected to a sign-in page.
+- [Test accessing ratings as a customer](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/59ba25e24b539a83ca81f7fe64136ac89dcab4b4/src/account/tests.py#L33)
+  - Tests that customer accounts can correctly view their rating and rate bookings in their profile page.
+- [Test accessing ratings as a cleaner](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/59ba25e24b539a83ca81f7fe64136ac89dcab4b4/src/account/tests.py#L40)
+  - Tests that cleaner accounts can correctly view their own rating and rate customers in their profile page.
+
 # UI Design:
 [Rating wireframe](wireframes/Profile_WF.drawio.svg)
 
