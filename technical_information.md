@@ -46,6 +46,7 @@ For Continuous Deployment (CD), we also used GitHub Actions, specifically the `d
 - Once the file is in S3, we create a new application version in AWS Elastic Beanstalk using the uploaded zip file.
 - The environment is then updated to use this new version, with environment variables (e.g., `SECRET_KEY`) set securely using GitHub secrets.
 - The deployment environment (`CP3407CleaningWebsite-env`) is managed entirely by Beanstalk, handling web server, application server, and database connectivity.
+- Elastic Beanstalk performs actions in the environment based on the config files found in the `/src/.ebextensions` folder.
 
 > In this project, Elastic Beanstalk was used to host our Django application with a managed MySQL database. It provided an easy way to scale, monitor, and manage the application lifecycle while keeping deployments automated via GitHub Actions.
 
