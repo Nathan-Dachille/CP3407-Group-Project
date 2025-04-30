@@ -22,6 +22,9 @@ Continued from iteration 1:
 
 ### In progress:
 
+**Rescheduling Bookings**
+* Notify cleaners of rescheduled bookings via email or dashboard alerts, 1 day
+
 ### Completed:
 
 **Accept a booking**
@@ -46,13 +49,16 @@ Continued from iteration 1:
 **Setup Continuous Deployment**
 * Setup continuous deployment with AWS and github actions, 2 days, Nathan, End Date: 10/04/2025
 
+**Rescheduling Bookings**
+* Develop a rescheduling interface for users, 1 day, Quinn, End Date: 08/04/2025
+
 ### Burn Down for iteration-2 (see chapter 4):
 Update this at least once per week
-* 4 weeks left, 6 days of estimated amount of work 
+* 4 weeks left, 6 days of estimated amount of work
 * 2 weeks left, 5.25 days
 * 1 weeks left, 2.25 days
-* 0 weeks left, -5.75 days
-* Actual Velocity:  1.5
+* 0 weeks left, -6.75 days
+* Actual Velocity:  1.59
 
 A lot of the tasks that were not finished in iteration 1 rolled over to iteration 2, meaning that we ended
 up with a very large iteration 2 actual velocity. Despite this, this is not 100% indicative of the actual velocity 

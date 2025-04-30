@@ -26,7 +26,18 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
 # UI Design:
 [Book cleaner wireframe](wireframes/Booking_WF.png)
 
+# Related Tests:
+- [Create a booking and test the booking string](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L40)
+  - Tests that a booking object can be created and that the string method is functioning correctly.
+- [Test accessing the booking page while not signed in](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L47)
+  - Tests that the user gets redirected to a sign in page.
+- [Test accessing the booking page while signed in as a cleaner](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L52)
+  - Test that cleaners are redirected to their booking management page.
+- [Test accessing the booking page while signed in a a customer](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L58)
+  - Checks that the correct page is served to the customer and that there are no errors.
+
 # Completed:
-[Book cleaner final page (normal)](final_images/Bookings_Normal.png) \
-[Book cleaner final page (phone)](final_images/Bookings_Phone.png)
+[Book cleaner final page](final_images/Booking.svg)
+
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
 

@@ -6,9 +6,9 @@
 
 ### User stories or tasks (see chapter 4): 
 * [Account creation](./user_stories/user_story_12_Account_creation.md), priority 10, 2 days
-* [Book cleaner](./user_stories/user_story_01_title.md), priority 10, 2 days
-* [Accept a booking](./user_stories/user_story_01_title.md), priority 10, 1 day 
-* [User profile management](./user_stories/user_story_01_title.md), priority 10, 3 days 
+* [Book cleaner](./user_stories/user_story_01_Book_cleaner.md), priority 10, 2 days
+* [Accept a booking](./user_stories/user_story_02_Accept_a_booking.md), priority 10, 1 day 
+* [User profile management](./user_stories/user_story_03_User_profile_management.md), priority 10, 3 days 
 
 ### In progress:
 

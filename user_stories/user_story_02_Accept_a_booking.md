@@ -26,7 +26,14 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
 # UI Design:
 [Accept booking wireframe](wireframes/Profile_WF.drawio.svg)
 
+# Related Tests:
+- [Check that a cleaner can successfully access the profile/booking page](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L52)
+  - Checks that cleaners are redirected to the correct page for managing/accepting bookings.
+
 # Completed:
-[Accept booking final page (normal)](final_images/Profile_Normal.png) \
-[Accept booking final page (phone)](final_images/Profile_Phone.png)
+[Accept booking final page](final_images/Accept_a_Booking.svg)
+
+NOTE: The ability for a cleaner to accept a booking will only be accessible once they [sign in or create an account](user_story_12_Account_creation.md). It uses the [calendar](user_story_08_Bookings_calendar.md) functionality to set availability.
+
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
 
