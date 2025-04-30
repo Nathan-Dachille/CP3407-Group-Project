@@ -33,7 +33,7 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
 # Completed:
 [Accept booking final page](final_images/Accept_a_Booking.svg)
 
-NOTE: The ability for a cleaner to accept a booking will only be accessible once they [sign in or create an account](user_story_12_Account_creation.md)
+NOTE: The ability for a cleaner to accept a booking will only be accessible once they [sign in or create an account](user_story_12_Account_creation.md). It uses the [calendar](user_story_08_Bookings_calendar.md) functionality to set availability.
 
 NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
 

@@ -34,5 +34,9 @@ Description-v1: A rating system for users to review their cleaners.
   - Tests that cleaner accounts can correctly view their own rating and rate customers in their profile page.
 
 # Completed:
-[Rating final page (normal)](final_images/Profile_Normal.png) \
-[Rating final page (phone)](final_images/Profile_Phone.png)
+[Rating final page](final_images/Rate_a_Cleaner.svg)
+
+NOTE: The rating system will only be accessible once a user [signs in or creates an account](user_story_12_Account_creation.md).
+When rating a cleaner the user must be signed in with a customer account. They must have also made a [booking](user_story_01_Book_cleaner.md) with that cleaner in order to rate them.
+
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
