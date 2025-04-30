@@ -86,4 +86,4 @@ Total milestone estimate = 8 x 2 = **16 actual people days for the milestone**
 2. [Iteration-2](./iteration_2.md)
 
 # Additional Technical Information
-Some additional technical information can be found in the [technical information file](./technical_information.md).
+Some additional technical information including details on testing, continuous integration and continuous deployment can be found in the [technical information file](./technical_information.md). This file also contains the website's UML class diagrams and the database's ERD.
