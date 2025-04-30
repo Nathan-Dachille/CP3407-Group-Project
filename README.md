@@ -58,21 +58,23 @@ Number of people x Number of working days x velocity = 4 x 4 x 0.5 = **8 actual 
 
 Total milestone estimate = 8 x 2 = **16 actual people days for the milestone**
 
-## Iteration 1 [duration 3-4 weeks], Start: 10/02/2025, End: 10/03/2025
+# Planned Iterations
+
+### Iteration 1 [duration 3-4 weeks], Start: 10/02/2025, End: 10/03/2025
 
 * [Account Creation](./user_stories/user_story_12_Account_creation.md), priority 10, 2 days
 * [Book cleaner](./user_stories/user_story_01_Book_cleaner.md), priority 10, 2 days
 * [Accept a booking](./user_stories/user_story_02_Accept_a_booking.md), priority 10, 1 day
 * [User profile management](./user_stories/user_story_03_User_profile_management.md), priority 10, 3 days
 
-## Iteration 2 [duration 3-4 weeks], Start: 11/03/2025, End: 10/04/2025
+### Iteration 2 [duration 3-4 weeks], Start: 11/03/2025, End: 10/04/2025
 
 * [Track job completion](./user_stories/user_story_04_Track_job_completion.md), priority 20, 1 day
 * [Rescheduling bookings](./user_stories/user_story_06_Rescheduling_bookings.md) priority 20, 2 days
 * [Bookings calendar](./user_stories/user_story_08_Bookings_calendar.md), priority 10, 4 days
 * [Rate a cleaner](./user_stories/user_story_10_Rate_a_cleaner.md), priority 10, 1 day
 
-## Not enough time/developers:
+### Not enough time/developers:
 
 * [Create a cleaning checklist](./user_stories/user_story_11_Create_a_cleaning_checklist.md), priority 20, 1 day
 * [User and cleaner communication](./user_stories/user_story_09_User_and_cleaner_communication.md), priority 20, 2 days
