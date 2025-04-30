@@ -39,3 +39,5 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
 # Completed:
 [Book cleaner final page](final_images/Booking.svg)
 
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
+

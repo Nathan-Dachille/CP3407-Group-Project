@@ -41,3 +41,5 @@ Description-v1: Web pages that will allow the user to create an account and sign
 [Register account final page](final_images/Register.svg)\
 [Sign in account final page](final_images/Sign_In.svg)
 
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
+
