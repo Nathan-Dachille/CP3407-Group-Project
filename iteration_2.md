@@ -58,7 +58,7 @@ Update this at least once per week
 * 2 weeks left, 5.25 days
 * 1 weeks left, 2.25 days
 * 0 weeks left, -6.75 days
-* Actual Velocity:  1.72
+* Actual Velocity:  1.59
 
 A lot of the tasks that were not finished in iteration 1 rolled over to iteration 2, meaning that we ended
 up with a very large iteration 2 actual velocity. Despite this, this is not 100% indicative of the actual velocity 
