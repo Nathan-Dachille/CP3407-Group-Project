@@ -18,9 +18,10 @@ For Continuous Integration (CI), we used GitHub Actions to automatically run tes
 - Python 3.12 is used to set up the environment.
 - Dependencies are installed from `requirements.txt` located in the `src` folder.
 - The tests are run using Django’s built-in test runner:  
-
 - This checks the behaviour of the application, including the custom logic defined in our `test.py` files.
-- Most Django standard features are automatically tested by the framework, while our custom business logic was tested manually and through unit tests.
+- Tests related to user stories can be found on the user stories pages.
+- Most of the tests involve checking that the Django application is providing the correct content when a user accesses a page.
+- Developers can run the tests locally with `python manage.py test`.
 
 ---
 
@@ -36,12 +37,10 @@ For Continuous Deployment (CD), we also used GitHub Actions, specifically the `d
 #### Build Job
 - Clones the repo and checks out only the necessary files (`.github` and `src` folders).
 - A Python virtual environment is created using version 3.12.
-- Dependencies are installed via `pip` from the `src/requirements.txt` file.
-- Static files (CSS, JavaScript, etc.) are collected with:
-
-
+- Dependencies are installed via `pip` from the `requirements.txt` file.
+- Static files (CSS, JavaScript, etc.) are collected with: `python manage.py collectstatic`.
 - All source and static files are zipped into a file named using the GitHub commit SHA.
-- The zip file is uploaded to an AWS S3 bucket using the AWS CLI.
+- The zip file is uploaded to an AWS S3 (Amazon Web Services Simple Storage Service) bucket using the AWS CLI.
 
 #### Deploy Job
 - Once the file is in S3, we create a new application version in AWS Elastic Beanstalk using the uploaded zip file.
