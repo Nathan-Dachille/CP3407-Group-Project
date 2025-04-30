@@ -9,7 +9,7 @@
 
 ## Testing
 
-For Continuous Integration (CI), we used GitHub Actions to automatically run tests when new code is pushed or pull requests are opened on the `main` branch.
+For Continuous Integration (CI), we used GitHub Actions to automatically run tests when new code is pushed or pull requests are opened on the `main` branch. The link below shows all previous runs of the workflow and below that is a summary of the workflow.
 
 ### Testing Workflow: [Django CI GitHub Action](https://github.com/Nathan-Dachille/CP3407-Group-Project/actions/workflows/django.yml)
 
@@ -19,7 +19,7 @@ For Continuous Integration (CI), we used GitHub Actions to automatically run tes
 - Dependencies are installed from `requirements.txt` located in the `src` folder.
 - The tests are run using Django’s built-in test runner:  
 - This checks the behaviour of the application, including the custom logic defined in our `test.py` files.
-- Tests related to user stories can be found on the user stories pages.
+- Tests related to user stories can be found on the user stories pages (for the user stories that were completed).
 - Most of the tests involve checking that the Django application is providing the correct content when a user accesses a page.
 - Developers can run the tests locally with `python manage.py test`.
 
@@ -27,7 +27,7 @@ For Continuous Integration (CI), we used GitHub Actions to automatically run tes
 
 ## Deployment Information
 
-For Continuous Deployment (CD), we also used GitHub Actions, specifically the `deploy.yml` workflow which automates packaging and deployment to AWS Elastic Beanstalk.
+For Continuous Deployment (CD), we also used GitHub Actions, specifically the `deploy.yml` workflow which automates packaging and deployment to AWS Elastic Beanstalk. The hyperlink below takes you to a list of the previous runs of the deployment workflow.
 
 ### Deployment Workflow: [CI-CD pipeline to AWS GitHub Action](https://github.com/Nathan-Dachille/CP3407-Group-Project/actions/workflows/deploy.yml)
 
