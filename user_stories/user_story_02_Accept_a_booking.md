@@ -26,6 +26,10 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
 # UI Design:
 [Accept booking wireframe](wireframes/Profile_WF.drawio.svg)
 
+# Related Tests:
+- [Check that a cleaner can successfully access the profile/booking page](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L52)
+  - Checks that cleaners are redirected to the correct page for managing/accepting bookings.
+
 # Completed:
 [Accept booking final page (normal)](final_images/Profile_Normal.png) \
 [Accept booking final page (phone)](final_images/Profile_Phone.png)

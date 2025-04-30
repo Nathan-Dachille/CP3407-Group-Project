@@ -27,6 +27,16 @@ Description-v1: Web pages that will allow the user to create an account and sign
 [Register account wireframe](wireframes/Registration_WF.png)
 [Sign in account wireframe](wireframes/Sign_In_WF.png)
 
+# Related Tests:
+- [Test sign-in page](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/authuser/tests.py#L28)
+  - Tests that users can access the sign-in page.
+- [Test register page](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/authuser/tests.py#L34)
+  - Tests that users can access the registration page.
+- [Test custom phone number validation](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/authuser/tests.py#L21)
+  - Test the custom phone number validator only allows valid phone numbers.
+
+****
+
 # Completed:
 [Register account final page (normal)](final_images/Register_Normal.png)\
 [Register account final page (phone)](final_images/Register_Phone.png)\
