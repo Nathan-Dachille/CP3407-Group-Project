@@ -34,5 +34,8 @@ Description-v1: A web page that will allow users to view their personal details 
   - Tests that cleaner accounts can correctly access their profile page.
 
 # Completed:
-[User profile management final page (normal)](final_images/Profile_Normal.png)\
-[User profile management final page (phone)](final_images/Profile_Phone.png)
+[User profile management final page](final_images/User_Profile_Management.svg)
+
+NOTE: The user profile system will only be accessible once a user [signs in or creates an account](user_story_12_Account_creation.md)
+
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
