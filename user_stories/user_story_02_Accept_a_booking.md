@@ -31,6 +31,9 @@ Description-v1: A web page that will allow a cleaner to accept bookings. Might b
   - Checks that cleaners are redirected to the correct page for managing/accepting bookings.
 
 # Completed:
-[Accept booking final page (normal)](final_images/Profile_Normal.png) \
-[Accept booking final page (phone)](final_images/Profile_Phone.png)
+[Accept booking final page](final_images/Accept_a_Booking.svg)
+
+NOTE: The ability for a cleaner to accept a booking will only be accessible once they [sign in or create an account](user_story_12_Account_creation.md)
+
+NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
 
