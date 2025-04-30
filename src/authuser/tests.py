@@ -5,9 +5,9 @@ from authuser.models import User
 
 
 class UserModelTests(TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpTestData(self):
         """Set up tests by creating user object."""
-        print("Creating a user...")
         self.user = User.objects.create_user(
             username="TestUser",
             email="thisis@test.au",
@@ -18,16 +18,21 @@ class UserModelTests(TestCase):
         )
         pass
 
-    # def test_user_role(self):
-    # """Currently no role validation."""
-    #     print("Test setting user role.")
-    #     self.assertFieldOutput(
-    #         self.user.role, {"Customer": "CUSTOMER", "Cleaner": "CLEANER"},
-    #         {}
-    #     )
-
-    def test_phone(self):
+    def test_phone_validation(self):
         """Test phone number validation."""
-        print("Test phone number validation.")
         self.user.phone = "NotAPhoneNumber"
         self.assertRaises(ValidationError, self.user.full_clean)
+
+
+class AuthenticationPageTests(TestCase):
+    def test_sign_in_page(self):
+        """Test accessing sign in page."""
+        response = self.client.get("/sign_in", follow=True)
+        self.assertTemplateUsed(response, "sign_in.html")
+        self.assertTemplateUsed(response, "navbar.html")
+
+    def test_register_page(self):
+        """Test accessing register page."""
+        response = self.client.get("/register", follow=True)
+        self.assertTemplateUsed(response, "register.html")
+        self.assertTemplateUsed(response, "navbar.html")
