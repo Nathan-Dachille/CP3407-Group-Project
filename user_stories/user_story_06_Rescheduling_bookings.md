@@ -35,7 +35,9 @@ Description-v1: A system that allows users to reschedule their bookings easily.
 
 # Completed:
 [Rescheduling as a cleaner final page](final_images/Reschedule_Cleaner.svg)
+[Rescheduling as a customer final page](final_images/Reschedule_Customer.svg)
 
 NOTE: The rescheduling system will only be accessible once a user [signs in or creates an account](user_story_12_Account_creation.md). It also uses the [calendar](user_story_08_Bookings_calendar.md) functionality.
+When rescheduling as a cleaner the user must be signed in with a cleaner account. When rescheduling as a customer the user must be signed in with a customer account and have made a [booking](user_story_01_Book_cleaner.md) to reschedule.
 
 NOTE: If the image is hard to see, please download and view in a separate tab for a higher resolution.
