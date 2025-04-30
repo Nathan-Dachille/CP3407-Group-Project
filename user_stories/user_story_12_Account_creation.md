@@ -24,7 +24,7 @@ Description-v1: Web pages that will allow the user to create an account and sign
 * Create custom user model in Django to store account type and key details, 0.75 days
 
 # UI Design:
-[Register account wireframe](wireframes/Registration_WF.png)
+[Register account wireframe](wireframes/Registration_WF.png)\
 [Sign in account wireframe](wireframes/Sign_In_WF.png)
 
 # Related Tests:
@@ -38,9 +38,6 @@ Description-v1: Web pages that will allow the user to create an account and sign
 ****
 
 # Completed:
-[Register account final page (normal)](final_images/Register_Normal.png)\
-[Register account final page (phone)](final_images/Register_Phone.png)\
-\
-[Sign in account final page (normal)](final_images/Sign_In_Normal.png)\
-[Sign in account final page (phone)](final_images/Sign_In_Phone.png)
+[Register account final page](final_images/Register.svg)\
+[Sign in account final page](final_images/Sign_In.svg)
 

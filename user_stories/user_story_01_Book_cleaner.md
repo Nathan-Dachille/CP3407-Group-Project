@@ -37,6 +37,5 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
   - Checks that the correct page is served to the customer and that there are no errors.
 
 # Completed:
-[Book cleaner final page (normal)](final_images/Bookings_Normal.png) \
-[Book cleaner final page (phone)](final_images/Bookings_Phone.png)
+[Book cleaner final page](final_images/Booking.svg)
 
