@@ -23,6 +23,16 @@ Description-v1: A web page that will allow users to make a booking for a cleaner
     - It will look up their area from their profile and compare to serviced area for cleaner
 * Create a booking model, 1 days
 
+# Related Tests:
+- [Create a booking and test the booking string](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L40)
+  - Tests that a booking object can be created and that the string method is functioning correctly.
+- [Test accessing the booking page while not signed in](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L47)
+  - Tests that the user gets redirected to a sign in page.
+- [Test accessing the booking page while signed in as a cleaner](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L52)
+  - Test that cleaners are redirected to their booking management page.
+- [Test accessing the booking page while signed in a a customer](https://github.com/Nathan-Dachille/CP3407-Group-Project/blob/038d723a8cbeb57250d82e70aef7724d1fb832b1/src/bookings/tests.py#L58)
+  - Checks that the correct page is served to the customer and that there are no errors.
+
 # UI Design:
 [Book cleaner wireframe](wireframes/Booking_WF.png)
 
